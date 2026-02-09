@@ -6,26 +6,17 @@ export default function TitleSlide() {
 
   return (
     <div className="h-full flex flex-col items-center justify-center text-center">
-      <div className="mb-4">
-        <span className="bg-blue-600 text-white px-4 py-2 rounded-lg text-lg font-bold tracking-wider">HOA</span>
-      </div>
-      <h1 className="text-6xl font-bold text-slate-900 mb-6 leading-tight">
+      <div className="mb-8 p-4 border-b-2 border-black w-32"></div>
+      <h1 className="text-6xl font-normal text-black mb-6 leading-tight italic">
         Treasurer's Report
       </h1>
-      <p className="text-3xl text-slate-500 font-light mb-12">
+      <p className="text-3xl text-slate-700 font-serif mb-12">
         {currentDate}
       </p>
-
-      <div className="flex gap-8 text-slate-400 text-sm">
-        <div>
-           <strong className="block text-slate-600 mb-1">Presented By</strong>
-           Treasurer
-        </div>
-        <div>
-           <strong className="block text-slate-600 mb-1">Period</strong>
-           2021—2025
-        </div>
+      <div className="flex gap-16 text-slate-600 text-sm font-mono uppercase tracking-widest">
+           Treasurer &bull; 2021—2025
       </div>
     </div>
+
   );
 }

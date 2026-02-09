@@ -4,6 +4,7 @@ import Slide from '../components/ui/Slide';
 import ChartContainer from '../components/charts/ChartContainer';
 import { useData } from '../hooks/useData';
 import { parseCurrency, formatCurrency } from '../utils/format';
+import { TUFTE_PALETTE } from '../utils/theme';
 
 export default function FinancialPosition() {
   const { data, loading, error } = useData('2021-2025/Overall Financial Position.csv');
@@ -21,17 +22,17 @@ export default function FinancialPosition() {
           type: 'line',
           label: 'Net Cash Flow',
           data: rows.map(r => parseCurrency(r['Net Cash Flow'])),
-          borderColor: '#2563eb', // Blue 600
-          backgroundColor: '#2563eb',
+          borderColor: TUFTE_PALETTE[4], // Blue
+          backgroundColor: TUFTE_PALETTE[4],
           borderWidth: 2,
           yAxisID: 'y',
-          tension: 0.3
+          tension: 0
         },
         {
           type: 'bar',
           label: 'Total Inflows',
           data: rows.map(r => parseCurrency(r['Total Cash Inflows'])),
-          backgroundColor: '#10b981', // Emerald 500
+          backgroundColor: TUFTE_PALETTE[0], // Teal
           yAxisID: 'y',
           order: 2
         },
@@ -39,7 +40,7 @@ export default function FinancialPosition() {
           type: 'bar',
           label: 'Total Outflows',
           data: rows.map(r => parseCurrency(r['Total Cash Outflows'])),
-          backgroundColor: '#ef4444', // Red 500
+          backgroundColor: TUFTE_PALETTE[3], // Salmon
           yAxisID: 'y',
           order: 3
         }
@@ -59,12 +60,20 @@ export default function FinancialPosition() {
         type: 'linear',
         display: true,
         position: 'left',
+        grid: { display: true, drawBorder: false },
         ticks: {
-            callback: (value) => formatCurrency(value)
+            callback: (value) => formatCurrency(value),
+            font: { family: '"Consolas", monospace' }
         }
+      },
+      x: {
+        grid: { display: false }
       }
     },
     plugins: {
+        legend: {
+            labels: { font: { family: '"Consolas", monospace' } }
+        },
         tooltip: {
             callbacks: {
                 label: (context) => {
@@ -90,18 +99,18 @@ export default function FinancialPosition() {
       <ChartContainer title="Annual Cash Flow (2021-2025)">
           {chartData && <Chart type='bar' data={chartData} options={options} />}
       </ChartContainer>
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white p-4 rounded border border-slate-100 shadow-sm text-center">
-             <div className="text-sm text-slate-500 uppercase tracking-wide font-semibold">Avg. Annual Inflow</div>
-             <div className="text-2xl font-bold text-emerald-600">$75,387</div>
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-sm">
+          <div className="p-4 border-t-2 border-slate-200 text-center">
+             <div className="uppercase tracking-wide font-semibold mb-2">Avg. Annual Inflow</div>
+             <div className="text-xl">$75,387</div>
           </div>
-          <div className="bg-white p-4 rounded border border-slate-100 shadow-sm text-center">
-             <div className="text-sm text-slate-500 uppercase tracking-wide font-semibold">Avg. Annual Outflow</div>
-             <div className="text-2xl font-bold text-red-500">$70,101</div>
+          <div className="p-4 border-t-2 border-slate-200 text-center">
+             <div className="uppercase tracking-wide font-semibold mb-2">Avg. Annual Outflow</div>
+             <div className="text-xl">$70,101</div>
           </div>
-          <div className="bg-white p-4 rounded border border-slate-100 shadow-sm text-center">
-             <div className="text-sm text-slate-500 uppercase tracking-wide font-semibold">Avg. Net Flow</div>
-             <div className="text-2xl font-bold text-blue-600">+$5,286</div>
+          <div className="p-4 border-t-2 border-slate-200 text-center">
+             <div className="uppercase tracking-wide font-semibold mb-2">Avg. Net Flow</div>
+             <div className="text-xl">+$5,286</div>
           </div>
       </div>
     </Slide>

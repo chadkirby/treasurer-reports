@@ -5,6 +5,7 @@ import ChartContainer from '../components/charts/ChartContainer';
 import MarkdownBlock from '../components/ui/MarkdownBlock';
 import { useData } from '../hooks/useData';
 import { parseCurrency, formatCurrency } from '../utils/format';
+import { TUFTE_PALETTE } from '../utils/theme';
 
 export default function IncomeAnalysis() {
   const { data } = useData('2021-2025/Cash Inflows.csv');
@@ -18,22 +19,22 @@ export default function IncomeAnalysis() {
         {
           label: 'HOA Dues',
           data: rows.map(r => parseCurrency(r['HOA Dues'])),
-          backgroundColor: '#3b82f6',
+          backgroundColor: TUFTE_PALETTE[4], // Blue
         },
         {
           label: 'Interest',
           data: rows.map(r => parseCurrency(r['Interest'])),
-          backgroundColor: '#10b981',
+          backgroundColor: TUFTE_PALETTE[6], // Green
         },
         {
           label: 'Late Fees',
           data: rows.map(r => parseCurrency(r['Late Fees'])),
-          backgroundColor: '#f59e0b',
+          backgroundColor: TUFTE_PALETTE[5], // Orange
         },
          {
           label: 'Other',
           data: rows.map(r => parseCurrency(r['Miscellaneous']) + parseCurrency(r['Violation Fees'])),
-          backgroundColor: '#64748b',
+          backgroundColor: TUFTE_PALETTE[2], // Lavender
         }
       ]
     };

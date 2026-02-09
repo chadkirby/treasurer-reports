@@ -5,6 +5,8 @@ import ChartContainer from '../components/charts/ChartContainer';
 import MarkdownBlock from '../components/ui/MarkdownBlock';
 import { useData } from '../hooks/useData';
 import { parseCurrency, formatCurrency } from '../utils/format';
+import { TUFTE_PALETTE } from '../utils/theme';
+
 
 export default function SpendingAnalysis() {
   const { data: categoryData } = useData('2021-2025/Cash Outflows by Category.csv');
@@ -31,8 +33,8 @@ export default function SpendingAnalysis() {
       datasets: [{
         label: 'Total Payments (2021-2025)',
         data: top.map(d => d.value),
-        backgroundColor: '#3b82f6',
-        borderRadius: 4,
+        backgroundColor: TUFTE_PALETTE[4], // Blue
+        borderRadius: 0, // No radius for Tufte
       }]
     };
   }, [payeeData]);
@@ -61,9 +63,7 @@ export default function SpendingAnalysis() {
       labels: sorted.map(d => d.label),
       datasets: [{
         data: sorted.map(d => d.value),
-        backgroundColor: [
-          '#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#6366f1', '#8b5cf6', '#ec4899', '#64748b'
-        ]
+        backgroundColor: TUFTE_PALETTE
       }]
     };
   }, [categoryData]);
@@ -96,7 +96,7 @@ export default function SpendingAnalysis() {
             <ChartContainer title="Expense Categories (Avg. Annual)">
                 {chartData && <Chart type='doughnut' data={chartData} options={options} />}
             </ChartContainer>
-            <div className="bg-slate-50 p-4 rounded-lg border border-slate-100 flex-1 overflow-y-auto">
+            <div className="p-4 border-t border-slate-300 flex-1 overflow-y-auto font-serif text-sm">
                 <MarkdownBlock filename="2021-2025/Cash Outflows by Category.md" className="prose-sm" />
             </div>
           </div>
@@ -106,8 +106,8 @@ export default function SpendingAnalysis() {
              <ChartContainer title="Top Payees (5-Year Total)">
                   {payeeChartData && <Chart type='bar' data={payeeChartData} options={barOptions} />}
              </ChartContainer>
-              <div className="bg-white p-4 rounded-lg border border-slate-100 flex-1 overflow-y-auto">
-                  <h4 className="font-bold text-sm text-slate-500 mb-2">Vendors Detail</h4>
+              <div className="p-4 border-t border-slate-300 flex-1 overflow-y-auto text-sm">
+                  <h4 className="font-bold mb-2 uppercase tracking-widest text-xs">Vendor Details</h4>
                   <MarkdownBlock filename="2021-2025/Cash Outflows by Payee.md" className="prose-sm" />
               </div>
           </div>
