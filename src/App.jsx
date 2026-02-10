@@ -17,13 +17,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<TitleSlide />} />
+          <Route path="methodology" element={<Methodology />} />
           <Route path="executive-summary" element={<ExecutiveSummary />} />
           <Route path="financial-position" element={<FinancialPosition />} />
           <Route path="income" element={<IncomeAnalysis />} />
           <Route path="spending-category" element={<SpendingByCategory />} />
           <Route path="spending-payee" element={<SpendingByPayee />} />
           <Route path="reserves" element={<ReserveStudy />} />
-          <Route path="methodology" element={<Methodology />} />
         </Route>
       </Routes>
     </HashRouter>

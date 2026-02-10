@@ -4,13 +4,13 @@ import { ChevronLeft, ChevronRight, Home } from 'lucide-react';
 
 const SLIDES = [
   { path: '/', title: 'Home' },
+  { path: '/methodology', title: 'Methodology' },
   { path: '/executive-summary', title: 'Executive Summary' },
   { path: '/financial-position', title: 'Overall Financial Position' },
   { path: '/income', title: 'Income Analysis' },
   { path: '/spending-category', title: 'Spending: By Category' },
   { path: '/spending-payee', title: 'Spending: By Payee' },
   { path: '/reserves', title: 'Reserve Study' },
-  { path: '/methodology', title: 'Methodology' },
 ];
 
 export default function Layout() {

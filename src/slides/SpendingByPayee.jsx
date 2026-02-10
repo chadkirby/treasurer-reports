@@ -20,8 +20,8 @@ export default function SpendingByPayee() {
     return k ? parseCurrency(row[k]) : 0;
   };
 
-  const { payeeChartData, payeeTotals } = useMemo(() => {
-    if (!payeeData) return { payeeChartData: null, payeeTotals: [] };
+  const { payeeChartData, payeeTotals, top3Share, topPayee } = useMemo(() => {
+    if (!payeeData) return { payeeChartData: null, payeeTotals: [], top3Share: 0, topPayee: null };
 
     // Filter out total row and empty payees
     const rows = payeeData.filter(r => {
@@ -32,12 +32,17 @@ export default function SpendingByPayee() {
     // Sort by Total to get Top 10
     const sorted = [...rows].sort((a, b) => getRowVal(b, 'Total') - getRowVal(a, 'Total'));
     const top10 = sorted.slice(0, 10);
+    const totalAll = rows.reduce((sum, r) => sum + getRowVal(r, 'Total'), 0);
+    const top3Sum = sorted.slice(0, 3).reduce((sum, r) => sum + getRowVal(r, 'Total'), 0);
+    const topPayeeRow = sorted[0];
 
     return {
       payeeTotals: top10.map(r => ({
         label: r['Payee'] || Object.values(r)[0],
         total: getRowVal(r, 'Total')
       })),
+      top3Share: totalAll > 0 ? top3Sum / totalAll : 0,
+      topPayee: topPayeeRow ? { label: topPayeeRow['Payee'] || Object.values(topPayeeRow)[0], total: getRowVal(topPayeeRow, 'Total') } : null,
       payeeChartData: {
         labels: years,
         datasets: top10.map((row, idx) => ({
@@ -51,6 +56,8 @@ export default function SpendingByPayee() {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div className="text-red-500">Error loading Payee data: {error.message}</div>;
+
+  const formatPercent = (value) => `${(value * 100).toFixed(1)}%`;
 
   const stackedOptions = {
     responsive: true,
@@ -93,6 +100,18 @@ export default function SpendingByPayee() {
           <ChartContainer title="Cash Outflows by Payee (Yearly Trends)">
             {payeeChartData && <Chart type='bar' data={payeeChartData} options={stackedOptions} />}
           </ChartContainer>
+        </div>
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="p-4 bg-slate-50 border border-slate-200">
+            <div className="text-[10px] uppercase text-slate-500 font-bold tracking-tight">Top 3 Share of Total Outflows</div>
+            <div className="text-2xl font-serif italic text-slate-900">{formatPercent(top3Share)}</div>
+            <div className="text-xs text-slate-500">Based on 2020–2025 payee totals</div>
+          </div>
+          <div className="p-4 bg-slate-50 border border-slate-200">
+            <div className="text-[10px] uppercase text-slate-500 font-bold tracking-tight">Largest Payee</div>
+            <div className="text-lg font-serif italic text-slate-900">{topPayee ? topPayee.label : '—'}</div>
+            <div className="text-sm text-slate-600">{topPayee ? formatCurrency(topPayee.total) : '—'}</div>
+          </div>
         </div>
         <div className="mt-8 pt-8 border-t border-slate-300">
           <h4 className="font-bold mb-4 italic font-serif text-lg">Top Payee Aggregates (2020-2025)</h4>

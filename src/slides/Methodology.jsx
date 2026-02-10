@@ -4,9 +4,9 @@ import MarkdownBlock from '../components/ui/MarkdownBlock';
 
 export default function Methodology() {
   return (
-    <Slide title={null} subtitle={null}>
-      <div className="">
-          <MarkdownBlock filename="METHODOLOGY.md" className="max-w-4xl" />
+    <Slide title="Methodology & Data Sources" subtitle="How this analysis was built from monthly GL reports.">
+      <div className="bg-slate-50 p-8 border border-slate-200 max-w-4xl mx-auto">
+          <MarkdownBlock filename="METHODOLOGY.md" className="max-w-3xl" />
       </div>
     </Slide>
   );
