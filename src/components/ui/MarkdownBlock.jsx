@@ -10,7 +10,7 @@ export default function MarkdownBlock({ filename, className = '' }) {
 
   return (
     <div className={`prose prose-slate max-w-none ${className}`}>
-      <ReactMarkdown>{data}</ReactMarkdown>
+      <ReactMarkdown children={typeof data === 'string' ? data : ''} />
     </div>
   );
 }

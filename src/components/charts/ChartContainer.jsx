@@ -10,6 +10,10 @@ import {
   Tooltip,
   Legend,
   ArcElement,
+  BarController,
+  LineController,
+  DoughnutController,
+  PieController
 } from 'chart.js';
 
 // Register ChartJS components
@@ -22,7 +26,11 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ArcElement
+  ArcElement,
+  BarController,
+  LineController,
+  DoughnutController,
+  PieController
 );
 
 ChartJS.defaults.font.family = '"Consolas", "Monaco", "Andale Mono", monospace';

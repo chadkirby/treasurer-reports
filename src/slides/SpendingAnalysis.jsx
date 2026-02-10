@@ -9,24 +9,39 @@ import { TUFTE_PALETTE } from '../utils/theme';
 
 
 export default function SpendingAnalysis() {
-  const { data: categoryData } = useData('2021-2025/Cash Outflows by Category.csv');
+  const { data: categoryData, loading: catLoading, error: catError } = useData('2021-2025/Cash Outflows by Category.csv');
+  const { data: payeeData, loading: payeeLoading, error: payeeError } = useData('2021-2025/Cash Outflows by Payee.csv');
 
-  // Payee Data Logic
-  const { data: payeeData } = useData('2021-2025/Cash Outflows by Payee.csv');
+  if (catLoading || payeeLoading) return <div>Loading...</div>;
+  if (catError) return <div className="text-red-500">Error loading Category data: {catError.message}</div>;
+  if (payeeError) return <div className="text-red-500">Error loading Payee data: {payeeError.message}</div>;
 
   const payeeChartData = useMemo(() => {
     if (!payeeData) return null;
 
+    const getVal = (row, key) => {
+        if (!row) return undefined;
+        let val = row[key];
+        if (val !== undefined) return val;
+        const k = Object.keys(row).find(rk => rk.trim() === key);
+        return k ? row[k] : undefined;
+    };
+
     // Rows have Payee, ..., Total
-    // We want top payees by Total
-    const rows = payeeData.filter(r => r.Payee && r.Payee !== 'TOTAL OUTFLOW');
+    const rows = payeeData.filter(r => {
+        const p = getVal(r, 'Payee');
+        return p && p !== 'TOTAL OUTFLOW';
+    });
+
     const sorted = rows.map(r => ({
-      label: r.Payee,
-      value: parseCurrency(r.Total)
+      label: getVal(r, 'Payee'),
+      value: parseCurrency(getVal(r, 'Total'))
     })).sort((a, b) => b.value - a.value);
 
     // Limit to top 5
     const top = sorted.slice(0, 5);
+
+    if (top.length === 0) return null;
 
     return {
       labels: top.map(d => d.label),
@@ -47,23 +62,36 @@ export default function SpendingAnalysis() {
   const chartData = useMemo(() => {
     if (!categoryData) return null;
 
-    // Find the Average row
-    const avgRow = categoryData.find(r => r.Year === 'Average');
-    if (!avgRow) return null;
+    // Helper for safe key access
+    const getVal = (row, key) => {
+        if (!row) return undefined;
+        let val = row[key];
+        if (val !== undefined) return val;
+        const k = Object.keys(row).find(rk => rk.trim() === key);
+        return k ? row[k] : undefined;
+    };
 
-    // Extract categories (keys exclude Year and Total)
-    const categories = Object.keys(avgRow).filter(k => k !== 'Year' && k !== 'Total Cash Outflows');
-    const values = categories.map(k => parseCurrency(avgRow[k]));
+    // Filter rows
+    const rows = categoryData.filter(r => {
+        const cat = getVal(r, 'Category');
+        return cat && cat !== 'TOTAL OUTFLOW';
+    });
 
-    // Sort by value desc
-    const sorted = categories.map((c, i) => ({ label: c, value: values[i] }))
-                             .sort((a, b) => b.value - a.value);
+    // Sort by Total
+    const sorted = rows.map(r => ({
+        label: getVal(r, 'Category'),
+        value: parseCurrency(getVal(r, 'Total'))
+    })).sort((a, b) => b.value - a.value);
+
+    // If no processing happened (empty), return check
+    if (sorted.length === 0) return null;
 
     return {
       labels: sorted.map(d => d.label),
       datasets: [{
         data: sorted.map(d => d.value),
-        backgroundColor: TUFTE_PALETTE
+        backgroundColor: TUFTE_PALETTE,
+        borderWidth: 0
       }]
     };
   }, [categoryData]);

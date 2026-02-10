@@ -12,29 +12,48 @@ export default function IncomeAnalysis() {
 
   const chartData = useMemo(() => {
     if (!data) return null;
-    const rows = data.filter(r => r.Year && r.Year !== 'Average');
+
+    // CSV structure: Revenue Source, 2020*, 2021, 2022, 2023, 2024, 2025
+    // We want years 2021-2025
+    const years = ['2021', '2022', '2023', '2024', '2025'];
+
+    // Helper to find row by source name (loose match)
+    const findRow = (source) => data.find(r => r['Revenue Source'] && r['Revenue Source'].includes(source));
+
+    const hoaRow = findRow('HOA Dues');
+    const conveyanceRow = findRow('Conveyance');
+    const otherRow = findRow('Other'); // "Other (Fines/Late Fees)"
+
+    if (!hoaRow) return null;
+
+    // Helper to get value even if whitespace in keys
+    const getValue = (row, year) => {
+        if (!row) return 0;
+        // Try direct access
+        let val = row[year];
+        if (val) return val;
+        // Try trimmed keys
+        const key = Object.keys(row).find(k => k.trim() === year);
+        return key ? row[key] : 0;
+    };
+
     return {
-      labels: rows.map(r => r.Year),
+      labels: years,
       datasets: [
         {
           label: 'HOA Dues',
-          data: rows.map(r => parseCurrency(r['HOA Dues'])),
+          data: years.map(y => parseCurrency(getValue(hoaRow, y))),
           backgroundColor: TUFTE_PALETTE[4], // Blue
         },
         {
-          label: 'Interest',
-          data: rows.map(r => parseCurrency(r['Interest'])),
-          backgroundColor: TUFTE_PALETTE[6], // Green
+          label: 'Conveyance Assessments',
+          data: years.map(y => parseCurrency(getValue(conveyanceRow, y))),
+          backgroundColor: TUFTE_PALETTE[0], // Teal
         },
         {
-          label: 'Late Fees',
-          data: rows.map(r => parseCurrency(r['Late Fees'])),
-          backgroundColor: TUFTE_PALETTE[5], // Orange
-        },
-         {
-          label: 'Other',
-          data: rows.map(r => parseCurrency(r['Miscellaneous']) + parseCurrency(r['Violation Fees'])),
-          backgroundColor: TUFTE_PALETTE[2], // Lavender
+          label: 'Other (Fines/Late Fees)',
+          data: years.map(y => parseCurrency(getValue(otherRow, y))),
+          backgroundColor: TUFTE_PALETTE[3], // Salmon
         }
       ]
     };
@@ -44,11 +63,22 @@ export default function IncomeAnalysis() {
       responsive: true,
       maintainAspectRatio: false,
       scales: {
-          x: { stacked: true },
+          x: { stacked: true, grid: { display: false } },
           y: {
               stacked: true,
-              ticks: { callback: (v) => formatCurrency(v) }
+              ticks: { callback: (v) => formatCurrency(v), font: { family: '"Consolas", monospace' } },
+              grid: { display: true, drawBorder: false, color: '#e5e5e5' }
           }
+      },
+      plugins: {
+        legend: { labels: { font: { family: '"Consolas", monospace' } } },
+        tooltip: {
+            callbacks: {
+                label: (context) => {
+                     return context.dataset.label + ': ' + formatCurrency(context.raw);
+                }
+            }
+        }
       }
   };
 
@@ -58,9 +88,9 @@ export default function IncomeAnalysis() {
          <ChartContainer title="Revenue Composition">
              {chartData && <Chart type='bar' data={chartData} options={options} />}
          </ChartContainer>
-         <div className="h-full overflow-y-auto bg-slate-50 p-6 rounded-lg border border-slate-100">
-             <h3 className="text-xl font-bold mb-4">Commentary</h3>
-             <MarkdownBlock filename="Cash Inflows.md" />
+         <div className="h-full overflow-y-auto pt-4 border-t border-slate-300">
+             <h3 className="text-lg font-bold mb-4 font-serif italic">Commentary</h3>
+             <MarkdownBlock filename="2021-2025/Cash Inflows.md" className="prose-sm font-serif" />
          </div>
       </div>
     </Slide>

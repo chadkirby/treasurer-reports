@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   /* Tufte / Set3 Palette */
   --color-bg: #fffff8; /* Warm white / paper */
@@ -17,68 +21,51 @@
   --chart-c6: #fdb462;
   --chart-c7: #b3de69;
 
-  /* Typography */
-  --font-serif: "et-book", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
-  --font-sans: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
-  --font-mono: "Consolas", "Monaco", "Andale Mono", monospace;
-
-  /* Spacing */
-  --spacing-1: 0.25rem;
-  --spacing-2: 0.5rem;
-  --spacing-4: 1rem;
-  --spacing-8: 2rem;
-  --spacing-16: 4rem;
-
-  /* Radius */
-  --radius-sm: 0;
-  --radius-md: 0;
-  --radius-lg: 0; /* Tufte usually sharp edges */
+  /* Typography variables used by ChartJS or other logic,
+     but Tailwind classes will use the fontFamily config */
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+@layer base {
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    /* font-family is handled by utility class on body in Layout or here */
+    font-family: theme('fontFamily.serif');
+  }
 
-body {
-  font-family: var(--font-serif);
-  background-color: var(--color-bg);
-  color: var(--color-text-primary);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    color: var(--color-accent);
+    margin-bottom: theme('spacing.4');
+  }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: normal;
-  color: var(--color-accent);
-  margin-bottom: var(--spacing-4);
-}
+  h1 { font-size: 2.5rem; line-height: 1.1; font-style: italic; }
+  h2 { font-size: 1.8rem; font-style: italic; }
+  h3 { font-size: 1.4rem; }
 
-h1 { font-size: 2.5rem; line-height: 1.1; }
-h2 { font-size: 1.8rem; font-style: italic; }
-h3 { font-size: 1.4rem; }
+  a {
+    color: var(--color-text-primary);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  a:hover {
+    text-decoration-thickness: 2px;
+  }
+}
 
 /* Data Tables & Numbers */
 .tufte-data {
-  font-family: var(--font-mono);
+  font-family: theme('fontFamily.mono');
   font-size: 0.9rem;
 }
 
-a {
-  color: var(--color-text-primary);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-}
-a:hover {
-  text-decoration-thickness: 2px;
-}
-
 .container {
-  max-width: 1000px; /* Tufte prefers tighter measures */
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 0 var(--spacing-8);
+  padding: 0 2rem;
 }
 
 /* Utility for Slide Deck feel */

@@ -19,15 +19,19 @@ export function useData(filename) {
       setError(null);
       try {
         const response = await fetch(`/sources/${filename}`);
-        if (!response.ok) {
-          throw new Error(`Failed to fetch ${filename}: ${response.statusText}`);
+
+        const contentType = response.headers.get('content-type');
+        if (!response.ok || (contentType && contentType.includes('text/html'))) {
+             throw new Error(`Failed to load ${filename}: ${response.status} ${response.statusText} - Possibly 404 returning index.html`);
         }
+
         const text = await response.text();
 
         if (filename.endsWith('.csv')) {
           Papa.parse(text, {
             header: true,
             dynamicTyping: true,
+            skipEmptyLines: true,
             complete: (results) => {
               if (results.errors.length > 0) {
                  console.warn('CSV Parsing errors:', results.errors);
