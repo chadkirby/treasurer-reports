@@ -65,7 +65,8 @@
 .container {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 /* Utility for Slide Deck feel */
@@ -90,4 +91,33 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   transition: all 0.2s ease-in-out;
+}
+
+/* Typography Overrides for Tufte Aesthetic */
+.prose h1, .prose h2, .prose h3 {
+    @apply font-serif italic text-black font-normal;
+}
+
+.prose h1 {
+    @apply text-4xl mb-6 mt-0;
+}
+
+.prose h2 {
+    @apply text-2xl mt-6 mb-3 border-b border-slate-200 pb-2;
+}
+
+.prose h3 {
+    @apply text-xl mt-6 mb-3;
+}
+
+.prose p {
+    @apply mb-6 leading-relaxed;
+}
+
+.prose ul, .prose ol {
+    @apply mb-8;
+}
+
+.prose li {
+    @apply mb-2;
 }

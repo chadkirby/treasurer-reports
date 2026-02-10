@@ -56,7 +56,7 @@ export default function Layout() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 pt-36 pb-24 px-4 container mx-auto slide-content max-w-5xl text-lg">
+      <main className="flex-1 pt-32 pb-24 px-4 container mx-auto slide-content max-w-5xl text-lg">
         <div className="bg-transparent rounded-none p-0 min-h-full">
             <Outlet />
         </div>

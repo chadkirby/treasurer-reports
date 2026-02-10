@@ -5,8 +5,8 @@ import MarkdownBlock from '../components/ui/MarkdownBlock';
 export default function Methodology() {
   return (
     <Slide title={null} subtitle={null}>
-      <div className="h-full overflow-y-auto">
-          <MarkdownBlock filename="METHODOLOGY.md" />
+      <div className="">
+          <MarkdownBlock filename="METHODOLOGY.md" className="max-w-4xl" />
       </div>
     </Slide>
   );
