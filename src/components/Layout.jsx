@@ -7,7 +7,8 @@ const SLIDES = [
   { path: '/executive-summary', title: 'Executive Summary' },
   { path: '/financial-position', title: 'Overall Financial Position' },
   { path: '/income', title: 'Income Analysis' },
-  { path: '/spending', title: 'Spending Analysis' },
+  { path: '/spending-category', title: 'Spending: By Category' },
+  { path: '/spending-payee', title: 'Spending: By Payee' },
   { path: '/reserves', title: 'Reserve Study' },
   { path: '/methodology', title: 'Methodology' },
 ];
