@@ -12,10 +12,6 @@ export default function SpendingAnalysis() {
   const { data: categoryData, loading: catLoading, error: catError } = useData('2021-2025/Cash Outflows by Category.csv');
   const { data: payeeData, loading: payeeLoading, error: payeeError } = useData('2021-2025/Cash Outflows by Payee.csv');
 
-  if (catLoading || payeeLoading) return <div>Loading...</div>;
-  if (catError) return <div className="text-red-500">Error loading Category data: {catError.message}</div>;
-  if (payeeError) return <div className="text-red-500">Error loading Payee data: {payeeError.message}</div>;
-
   const payeeChartData = useMemo(() => {
     if (!payeeData) return null;
 
@@ -27,7 +23,6 @@ export default function SpendingAnalysis() {
         return k ? row[k] : undefined;
     };
 
-    // Rows have Payee, ..., Total
     const rows = payeeData.filter(r => {
         const p = getVal(r, 'Payee');
         return p && p !== 'TOTAL OUTFLOW';
@@ -38,9 +33,7 @@ export default function SpendingAnalysis() {
       value: parseCurrency(getVal(r, 'Total'))
     })).sort((a, b) => b.value - a.value);
 
-    // Limit to top 5
-    const top = sorted.slice(0, 5);
-
+    const top = sorted.slice(0, 10); // Increased to 10 for more info
     if (top.length === 0) return null;
 
     return {
@@ -48,21 +41,15 @@ export default function SpendingAnalysis() {
       datasets: [{
         label: 'Total Payments (2021-2025)',
         data: top.map(d => d.value),
-        backgroundColor: TUFTE_PALETTE[4], // Blue
-        borderRadius: 0, // No radius for Tufte
+        backgroundColor: TUFTE_PALETTE[4],
+        borderRadius: 0,
       }]
     };
   }, [payeeData]);
 
-  // We actully want the "Average" row for distribution, or maybe summed up over years?
-  // Let's take the "Average" row for a representative year breakdown if available,
-  // or sum up all years.
-  // The CSV usually has Year, Category1, Category2...
-
   const chartData = useMemo(() => {
     if (!categoryData) return null;
 
-    // Helper for safe key access
     const getVal = (row, key) => {
         if (!row) return undefined;
         let val = row[key];
@@ -71,19 +58,16 @@ export default function SpendingAnalysis() {
         return k ? row[k] : undefined;
     };
 
-    // Filter rows
     const rows = categoryData.filter(r => {
         const cat = getVal(r, 'Category');
         return cat && cat !== 'TOTAL OUTFLOW';
     });
 
-    // Sort by Total
     const sorted = rows.map(r => ({
         label: getVal(r, 'Category'),
         value: parseCurrency(getVal(r, 'Total'))
     })).sort((a, b) => b.value - a.value);
 
-    // If no processing happened (empty), return check
     if (sorted.length === 0) return null;
 
     return {
@@ -96,48 +80,51 @@ export default function SpendingAnalysis() {
     };
   }, [categoryData]);
 
+  if (catLoading || payeeLoading) return <div>Loading...</div>;
+  if (catError) return <div className="text-red-500">Error loading Category data: {catError.message}</div>;
+  if (payeeError) return <div className="text-red-500">Error loading Payee data: {payeeError.message}</div>;
+
   const barOptions = {
     indexAxis: 'y',
     responsive: true,
     maintainAspectRatio: false,
-    plugins: {
-       legend: { display: false }
-    },
-    scales: {
-        x: { ticks: { callback: (v) => formatCurrency(v) } }
-    }
+    plugins: { legend: { display: false } },
+    scales: { x: { ticks: { callback: (v) => formatCurrency(v) }, grid: { display: true, color: '#e5e5e5' } } }
   };
 
   const options = {
     responsive: true,
     maintainAspectRatio: false,
-    plugins: {
-        legend: { position: 'right' }
-    }
+    plugins: { legend: { position: 'right' } }
   };
 
   return (
     <Slide title="Spending Analysis" subtitle="Where does the money go?">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-full">
-          {/* Left Col: Categories */}
-          <div className="flex flex-col gap-4 h-1/2 md:h-full">
-            <ChartContainer title="Expense Categories (Avg. Annual)">
-                {chartData && <Chart type='doughnut' data={chartData} options={options} />}
-            </ChartContainer>
-            <div className="p-4 border-t border-slate-300 flex-1 overflow-y-auto font-serif text-sm">
-                <MarkdownBlock filename="2021-2025/Cash Outflows by Category.md" className="prose-sm" />
+      <div className="flex flex-col gap-12">
+          {/* Section 1: Categories */}
+          <div className="bg-slate-50 p-8 border border-slate-200">
+            <div className="h-[400px]">
+                <ChartContainer title="Expense Categories (5-Year Total Sum)">
+                    {chartData && <Chart type='doughnut' data={chartData} options={options} />}
+                </ChartContainer>
+            </div>
+            <div className="mt-8 pt-8 border-t border-slate-300">
+                <h4 className="font-bold mb-4 italic font-serif">Analysis by Category</h4>
+                <MarkdownBlock filename="2021-2025/Cash Outflows by Category.md" className="prose-sm max-w-3xl" />
             </div>
           </div>
 
-          {/* Right Col: Payees */}
-          <div className="flex flex-col gap-4 h-1/2 md:h-full">
-             <ChartContainer title="Top Payees (5-Year Total)">
-                  {payeeChartData && <Chart type='bar' data={payeeChartData} options={barOptions} />}
-             </ChartContainer>
-              <div className="p-4 border-t border-slate-300 flex-1 overflow-y-auto text-sm">
-                  <h4 className="font-bold mb-2 uppercase tracking-widest text-xs">Vendor Details</h4>
-                  <MarkdownBlock filename="2021-2025/Cash Outflows by Payee.md" className="prose-sm" />
-              </div>
+          {/* Section 2: Payees */}
+          <div className="bg-white p-8 border border-slate-200">
+             <div className="h-[500px]">
+                <ChartContainer title="Top 10 Payees (5-Year Total Sum)">
+                    {payeeChartData && <Chart type='bar' data={payeeChartData} options={barOptions} />}
+                </ChartContainer>
+             </div>
+             <div className="mt-8 pt-8 border-t border-slate-300">
+                <h4 className="font-bold mb-4 italic font-serif">Vendor Details</h4>
+                <MarkdownBlock filename="2021-2025/Cash Outflows by Payee.md" className="prose-sm max-w-3xl" />
+             </div>
           </div>
       </div>
     </Slide>

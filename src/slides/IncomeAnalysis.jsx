@@ -8,7 +8,7 @@ import { parseCurrency, formatCurrency } from '../utils/format';
 import { TUFTE_PALETTE } from '../utils/theme';
 
 export default function IncomeAnalysis() {
-  const { data } = useData('2021-2025/Cash Inflows.csv');
+  const { data, loading, error } = useData('2021-2025/Cash Inflows.csv');
 
   const chartData = useMemo(() => {
     if (!data) return null;
@@ -59,11 +59,18 @@ export default function IncomeAnalysis() {
     };
   }, [data]);
 
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div className="text-red-500">Error: {error.message}</div>;
+
   const options = {
       responsive: true,
       maintainAspectRatio: false,
       scales: {
-          x: { stacked: true, grid: { display: false } },
+          x: {
+            stacked: true,
+            grid: { display: false },
+            ticks: { font: { family: '"Consolas", monospace' } }
+          },
           y: {
               stacked: true,
               ticks: { callback: (v) => formatCurrency(v), font: { family: '"Consolas", monospace' } },
@@ -84,13 +91,15 @@ export default function IncomeAnalysis() {
 
   return (
     <Slide title="Income Analysis" subtitle="Breakdown of revenue sources.">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-full">
-         <ChartContainer title="Revenue Composition">
-             {chartData && <Chart type='bar' data={chartData} options={options} />}
-         </ChartContainer>
-         <div className="h-full overflow-y-auto pt-4 border-t border-slate-300">
+      <div className="flex flex-col gap-12">
+         <div className="h-[400px]">
+            <ChartContainer title="Revenue Composition (2021-2025)">
+                {chartData && <Chart type='bar' data={chartData} options={options} />}
+            </ChartContainer>
+         </div>
+         <div className="pt-8 border-t border-slate-300">
              <h3 className="text-lg font-bold mb-4 font-serif italic">Commentary</h3>
-             <MarkdownBlock filename="2021-2025/Cash Inflows.md" className="prose-sm font-serif" />
+             <MarkdownBlock filename="2021-2025/Cash Inflows.md" className="prose-sm font-serif max-w-3xl" />
          </div>
       </div>
     </Slide>
