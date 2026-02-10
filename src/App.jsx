@@ -9,6 +9,7 @@ import SpendingByPayee from './slides/SpendingByPayee';
 import ConveyanceAssessment from './slides/ConveyanceAssessment';
 import ReserveStudy from './slides/ReserveStudy';
 import Methodology from './slides/Methodology';
+import CastAndFramework from './slides/CastAndFramework';
 import './index.css';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<TitleSlide />} />
           <Route path="methodology" element={<Methodology />} />
+          <Route path="cast-framework" element={<CastAndFramework />} />
           <Route path="executive-summary" element={<ExecutiveSummary />} />
           <Route path="financial-position" element={<FinancialPosition />} />
           <Route path="income" element={<IncomeAnalysis />} />
