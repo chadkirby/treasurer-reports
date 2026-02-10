@@ -8,6 +8,13 @@ This caused the "Conveyance Assessment" income to net against the "Developer Pay
 
 ---
 
+### Why this created an overpayment risk (Management Company practice)
+
+- The Developer’s claim was never recorded as a balance‑sheet liability, so repayments did not reduce an outstanding balance that could be reconciled over time.
+- Payments were run through a single revenue account (GL 300150) that was frequently swept to zero, which hid cash outflows from casual review.
+- Because the account netted to near‑zero, there was no clear audit trail showing when the alleged “loan” had been fully repaid.
+- As a direct result, the HOA appears to have overpaid the Developer by at least $18k relative to the Developer’s own stated loan amount.
+
 ### The Technical Breakdown
 
 Here is the step-by-step accounting flow based on the General Ledgers (specifically focusing on the transactions in GL 300150):
