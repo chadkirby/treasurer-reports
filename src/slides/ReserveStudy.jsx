@@ -9,19 +9,6 @@ export default function ReserveStudy() {
           <div className="bg-slate-50 p-8 border border-slate-200">
               <h3 className="text-xl font-bold mb-6 font-serif italic border-b border-slate-300 pb-2">Analysis of Reserve Health</h3>
               <MarkdownBlock filename="2021-2025/Reserve Study Analysis.md" className="prose-base font-serif" />
-
-              <div className="mt-8 p-6 bg-white border border-slate-200">
-                <h4 className="font-bold mb-3 font-serif italic text-slate-900">Risk Flags / Questions</h4>
-                <ul className="list-disc pl-5 text-sm text-slate-700 space-y-2">
-                  <li>Stormwater maintenance obligations may not be fully reflected in the reserve study scope.</li>
-                  <li>Reserve funding contributions appear below target relative to expected long-term obligations.</li>
-                  <li>Repayments to the Developer may have used funds that were legally obligated to the reserve account.</li>
-                </ul>
-              </div>
-
-              <div className="mt-8 p-6 bg-white border border-slate-200 text-sm text-slate-600 font-serif">
-                <p><strong>Note:</strong> The full 2025 Reserve Study (Report #46458-2) is a 40-page technical document. The summary above distills the most critical financial implications for the Association.</p>
-              </div>
           </div>
       </div>
     </Slide>

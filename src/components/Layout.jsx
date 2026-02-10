@@ -10,6 +10,7 @@ const SLIDES = [
   { path: '/income', title: 'Income Analysis' },
   { path: '/spending-category', title: 'Spending: By Category' },
   { path: '/spending-payee', title: 'Spending: By Payee' },
+  { path: '/conveyance-assessment', title: 'Conveyance Assessments' },
   { path: '/reserves', title: 'Reserve Study' },
 ];
 

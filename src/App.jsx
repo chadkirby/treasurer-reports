@@ -6,6 +6,7 @@ import FinancialPosition from './slides/FinancialPosition';
 import IncomeAnalysis from './slides/IncomeAnalysis';
 import SpendingByCategory from './slides/SpendingByCategory';
 import SpendingByPayee from './slides/SpendingByPayee';
+import ConveyanceAssessment from './slides/ConveyanceAssessment';
 import ReserveStudy from './slides/ReserveStudy';
 import Methodology from './slides/Methodology';
 import './index.css';
@@ -23,6 +24,7 @@ function App() {
           <Route path="income" element={<IncomeAnalysis />} />
           <Route path="spending-category" element={<SpendingByCategory />} />
           <Route path="spending-payee" element={<SpendingByPayee />} />
+          <Route path="conveyance-assessment" element={<ConveyanceAssessment />} />
           <Route path="reserves" element={<ReserveStudy />} />
         </Route>
       </Routes>
