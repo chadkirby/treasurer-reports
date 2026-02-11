@@ -13,19 +13,13 @@ graph TB
   Board_H["Board"]:::entity
   HOA_H["Deschutes Heights HOA<br/>(WA non-profit)"]:::hoa
 
-  subgraph LANDOWNERS ["Landowners (no governance)"]
-    direction LR
   Min_H["Min<br/>(not on Board)"]:::person
-    SOUK_H["SO UK Investments"]:::entity
-    Lotus_H["Lotus House"]:::entity
-  end
+  SOUK_H["SO UK Investments"]:::entity
+  Lotus_H["Lotus House"]:::entity
 
-  subgraph VENDORS ["Contracted Services"]
-    direction LR
   VIS_H["VIS Group<br/>(Management Co.)"]:::mgmt
   SHR_H["Simply Home Realty<br/>(Vendor)"]:::vendor
   PG_H["Precision Groundworks<br/>(Vendor)"]:::vendor
-  end
 
   Owners -- "control" --> Board_H
   Board_H -- "governs" --> HOA_H

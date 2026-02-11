@@ -10,21 +10,15 @@ graph TB
 
   Min_D["Min<br/>(Individual, NY)"]:::person
 
-  subgraph DEV_CONTROLS ["Control"]
-    direction LR
-    SOUK_D["SO UK Investments<br/>(NY entity)"]:::entity
-    Lotus_D["Lotus House<br/>(WA entity)"]:::entity
-    Board_D["Board<br/>(Min = controlling director)"]:::entity
-  end
+  SOUK_D["SO UK Investments<br/>(NY entity)"]:::entity
+  Lotus_D["Lotus House<br/>(WA entity)"]:::entity
+  Board_D["Board<br/>(Min = controlling director)"]:::entity
 
   HOA_D["Deschutes Heights HOA<br/>(WA non-profit, est. 2011)"]:::hoa
 
-  subgraph VENDORS ["Contracted Services"]
-    direction LR
-    VIS_D["VIS Group<br/>(Management Co., hired 2020)"]:::mgmt
-    SHR_D["Simply Home Realty<br/>(Vendor)"]:::vendor
-    PG_D["Precision Groundworks<br/>(Vendor)"]:::vendor
-  end
+  VIS_D["VIS Group<br/>(Management Co., hired 2020)"]:::mgmt
+  SHR_D["Simply Home Realty<br/>(Vendor)"]:::vendor
+  PG_D["Precision Groundworks<br/>(Vendor)"]:::vendor
 
   Min_D -- "controls" --> SOUK_D
   Min_D -- "controls" --> Lotus_D
