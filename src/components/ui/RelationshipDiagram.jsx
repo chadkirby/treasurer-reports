@@ -120,17 +120,17 @@ export function DeveloperDiagram() {
     <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-auto">
       <ArrowDefs />
 
-      <Box x={minX} y={minY} w={boxW} h={boxH} {...COLORS.person} lines={['Min', '(Individual, NY)']} />
+      <Box x={minX} y={minY} w={boxW} h={boxH} {...COLORS.person} lines={['Min']} />
 
-      <Box x={soX} y={row2Y} w={boxW} h={boxH} {...COLORS.entity} lines={['SO UK Investments', '(NY entity)']} />
-      <Box x={loX} y={row2Y} w={boxW} h={boxH} {...COLORS.entity} lines={['Lotus House', '(WA entity)']} />
-      <Box x={boX} y={row2Y} w={boxW} h={boxH} {...COLORS.entity} lines={['Board', '(Min = controlling director)']} />
+      <Box x={soX} y={row2Y} w={boxW} h={boxH} {...COLORS.entity} lines={['SO UK Investments']} />
+      <Box x={loX} y={row2Y} w={boxW} h={boxH} {...COLORS.entity} lines={['Lotus House']} />
+      <Box x={boX} y={row2Y} w={boxW} h={boxH} {...COLORS.entity} lines={['Board']} />
 
-      <Box x={hoaX} y={hoaY} w={boxW} h={boxH + 6} {...COLORS.hoa} lines={['Deschutes Heights HOA', '(WA non-profit, est. 2011)']} />
-      <Box x={visX} y={visY} w={boxW} h={boxH + 6} {...COLORS.mgmt} lines={['VIS Group', '(Management Co., hired 2020)']} />
+      <Box x={hoaX} y={hoaY} w={boxW} h={boxH + 6} {...COLORS.hoa} lines={['Deschutes Heights HOA']} />
+      <Box x={visX} y={visY} w={boxW} h={boxH + 6} {...COLORS.mgmt} lines={['VIS Group']} />
 
-      <Box x={shrX} y={vendorY} w={boxW} h={boxH} {...COLORS.vendor} lines={['Simply Home Realty', '(Vendor)']} />
-      <Box x={pgX} y={vendorY} w={boxW} h={boxH} {...COLORS.vendor} lines={['Precision Groundworks', '(Vendor)']} />
+      <Box x={shrX} y={vendorY} w={boxW} h={boxH} {...COLORS.vendor} lines={['Simply Home Realty']} />
+      <Box x={pgX} y={vendorY} w={boxW} h={boxH} {...COLORS.vendor} lines={['Precision Groundworks']} />
 
       <Line x1={minX + boxW / 2} y1={minY + boxH} x2={soX + boxW / 2} y2={row2Y} />
       <Line x1={minX + boxW / 2} y1={minY + boxH} x2={loX + boxW / 2} y2={row2Y} />
@@ -228,18 +228,18 @@ export function HomeownerDiagram() {
     <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-auto">
       <ArrowDefs />
 
-      <Box x={ownersX} y={topY} w={boxW} h={boxH} {...COLORS.person} lines={['7 Homeowner', 'Board Members']} />
+      <Box x={ownersX} y={topY} w={boxW} h={boxH} {...COLORS.person} lines={['7 Homeowners']} />
       <Box x={boardX} y={boardY} w={boxW} h={boxH} {...COLORS.entity} lines={['Board']} />
 
-      <Box x={minX} y={row2Y} w={boxW} h={boxH} {...COLORS.person} lines={['Min', '(not on Board)']} />
+      <Box x={minX} y={row2Y} w={boxW} h={boxH} {...COLORS.person} lines={['Min']} />
       <Box x={soX} y={row2Y} w={boxW} h={boxH} {...COLORS.entity} lines={['SO UK Investments']} />
       <Box x={loX} y={row2Y} w={boxW} h={boxH} {...COLORS.entity} lines={['Lotus House']} />
 
-      <Box x={hoaX} y={hoaY} w={boxW} h={boxH + 6} {...COLORS.hoa} lines={['Deschutes Heights HOA', '(WA non-profit)']} />
-      <Box x={visX} y={visY} w={boxW} h={boxH + 6} {...COLORS.mgmt} lines={['VIS Group', '(Management Co.)']} />
+      <Box x={hoaX} y={hoaY} w={boxW} h={boxH + 6} {...COLORS.hoa} lines={['Deschutes Heights HOA']} />
+      <Box x={visX} y={visY} w={boxW} h={boxH + 6} {...COLORS.mgmt} lines={['VIS Group']} />
 
-      <Box x={shrX} y={vendorY} w={boxW} h={boxH} {...COLORS.vendor} lines={['Simply Home Realty', '(Vendor)']} />
-      <Box x={pgX} y={vendorY} w={boxW} h={boxH} {...COLORS.vendor} lines={['Precision Groundworks', '(Vendor)']} />
+      <Box x={shrX} y={vendorY} w={boxW} h={boxH} {...COLORS.vendor} lines={['Simply Home Realty']} />
+      <Box x={pgX} y={vendorY} w={boxW} h={boxH} {...COLORS.vendor} lines={['Precision Groundworks']} />
 
       <Line x1={ownersX + boxW / 2} y1={topY + boxH} x2={boardX + boxW / 2} y2={boardY} />
       {(() => {
@@ -337,13 +337,13 @@ export function AuthorityDiagram() {
     <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-auto">
       <ArrowDefs />
 
-      <Box x={centerX} y={rcwY} w={boxW} h={boxH} {...COLORS.law} lines={['Washington State Law', '(Grants powers to common-interest communities)']} />
-      <Box x={centerX} y={declY} w={boxW} h={boxH} {...COLORS.law} lines={['Declaration (CC&Rs)', '(Defines HOA powers & restrictions)']} />
-      <Box x={centerX} y={bylawsY} w={boxW} h={boxH} {...COLORS.law} lines={['Bylaws', '(Board structure, meetings, voting)']} />
-      <Box x={centerX} y={hoaY} w={boxW} h={boxH + 6} {...COLORS.hoa} lines={['Deschutes Heights HOA', '(Holds authority granted by law + docs)']} />
-      <Box x={centerX} y={visY} w={boxW} h={boxH + 6} {...COLORS.mgmt} lines={['VIS Group', '(Management Co., hired 2020)', 'Agent of the HOA, not governing']} />
-      <Box x={centerX} y={tasksY} w={boxW} h={boxH + 16} {...COLORS.task} lines={['Delegated tasks:', 'Accounting & reporting', 'Records', 'Homeowner correspondence', 'Advising the Board', 'Other ministerial tasks']} />
-      <Box x={centerX} y={keyY} w={boxW} h={boxH + 16} {...COLORS.key} lines={['KEY PRINCIPLE:', 'Authority flows down from law', 'through governing documents', 'into the HOA.', 'VIS receives only what is delegated.']} />
+      <Box x={centerX} y={rcwY} w={boxW} h={boxH} {...COLORS.law} lines={['Washington State Law']} />
+      <Box x={centerX} y={declY} w={boxW} h={boxH} {...COLORS.law} lines={['Declaration (CC&Rs)']} />
+      <Box x={centerX} y={bylawsY} w={boxW} h={boxH} {...COLORS.law} lines={['Bylaws']} />
+      <Box x={centerX} y={hoaY} w={boxW} h={boxH + 6} {...COLORS.hoa} lines={['Deschutes Heights HOA']} />
+      <Box x={centerX} y={visY} w={boxW} h={boxH + 6} {...COLORS.mgmt} lines={['VIS Group']} />
+      <Box x={centerX} y={tasksY} w={boxW} h={boxH + 16} {...COLORS.task} lines={['Delegated tasks', 'Accounting & reporting', 'Records', 'Homeowner correspondence', 'Advising the Board', 'Other ministerial tasks']} />
+      <Box x={centerX} y={keyY} w={boxW} h={boxH + 16} {...COLORS.key} lines={['Key principle', 'Authority flows down from law', 'through governing documents', 'into the HOA.', 'VIS receives only what is delegated.']} />
 
       <Line x1={w / 2} y1={rcwY + boxH} x2={w / 2} y2={declY} />
       <Line x1={w / 2} y1={declY + boxH} x2={w / 2} y2={bylawsY} />
