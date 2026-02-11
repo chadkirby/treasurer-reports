@@ -1,7 +1,7 @@
 import React from 'react';
 import Slide from '../components/ui/Slide';
-import MermaidBlock from '../components/ui/MermaidBlock';
 import MarkdownBlock from '../components/ui/MarkdownBlock';
+import RelationshipDiagram from '../components/ui/RelationshipDiagram';
 
 export default function CastAndFramework() {
   return (
@@ -24,7 +24,7 @@ export default function CastAndFramework() {
         <div className="bg-white p-6 border border-slate-200">
           <h3 className="text-xl font-bold mb-4 font-serif italic border-b border-slate-300 pb-2">Relationship Map: Developer Control Period</h3>
           <div className="bg-slate-50 border border-slate-200 p-4">
-            <MermaidBlock filename="relationships-developer.mermaid" />
+            <RelationshipDiagram type="developer" />
           </div>
           <div className="mt-4">
             <MarkdownBlock filename="relationships-developer.md" className="prose-sm font-serif" />
@@ -34,7 +34,7 @@ export default function CastAndFramework() {
         <div className="bg-white p-6 border border-slate-200">
           <h3 className="text-xl font-bold mb-4 font-serif italic border-b border-slate-300 pb-2">Relationship Map: Homeowner Control Period (Current)</h3>
           <div className="bg-slate-50 border border-slate-200 p-4">
-            <MermaidBlock filename="relationships-homeowner.mermaid" />
+            <RelationshipDiagram type="homeowner" />
           </div>
           <div className="mt-4">
             <MarkdownBlock filename="relationships-homeowner.md" className="prose-sm font-serif" />
@@ -44,7 +44,7 @@ export default function CastAndFramework() {
         <div className="bg-white p-6 border border-slate-200">
           <h3 className="text-xl font-bold mb-4 font-serif italic border-b border-slate-300 pb-2">Authority & Delegation</h3>
           <div className="bg-slate-50 border border-slate-200 p-4">
-            <MermaidBlock filename="relationships-authority.mermaid" />
+            <RelationshipDiagram type="authority" />
           </div>
           <div className="mt-4">
             <MarkdownBlock filename="relationships-authority.md" className="prose-sm font-serif" />

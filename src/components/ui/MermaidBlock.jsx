@@ -18,7 +18,7 @@ export default function MermaidBlock({ filename, className = '' }) {
         startOnLoad: false,
         theme: 'base',
         securityLevel: 'loose',
-        flowchart: { curve: 'basis' },
+        flowchart: { curve: 'basis', nodeSpacing: 34, rankSpacing: 24, useMaxWidth: false },
         themeVariables: {
           fontFamily: '"Times New Roman", serif',
           fontSize: '15px',
@@ -51,7 +51,7 @@ export default function MermaidBlock({ filename, className = '' }) {
   if (error) return <div className="text-red-500 text-sm">Error loading diagram: {error.message}</div>;
 
   return (
-    <div className={`w-full ${className}`}>
+    <div className={`w-full flex justify-center ${className}`}>
       {svg ? (
         <div className="w-full overflow-auto" dangerouslySetInnerHTML={{ __html: svg }} />
       ) : (

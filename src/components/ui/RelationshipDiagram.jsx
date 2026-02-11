@@ -1,0 +1,266 @@
+import React from 'react';
+
+const COLORS = {
+  person: { fill: '#4A90D9', stroke: '#2C5F8A', text: '#ffffff' },
+  entity: { fill: '#F5A623', stroke: '#C47D0E', text: '#ffffff' },
+  hoa: { fill: '#7B68EE', stroke: '#5A4CB5', text: '#ffffff' },
+  vendor: { fill: '#50C878', stroke: '#2E8B57', text: '#ffffff' },
+  mgmt: { fill: '#E74C3C', stroke: '#C0392B', text: '#ffffff' },
+  law: { fill: '#D5E8D4', stroke: '#82B366', text: '#2D6A2E' },
+  task: { fill: '#f0f0f0', stroke: '#999999', text: '#333333' },
+  key: { fill: '#FFF3CD', stroke: '#FFD700', text: '#856404' },
+};
+
+function Box({ x, y, w, h, fill, stroke, textColor, lines }) {
+  const lineHeight = 18;
+  const startY = y + h / 2 - ((lines.length - 1) * lineHeight) / 2;
+  return (
+    <g>
+      <rect x={x} y={y} width={w} height={h} rx={4} fill={fill} stroke={stroke} strokeWidth={2} />
+      <text x={x + w / 2} y={startY} textAnchor="middle" fill={textColor} fontFamily="Times New Roman, serif" fontSize={16}>
+        {lines.map((line, idx) => (
+          <tspan key={line} x={x + w / 2} dy={idx === 0 ? 0 : lineHeight}>
+            {line}
+          </tspan>
+        ))}
+      </text>
+    </g>
+  );
+}
+
+function ArrowDefs() {
+  return (
+    <defs>
+      <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,6 L9,3 z" fill="#64748b" />
+      </marker>
+    </defs>
+  );
+}
+
+function Line({ x1, y1, x2, y2, dashed = false }) {
+  return (
+    <line
+      x1={x1}
+      y1={y1}
+      x2={x2}
+      y2={y2}
+      stroke="#64748b"
+      strokeWidth={1.6}
+      markerEnd="url(#arrow)"
+      strokeDasharray={dashed ? '4 4' : '0'}
+      fill="none"
+    />
+  );
+}
+
+function Curve({ d, dashed = false }) {
+  return (
+    <path
+      d={d}
+      stroke="#64748b"
+      strokeWidth={1.6}
+      markerEnd="url(#arrow)"
+      strokeDasharray={dashed ? '4 4' : '0'}
+      fill="none"
+    />
+  );
+}
+
+function Label({ x, y, text }) {
+  return (
+    <text x={x} y={y} textAnchor="middle" fill="#0f172a" fontFamily="Times New Roman, serif" fontSize={14}>
+      {text}
+    </text>
+  );
+}
+
+export function DeveloperDiagram() {
+  const w = 1200;
+  const h = 680;
+  const boxW = 220;
+  const boxH = 64;
+  const topY = 70;
+  const row2Y = 190;
+  const hoaY = 330;
+  const visY = 470;
+  const vendorY = 600;
+  const centers = [220, 600, 980];
+
+  const minX = 490;
+  const minY = topY;
+
+  const [soX, loX, boX] = centers.map(c => c - boxW / 2);
+  const hoaX = 600 - boxW / 2;
+  const visX = 600 - boxW / 2;
+  const shrX = 360 - boxW / 2;
+  const pgX = 840 - boxW / 2;
+
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-auto">
+      <ArrowDefs />
+
+      <Box x={minX} y={minY} w={boxW} h={boxH} {...COLORS.person} lines={['Min', '(Individual, NY)']} />
+
+      <Box x={soX} y={row2Y} w={boxW} h={boxH} {...COLORS.entity} lines={['SO UK Investments', '(NY entity)']} />
+      <Box x={loX} y={row2Y} w={boxW} h={boxH} {...COLORS.entity} lines={['Lotus House', '(WA entity)']} />
+      <Box x={boX} y={row2Y} w={boxW} h={boxH} {...COLORS.entity} lines={['Board', '(Min = controlling director)']} />
+
+      <Box x={hoaX} y={hoaY} w={boxW} h={boxH + 6} {...COLORS.hoa} lines={['Deschutes Heights HOA', '(WA non-profit, est. 2011)']} />
+      <Box x={visX} y={visY} w={boxW} h={boxH + 6} {...COLORS.mgmt} lines={['VIS Group', '(Management Co., hired 2020)']} />
+
+      <Box x={shrX} y={vendorY} w={boxW} h={boxH} {...COLORS.vendor} lines={['Simply Home Realty', '(Vendor)']} />
+      <Box x={pgX} y={vendorY} w={boxW} h={boxH} {...COLORS.vendor} lines={['Precision Groundworks', '(Vendor)']} />
+
+      <Line x1={minX + boxW / 2} y1={minY + boxH} x2={soX + boxW / 2} y2={row2Y} />
+      <Line x1={minX + boxW / 2} y1={minY + boxH} x2={loX + boxW / 2} y2={row2Y} />
+      <Line x1={minX + boxW / 2} y1={minY + boxH} x2={boX + boxW / 2} y2={row2Y} />
+
+      <Label x={soX + boxW / 2} y={row2Y - 8} text="controls" />
+      <Label x={loX + boxW / 2} y={row2Y - 8} text="controls" />
+      <Label x={boX + boxW / 2} y={row2Y - 8} text="controls" />
+
+      <Line x1={soX + boxW / 2} y1={row2Y + boxH} x2={hoaX + boxW / 2 - 60} y2={hoaY} dashed />
+      <Line x1={loX + boxW / 2} y1={row2Y + boxH} x2={hoaX + boxW / 2} y2={hoaY} dashed />
+      <Curve d={`M ${boX + boxW / 2} ${row2Y + boxH} Q ${boX + boxW / 2 + 80} ${hoaY - 20}, ${hoaX + boxW / 2 + 60} ${hoaY}`} />
+
+      <Label x={soX + boxW / 2 - 20} y={hoaY - 20} text="landowner" />
+      <Label x={soX + boxW / 2 - 20} y={hoaY - 2} text="(no governance)" />
+      <Label x={loX + boxW / 2 + 10} y={hoaY - 20} text="landowner / builder" />
+      <Label x={loX + boxW / 2 + 10} y={hoaY - 2} text="(no governance)" />
+      <Label x={boX + boxW / 2 + 60} y={hoaY - 6} text="governs" />
+
+      <Line x1={hoaX + boxW / 2} y1={hoaY + boxH + 6} x2={visX + boxW / 2} y2={visY} />
+      <Curve d={`M ${hoaX + 10} ${hoaY + boxH + 6} Q ${hoaX - 70} ${visY + 20}, ${shrX + boxW / 2} ${vendorY}`} />
+      <Curve d={`M ${hoaX + boxW - 10} ${hoaY + boxH + 6} Q ${hoaX + boxW + 70} ${visY + 20}, ${pgX + boxW / 2} ${vendorY}`} />
+
+      <Label x={hoaX + boxW / 2} y={visY - 8} text="contracts" />
+      <Label x={shrX + boxW / 2 - 70} y={visY + 8} text="contracts" />
+      <Label x={pgX + boxW / 2 + 70} y={visY + 8} text="contracts" />
+
+      <Line x1={visX + boxW / 2} y1={visY + boxH + 6} x2={shrX + boxW / 2} y2={vendorY} dashed />
+      <Line x1={visX + boxW / 2} y1={visY + boxH + 6} x2={pgX + boxW / 2} y2={vendorY} dashed />
+      <Label x={visX + boxW / 2} y={vendorY - 10} text="selects" />
+    </svg>
+  );
+}
+
+export function HomeownerDiagram() {
+  const w = 1200;
+  const h = 680;
+  const boxW = 220;
+  const boxH = 64;
+  const topY = 60;
+  const boardY = 160;
+  const row2Y = 260;
+  const hoaY = 360;
+  const visY = 500;
+  const vendorY = 610;
+
+  const ownersX = 600 - boxW / 2;
+  const boardX = 600 - boxW / 2;
+
+  const centers = [220, 600, 980];
+  const [minX, soX, loX] = centers.map(c => c - boxW / 2);
+
+  const hoaX = 600 - boxW / 2;
+  const visX = 600 - boxW / 2;
+  const shrX = 360 - boxW / 2;
+  const pgX = 840 - boxW / 2;
+
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-auto">
+      <ArrowDefs />
+
+      <Box x={ownersX} y={topY} w={boxW} h={boxH} {...COLORS.person} lines={['7 Homeowner', 'Board Members']} />
+      <Box x={boardX} y={boardY} w={boxW} h={boxH} {...COLORS.entity} lines={['Board']} />
+
+      <Box x={minX} y={row2Y} w={boxW} h={boxH} {...COLORS.person} lines={['Min', '(not on Board)']} />
+      <Box x={soX} y={row2Y} w={boxW} h={boxH} {...COLORS.entity} lines={['SO UK Investments']} />
+      <Box x={loX} y={row2Y} w={boxW} h={boxH} {...COLORS.entity} lines={['Lotus House']} />
+
+      <Box x={hoaX} y={hoaY} w={boxW} h={boxH + 6} {...COLORS.hoa} lines={['Deschutes Heights HOA', '(WA non-profit)']} />
+      <Box x={visX} y={visY} w={boxW} h={boxH + 6} {...COLORS.mgmt} lines={['VIS Group', '(Management Co.)']} />
+
+      <Box x={shrX} y={vendorY} w={boxW} h={boxH} {...COLORS.vendor} lines={['Simply Home Realty', '(Vendor)']} />
+      <Box x={pgX} y={vendorY} w={boxW} h={boxH} {...COLORS.vendor} lines={['Precision Groundworks', '(Vendor)']} />
+
+      <Line x1={ownersX + boxW / 2} y1={topY + boxH} x2={boardX + boxW / 2} y2={boardY} />
+      <Label x={boardX + boxW / 2} y={boardY - 8} text="control" />
+
+      <Line x1={boardX + boxW / 2} y1={boardY + boxH} x2={hoaX + boxW / 2} y2={hoaY} />
+      <Label x={hoaX + boxW / 2 + 60} y={hoaY - 6} text="governs" />
+
+      <Line x1={minX + boxW / 2} y1={row2Y + boxH} x2={soX + boxW / 2} y2={row2Y + boxH} />
+      <Line x1={minX + boxW / 2} y1={row2Y} x2={soX + boxW / 2} y2={row2Y} />
+      <Line x1={minX + boxW / 2} y1={row2Y + boxH / 2} x2={soX + boxW / 2} y2={row2Y + boxH / 2} />
+
+      <Line x1={minX + boxW / 2} y1={row2Y + boxH} x2={loX + boxW / 2} y2={row2Y + boxH} />
+      <Line x1={minX + boxW / 2} y1={row2Y} x2={loX + boxW / 2} y2={row2Y} />
+      <Line x1={minX + boxW / 2} y1={row2Y + boxH / 2} x2={loX + boxW / 2} y2={row2Y + boxH / 2} />
+
+      <Label x={soX + boxW / 2} y={row2Y - 8} text="controls" />
+      <Label x={loX + boxW / 2} y={row2Y - 8} text="controls" />
+
+      <Line x1={soX + boxW / 2} y1={row2Y + boxH} x2={hoaX + boxW / 2 - 40} y2={hoaY} dashed />
+      <Line x1={loX + boxW / 2} y1={row2Y + boxH} x2={hoaX + boxW / 2 + 40} y2={hoaY} dashed />
+      <Label x={hoaX + boxW / 2 - 80} y={hoaY - 16} text="landowner" />
+      <Label x={hoaX + boxW / 2 + 90} y={hoaY - 16} text="landowner / builder" />
+
+      <Line x1={hoaX + boxW / 2} y1={hoaY + boxH + 6} x2={visX + boxW / 2} y2={visY} />
+      <Curve d={`M ${hoaX + 10} ${hoaY + boxH + 6} Q ${hoaX - 70} ${visY + 20}, ${shrX + boxW / 2} ${vendorY}`} />
+      <Curve d={`M ${hoaX + boxW - 10} ${hoaY + boxH + 6} Q ${hoaX + boxW + 70} ${visY + 20}, ${pgX + boxW / 2} ${vendorY}`} />
+
+      <Label x={hoaX + boxW / 2} y={visY - 8} text="contracts" />
+      <Label x={shrX + boxW / 2 - 70} y={visY + 8} text="contracts" />
+      <Label x={pgX + boxW / 2 + 70} y={visY + 8} text="contracts" />
+
+      <Line x1={visX + boxW / 2} y1={visY + boxH + 6} x2={shrX + boxW / 2} y2={vendorY} dashed />
+      <Line x1={visX + boxW / 2} y1={visY + boxH + 6} x2={pgX + boxW / 2} y2={vendorY} dashed />
+      <Label x={visX + boxW / 2} y={vendorY - 10} text="selects" />
+    </svg>
+  );
+}
+
+export function AuthorityDiagram() {
+  const w = 900;
+  const h = 620;
+  const boxW = 360;
+  const boxH = 64;
+  const centerX = w / 2 - boxW / 2;
+
+  const rcwY = 40;
+  const declY = 130;
+  const bylawsY = 220;
+  const hoaY = 310;
+  const visY = 400;
+  const tasksY = 490;
+  const keyY = 580;
+
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-auto">
+      <ArrowDefs />
+
+      <Box x={centerX} y={rcwY} w={boxW} h={boxH} {...COLORS.law} lines={['Washington State Law', '(Grants powers to common-interest communities)']} />
+      <Box x={centerX} y={declY} w={boxW} h={boxH} {...COLORS.law} lines={['Declaration (CC&Rs)', '(Defines HOA powers & restrictions)']} />
+      <Box x={centerX} y={bylawsY} w={boxW} h={boxH} {...COLORS.law} lines={['Bylaws', '(Board structure, meetings, voting)']} />
+      <Box x={centerX} y={hoaY} w={boxW} h={boxH + 6} {...COLORS.hoa} lines={['Deschutes Heights HOA', '(Holds authority granted by law + docs)']} />
+      <Box x={centerX} y={visY} w={boxW} h={boxH + 6} {...COLORS.mgmt} lines={['VIS Group', '(Management Co., hired 2020)', 'Agent of the HOA, not governing']} />
+      <Box x={centerX} y={tasksY} w={boxW} h={boxH + 16} {...COLORS.task} lines={['Delegated tasks:', 'Accounting & reporting', 'Records', 'Homeowner correspondence', 'Advising the Board', 'Other ministerial tasks']} />
+      <Box x={centerX} y={keyY} w={boxW} h={boxH + 16} {...COLORS.key} lines={['KEY PRINCIPLE:', 'Authority flows down from law', 'through governing documents', 'into the HOA.', 'VIS receives only what is delegated.']} />
+
+      <Line x1={w / 2} y1={rcwY + boxH} x2={w / 2} y2={declY} />
+      <Line x1={w / 2} y1={declY + boxH} x2={w / 2} y2={bylawsY} />
+      <Line x1={w / 2} y1={bylawsY + boxH} x2={w / 2} y2={hoaY} />
+      <Line x1={w / 2} y1={hoaY + boxH + 6} x2={w / 2} y2={visY} />
+      <Line x1={w / 2} y1={visY + boxH + 6} x2={w / 2} y2={tasksY} dashed />
+      <Line x1={w / 2} y1={hoaY + boxH + 6} x2={w / 2} y2={keyY} />
+    </svg>
+  );
+}
+
+export default function RelationshipDiagram({ type }) {
+  if (type === 'homeowner') return <HomeownerDiagram />;
+  if (type === 'authority') return <AuthorityDiagram />;
+  return <DeveloperDiagram />;
+}

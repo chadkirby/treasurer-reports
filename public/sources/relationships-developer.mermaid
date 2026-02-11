@@ -9,13 +9,10 @@ graph TB
   classDef mgmt fill:#E74C3C,color:#fff,stroke:#C0392B,stroke-width:2px
 
   Min_D["Min<br/>(Individual, NY)"]:::person
-
   SOUK_D["SO UK Investments<br/>(NY entity)"]:::entity
   Lotus_D["Lotus House<br/>(WA entity)"]:::entity
   Board_D["Board<br/>(Min = controlling director)"]:::entity
-
   HOA_D["Deschutes Heights HOA<br/>(WA non-profit, est. 2011)"]:::hoa
-
   VIS_D["VIS Group<br/>(Management Co., hired 2020)"]:::mgmt
   SHR_D["Simply Home Realty<br/>(Vendor)"]:::vendor
   PG_D["Precision Groundworks<br/>(Vendor)"]:::vendor
@@ -35,3 +32,12 @@ graph TB
 
   VIS_D -. "selects" .-> SHR_D
   VIS_D -. "selects" .-> PG_D
+
+  style Min_D width:220px,height:60px
+  style SOUK_D width:200px,height:60px
+  style Lotus_D width:200px,height:60px
+  style Board_D width:200px,height:60px
+  style HOA_D width:240px,height:70px
+  style VIS_D width:240px,height:70px
+  style SHR_D width:240px,height:60px
+  style PG_D width:240px,height:60px
