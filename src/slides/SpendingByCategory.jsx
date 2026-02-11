@@ -88,7 +88,7 @@ export default function SpendingByCategory() {
 
   return (
     <Slide title="Cash Outflows by Category" subtitle="Yearly trends and category totals.">
-      <div className="bg-slate-50 p-8 border border-slate-200">
+      <div className="bg-white p-8 border border-slate-200">
         <div className="h-[450px]">
           <ChartContainer title="Cash Outflows by Category (Yearly Trends)">
             {catChartData && <Chart type='bar' data={catChartData} options={stackedOptions} />}

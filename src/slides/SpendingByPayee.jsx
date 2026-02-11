@@ -102,12 +102,12 @@ export default function SpendingByPayee() {
           </ChartContainer>
         </div>
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="p-4 bg-slate-50 border border-slate-200">
+          <div className="p-4 bg-white border border-slate-200">
             <div className="text-[10px] uppercase text-slate-500 font-bold tracking-tight">Top 3 Share of Total Outflows</div>
             <div className="text-2xl font-serif italic text-slate-900">{formatPercent(top3Share)}</div>
             <div className="text-xs text-slate-500">Based on 2020–2025 payee totals</div>
           </div>
-          <div className="p-4 bg-slate-50 border border-slate-200">
+          <div className="p-4 bg-white border border-slate-200">
             <div className="text-[10px] uppercase text-slate-500 font-bold tracking-tight">Largest Payee</div>
             <div className="text-lg font-serif italic text-slate-900">{topPayee ? topPayee.label : '—'}</div>
             <div className="text-sm text-slate-600">{topPayee ? formatCurrency(topPayee.total) : '—'}</div>

@@ -52,7 +52,7 @@ export default function Layout() {
               <h1 className="text-2xl font-normal text-black m-0 tracking-wide font-serif italic">HOA Treasurer's Report</h1>
               <span className="text-sm italic text-slate-600 font-sans">2021—2025 Financial Overview</span>
             </div>
-            <div className="text-sm font-mono text-slate-500 bg-slate-100 px-2 py-1 rounded">
+            <div className="text-sm font-mono text-slate-500 bg-[#f3efe3] px-2 py-1 rounded">
               {currentIndex + 1} / {SLIDES.length}
             </div>
         </div>

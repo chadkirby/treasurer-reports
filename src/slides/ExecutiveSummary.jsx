@@ -6,7 +6,7 @@ export default function ExecutiveSummary() {
   return (
     <Slide title="Executive Summary" subtitle="Key observations from the 2021-2025 financial period.">
       <div className="flex flex-col gap-8 max-w-4xl mx-auto">
-        <div className="bg-slate-50 p-8 border border-slate-200">
+        <div className="bg-white p-8 border border-slate-200">
           <h3 className="text-xl font-bold text-black mb-6 font-serif italic border-b border-slate-300 pb-2">
             Status Overview
           </h3>

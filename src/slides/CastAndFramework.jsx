@@ -6,7 +6,7 @@ export default function CastAndFramework() {
   return (
     <Slide title="Cast, Characters, and Legal Framework" subtitle="Who is who, and how the HOA is governed.">
       <div className="flex flex-col gap-8">
-        <div className="bg-slate-50 p-6 border border-slate-200">
+        <div className="bg-white p-6 border border-slate-200">
           <h3 className="text-xl font-bold mb-4 font-serif italic border-b border-slate-300 pb-2">Cast</h3>
           <ul className="list-disc pl-5 text-base text-slate-700 space-y-2">
             <li><strong>Deschutes Heights HOA</strong> - Nonprofit corporation (founded 2011) created to maintain common areas; powers and limits come from statute and the Declaration (CC&Rs).</li>
@@ -22,7 +22,7 @@ export default function CastAndFramework() {
 
         <div className="bg-white p-6 border border-slate-200">
           <h3 className="text-xl font-bold mb-4 font-serif italic border-b border-slate-300 pb-2">Relationship Map: Developer Control Period</h3>
-          <div className="bg-slate-50 border border-slate-200 p-4">
+          <div className="bg-white border border-slate-200 p-4">
             <img
               src="/sources/drawings/relationships-developer-control.drawio.svg"
               alt="Developer control period relationship map"
@@ -36,7 +36,7 @@ export default function CastAndFramework() {
 
         <div className="bg-white p-6 border border-slate-200">
           <h3 className="text-xl font-bold mb-4 font-serif italic border-b border-slate-300 pb-2">Relationship Map: Homeowner Control Period (Current)</h3>
-          <div className="bg-slate-50 border border-slate-200 p-4">
+          <div className="bg-white border border-slate-200 p-4">
             <img
               src="/sources/drawings/relationships-homeowner-control.drawio.svg"
               alt="Homeowner control period relationship map"
@@ -50,7 +50,7 @@ export default function CastAndFramework() {
 
         <div className="bg-white p-6 border border-slate-200">
           <h3 className="text-xl font-bold mb-4 font-serif italic border-b border-slate-300 pb-2">Authority & Delegation</h3>
-          <div className="bg-slate-50 border border-slate-200 p-4">
+          <div className="bg-white border border-slate-200 p-4">
             <img
               src="/sources/drawings/authorities.drawio.svg"
               alt="Authority and delegation diagram"
@@ -63,7 +63,7 @@ export default function CastAndFramework() {
         </div>
       </div>
 
-      <div className="mt-8 bg-slate-50 p-6 border border-slate-200">
+      <div className="mt-8 bg-white p-6 border border-slate-200">
         <h3 className="text-xl font-bold mb-4 font-serif italic border-b border-slate-300 pb-2">Timeline</h3>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm text-slate-700">
           <div className="p-4 bg-white border border-slate-200">
