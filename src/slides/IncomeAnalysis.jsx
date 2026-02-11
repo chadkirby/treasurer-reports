@@ -119,7 +119,7 @@ export default function IncomeAnalysis() {
               ))}
           </div>
 
-          <div className="bg-slate-50 p-8 border border-slate-200">
+          <div className="bg-white p-8 border border-slate-200">
              <div className="h-[450px]">
                 <ChartContainer title="Revenue Composition (Yearly Trends)">
                     {chartData && <Chart type='bar' data={chartData} options={options} />}

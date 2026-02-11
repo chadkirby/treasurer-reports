@@ -24,3 +24,10 @@ As documentation for the claim, the Developer submitted 25 pages of legal bills,
 Even if we take the Developer's documentation at face value, the HOA has overpaid by over $18k.
 
 More fundamentally, Conveyance Assessment funds were clearly used to reimburse the Developer for costs (e.g. legal fees, startup costs, etc.) that have nothing to do with common area maintenance. However, the governing documents prohibit the use of Conveyance Assessments for such costs.
+
+## Why this likely happened (management company accounting choices)
+
+- The claimed "loan" was never booked as a liability, so repayments did not reduce a tracked balance.
+- Payments were booked to a revenue account that routinely netted to zero, which obscured both inflows and outflows on summary reports.
+- The lack of a tracked balance meant there was no clear point at which the supposed loan had been repaid.
+- This accounting approach likely contributed to the HOA paying at least $18k more than the Developer’s own stated claim.

@@ -18,7 +18,14 @@ export function useData(filename) {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(`/sources/${filename}`);
+        const url = new URL(`/sources/${filename}`, window.location.origin);
+        if (import.meta.env.DEV) {
+          // Avoid stale cached data in dev when files change.
+          url.searchParams.set('t', Date.now().toString());
+        }
+        const response = await fetch(url, {
+          cache: import.meta.env.DEV ? 'no-store' : 'default',
+        });
 
         const contentType = response.headers.get('content-type');
         if (!response.ok || (contentType && contentType.includes('text/html'))) {

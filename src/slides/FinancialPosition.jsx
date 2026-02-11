@@ -105,15 +105,15 @@ export default function FinancialPosition() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-sm pt-8 border-t border-slate-300">
-            <div className="p-4 bg-slate-50 border border-slate-200 text-center">
+            <div className="p-4 bg-white border border-slate-200 text-center">
                <div className="uppercase tracking-widest text-xs font-semibold mb-2 text-slate-500">Avg. Annual Inflow</div>
                <div className="text-2xl">$75,387</div>
             </div>
-            <div className="p-4 bg-slate-50 border border-slate-200 text-center">
+            <div className="p-4 bg-white border border-slate-200 text-center">
                <div className="uppercase tracking-widest text-xs font-semibold mb-2 text-slate-500">Avg. Annual Outflow</div>
                <div className="text-2xl">$70,101</div>
             </div>
-            <div className="p-4 bg-slate-50 border border-slate-200 text-center text-teal-700">
+            <div className="p-4 bg-white border border-slate-200 text-center text-teal-700">
                <div className="uppercase tracking-widest text-xs font-semibold mb-2 text-slate-500">Avg. Net Flow</div>
                <div className="text-2xl">+$5,286</div>
             </div>
