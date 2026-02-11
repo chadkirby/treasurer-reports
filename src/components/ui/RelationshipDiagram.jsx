@@ -75,8 +75,8 @@ function Curve({ d, dashed = false }) {
   );
 }
 
-function Label({ x, y, text, align = 'middle', size = 16, padX = 6, padY = 4 }) {
-  const width = text.length * (size * 0.5) + padX * 2;
+function Label({ x, y, text, align = 'middle', size = 16, padX = 5, padY = 3, widthFactor = 0.47 }) {
+  const width = text.length * (size * widthFactor) + padX * 2;
   const height = size + padY * 2;
   const rx = 4;
   const boxX = x - width / 2;
@@ -284,12 +284,12 @@ export function HomeownerDiagram() {
       <Curve d={`M ${soX + boxW} ${row2Y + 120 + boxH / 2} Q ${soX + boxW + 160} ${hoaY - 60}, ${hoaX + 10} ${hoaY}`} dashed />
       <Curve d={`M ${loX + boxW} ${row2Y + 240 + boxH / 2} Q ${loX + boxW + 160} ${hoaY - 20}, ${hoaX} ${hoaY + boxH / 2}`} dashed />
       {(() => {
-        const l1 = quadPoint(soX + boxW, row2Y + 120 + boxH / 2, soX + boxW + 160, hoaY - 60, hoaX + 10, hoaY);
-        const l2 = quadPoint(loX + boxW, row2Y + 240 + boxH / 2, loX + boxW + 160, hoaY - 20, hoaX, hoaY + boxH / 2);
+        const l1 = quadPoint(soX + boxW, row2Y + 120 + boxH / 2, soX + boxW + 160, hoaY - 60, hoaX + 10, hoaY, 0.5);
+        const l2 = quadPoint(loX + boxW, row2Y + 240 + boxH / 2, loX + boxW + 160, hoaY - 10, hoaX, hoaY + boxH / 2, 0.5);
         return (
           <>
             <Label x={l1.x} y={l1.y} text="landowner" />
-            <Label x={l2.x} y={l2.y} text="landowner / builder" />
+            <Label x={l2.x} y={l2.y} text="landowner / builder" widthFactor={0.44} padX={4} />
           </>
         );
       })()}
