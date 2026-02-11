@@ -24,7 +24,7 @@ function Box({ x, y, w, h, fill, stroke, textColor, lines }) {
         dominantBaseline="middle"
         fill={textColor}
         fontFamily="Times New Roman, serif"
-        fontSize={16}
+        fontSize={15}
       >
         {lines.map((line, idx) => (
           <tspan key={line} x={x + w / 2} dy={(idx - (lines.length - 1) / 2) * lineHeight}>
@@ -75,9 +75,7 @@ function Curve({ d, dashed = false }) {
   );
 }
 
-function Label({ x, y, text, align = 'middle', size = 16 }) {
-  const padX = 6;
-  const padY = 4;
+function Label({ x, y, text, align = 'middle', size = 16, padX = 6, padY = 4 }) {
   const width = text.length * (size * 0.55) + padX * 2;
   const height = size + padY * 2;
   const rx = 4;
@@ -115,12 +113,12 @@ export function DeveloperDiagram() {
   const w = 1200;
   const h = 680;
   const boxW = 220;
-  const boxH = 64;
+  const boxH = 56;
   const topY = 70;
   const row2Y = 190;
   const hoaY = 330;
-  const visY = 470;
-  const vendorY = 600;
+  const visY = 460;
+  const vendorY = 585;
   const centers = [220, 600, 980];
 
   const minX = 490;
@@ -142,8 +140,8 @@ export function DeveloperDiagram() {
       <Box x={loX} y={row2Y} w={boxW} h={boxH} {...COLORS.entity} lines={['Lotus House']} />
       <Box x={boX} y={row2Y} w={boxW} h={boxH} {...COLORS.entity} lines={['Board']} />
 
-      <Box x={hoaX} y={hoaY} w={boxW} h={boxH + 6} {...COLORS.hoa} lines={['Deschutes Heights HOA']} />
-      <Box x={visX} y={visY} w={boxW} h={boxH + 6} {...COLORS.mgmt} lines={['VIS Group']} />
+      <Box x={hoaX} y={hoaY} w={boxW} h={boxH + 4} {...COLORS.hoa} lines={['Deschutes Heights HOA']} />
+      <Box x={visX} y={visY} w={boxW} h={boxH + 4} {...COLORS.mgmt} lines={['VIS Group']} />
 
       <Box x={shrX} y={vendorY} w={boxW} h={boxH} {...COLORS.vendor} lines={['Simply Home Realty']} />
       <Box x={pgX} y={vendorY} w={boxW} h={boxH} {...COLORS.vendor} lines={['Precision Groundworks']} />
@@ -158,9 +156,9 @@ export function DeveloperDiagram() {
         const c3 = midPoint(minX + boxW / 2, minY + boxH, boX + boxW / 2, row2Y);
         return (
           <>
-            <Label x={c1.x} y={c1.y - 6} text="controls" />
-            <Label x={c2.x} y={c2.y - 6} text="controls" />
-            <Label x={c3.x} y={c3.y - 6} text="controls" />
+            <Label x={c1.x} y={c1.y} text="controls" />
+            <Label x={c2.x} y={c2.y} text="controls" />
+            <Label x={c3.x} y={c3.y} text="controls" />
           </>
         );
       })()}
@@ -175,11 +173,9 @@ export function DeveloperDiagram() {
         const g = quadPoint(boX + boxW / 2, row2Y + boxH, boX + boxW / 2 + 80, hoaY - 20, hoaX + boxW / 2 + 60, hoaY);
         return (
           <>
-            <Label x={l1.x} y={l1.y - 6} text="landowner" />
-            <Label x={l1.x} y={l1.y + 10} text="(no governance)" size={12} />
-            <Label x={l2.x} y={l2.y - 6} text="landowner / builder" />
-            <Label x={l2.x} y={l2.y + 10} text="(no governance)" size={12} />
-            <Label x={g.x + 10} y={g.y - 6} text="governs" />
+            <Label x={l1.x} y={l1.y} text="landowner" />
+            <Label x={l2.x} y={l2.y} text="landowner / builder" />
+            <Label x={g.x} y={g.y} text="governs" />
           </>
         );
       })()}
@@ -189,14 +185,14 @@ export function DeveloperDiagram() {
       <Curve d={`M ${hoaX + boxW - 10} ${hoaY + boxH + 6} Q ${hoaX + boxW + 70} ${visY + 20}, ${pgX + boxW / 2} ${vendorY}`} />
 
       {(() => {
-        const c = midPoint(hoaX + boxW / 2, hoaY + boxH + 6, visX + boxW / 2, visY);
-        const lc = quadPoint(hoaX + 10, hoaY + boxH + 6, hoaX - 70, visY + 20, shrX + boxW / 2, vendorY);
-        const rc = quadPoint(hoaX + boxW - 10, hoaY + boxH + 6, hoaX + boxW + 70, visY + 20, pgX + boxW / 2, vendorY);
+        const c = midPoint(hoaX + boxW / 2, hoaY + boxH + 4, visX + boxW / 2, visY);
+        const lc = quadPoint(hoaX + 10, hoaY + boxH + 4, hoaX - 70, visY + 20, shrX + boxW / 2, vendorY);
+        const rc = quadPoint(hoaX + boxW - 10, hoaY + boxH + 4, hoaX + boxW + 70, visY + 20, pgX + boxW / 2, vendorY);
         return (
           <>
-            <Label x={c.x} y={c.y - 6} text="contracts" />
-            <Label x={lc.x} y={lc.y - 6} text="contracts" />
-            <Label x={rc.x} y={rc.y - 6} text="contracts" />
+            <Label x={c.x} y={c.y} text="contracts" />
+            <Label x={lc.x} y={lc.y} text="contracts" />
+            <Label x={rc.x} y={rc.y} text="contracts" />
           </>
         );
       })()}
@@ -204,12 +200,12 @@ export function DeveloperDiagram() {
       <Line x1={visX + boxW / 2} y1={visY + boxH + 6} x2={shrX + boxW / 2} y2={vendorY} dashed />
       <Line x1={visX + boxW / 2} y1={visY + boxH + 6} x2={pgX + boxW / 2} y2={vendorY} dashed />
       {(() => {
-        const s1 = midPoint(visX + boxW / 2, visY + boxH + 6, shrX + boxW / 2, vendorY);
-        const s2 = midPoint(visX + boxW / 2, visY + boxH + 6, pgX + boxW / 2, vendorY);
+        const s1 = midPoint(visX + boxW / 2, visY + boxH + 4, shrX + boxW / 2, vendorY);
+        const s2 = midPoint(visX + boxW / 2, visY + boxH + 4, pgX + boxW / 2, vendorY);
         return (
           <>
-            <Label x={s1.x} y={s1.y - 6} text="selects" />
-            <Label x={s2.x} y={s2.y - 6} text="selects" />
+            <Label x={s1.x} y={s1.y} text="selects" />
+            <Label x={s2.x} y={s2.y} text="selects" />
           </>
         );
       })()}
@@ -221,19 +217,21 @@ export function HomeownerDiagram() {
   const w = 1200;
   const h = 700;
   const boxW = 220;
-  const boxH = 64;
+  const boxH = 56;
   const topY = 40;
   const boardY = 140;
-  const row2Y = 260;
+  const row2Y = 250;
   const hoaY = 380;
-  const visY = 520;
-  const vendorY = 640;
+  const visY = 510;
+  const vendorY = 630;
 
   const ownersX = 600 - boxW / 2;
   const boardX = 600 - boxW / 2;
 
-  const centers = [220, 600, 980];
-  const [minX, soX, loX] = centers.map(c => c - boxW / 2);
+  const minColX = 160;
+  const minX = minColX - boxW / 2;
+  const soX = minX;
+  const loX = minX;
 
   const hoaX = 600 - boxW / 2;
   const visX = 600 - boxW / 2;
@@ -248,8 +246,8 @@ export function HomeownerDiagram() {
       <Box x={boardX} y={boardY} w={boxW} h={boxH} {...COLORS.entity} lines={['Board']} />
 
       <Box x={minX} y={row2Y} w={boxW} h={boxH} {...COLORS.person} lines={['Min']} />
-      <Box x={soX} y={row2Y} w={boxW} h={boxH} {...COLORS.entity} lines={['SO UK Investments']} />
-      <Box x={loX} y={row2Y} w={boxW} h={boxH} {...COLORS.entity} lines={['Lotus House']} />
+      <Box x={soX} y={row2Y + 90} w={boxW} h={boxH} {...COLORS.entity} lines={['SO UK Investments']} />
+      <Box x={loX} y={row2Y + 180} w={boxW} h={boxH} {...COLORS.entity} lines={['Lotus House']} />
 
       <Box x={hoaX} y={hoaY} w={boxW} h={boxH + 6} {...COLORS.hoa} lines={['Deschutes Heights HOA']} />
       <Box x={visX} y={visY} w={boxW} h={boxH + 6} {...COLORS.mgmt} lines={['VIS Group']} />
@@ -260,38 +258,38 @@ export function HomeownerDiagram() {
       <Line x1={ownersX + boxW / 2} y1={topY + boxH} x2={boardX + boxW / 2} y2={boardY} />
       {(() => {
         const c = midPoint(ownersX + boxW / 2, topY + boxH, boardX + boxW / 2, boardY);
-        return <Label x={c.x} y={c.y - 6} text="control" />;
+        return <Label x={c.x} y={c.y} text="control" />;
       })()}
 
       <Curve d={`M ${boardX + boxW / 2} ${boardY + boxH} Q ${boardX + boxW / 2} ${hoaY - 20}, ${hoaX + boxW / 2} ${hoaY}`} />
       {(() => {
         const g = quadPoint(boardX + boxW / 2, boardY + boxH, boardX + boxW / 2, hoaY - 20, hoaX + boxW / 2, hoaY);
-        return <Label x={g.x + 10} y={g.y - 10} text="governs" />;
+        return <Label x={g.x} y={g.y} text="governs" />;
       })()}
 
-      <Line x1={minX + boxW} y1={row2Y + boxH / 2} x2={soX} y2={row2Y + boxH / 2} />
-      <Line x1={soX + boxW} y1={row2Y + boxH / 2} x2={loX} y2={row2Y + boxH / 2} />
+      <Line x1={minX + boxW / 2} y1={row2Y + boxH} x2={soX + boxW / 2} y2={row2Y + 90} />
+      <Line x1={soX + boxW / 2} y1={row2Y + 90 + boxH} x2={loX + boxW / 2} y2={row2Y + 180} />
 
       {(() => {
-        const c1 = midPoint(minX + boxW, row2Y + boxH / 2, soX, row2Y + boxH / 2);
-        const c2 = midPoint(soX + boxW, row2Y + boxH / 2, loX, row2Y + boxH / 2);
+        const c1 = midPoint(minX + boxW / 2, row2Y + boxH, soX + boxW / 2, row2Y + 90);
+        const c2 = midPoint(soX + boxW / 2, row2Y + 90 + boxH, loX + boxW / 2, row2Y + 180);
         return (
           <>
-            <Label x={c1.x} y={row2Y - 8} text="controls" />
-            <Label x={c2.x} y={row2Y - 8} text="controls" />
+            <Label x={c1.x - 10} y={c1.y} text="controls" />
+            <Label x={c2.x - 10} y={c2.y} text="controls" />
           </>
         );
       })()}
 
-      <Curve d={`M ${soX + boxW / 2} ${row2Y + boxH} Q ${soX + boxW / 2} ${hoaY - 40}, ${hoaX + boxW / 2 - 40} ${hoaY}`} dashed />
-      <Curve d={`M ${loX + boxW / 2} ${row2Y + boxH} Q ${loX + boxW / 2} ${hoaY - 40}, ${hoaX + boxW / 2 + 40} ${hoaY}`} dashed />
+      <Curve d={`M ${soX + boxW / 2} ${row2Y + 90 + boxH} Q ${soX + boxW / 2} ${hoaY - 60}, ${hoaX + boxW / 2 - 60} ${hoaY}`} dashed />
+      <Curve d={`M ${loX + boxW / 2} ${row2Y + 180 + boxH} Q ${loX + boxW / 2} ${hoaY - 20}, ${hoaX + boxW / 2 - 20} ${hoaY}`} dashed />
       {(() => {
-        const l1 = quadPoint(soX + boxW / 2, row2Y + boxH, soX + boxW / 2, hoaY - 40, hoaX + boxW / 2 - 40, hoaY);
-        const l2 = quadPoint(loX + boxW / 2, row2Y + boxH, loX + boxW / 2, hoaY - 40, hoaX + boxW / 2 + 40, hoaY);
+        const l1 = quadPoint(soX + boxW / 2, row2Y + 90 + boxH, soX + boxW / 2, hoaY - 60, hoaX + boxW / 2 - 60, hoaY);
+        const l2 = quadPoint(loX + boxW / 2, row2Y + 180 + boxH, loX + boxW / 2, hoaY - 20, hoaX + boxW / 2 - 20, hoaY);
         return (
           <>
-            <Label x={l1.x} y={l1.y - 6} text="landowner" />
-            <Label x={l2.x} y={l2.y - 6} text="landowner / builder" />
+            <Label x={l1.x - 6} y={l1.y} text="landowner" />
+            <Label x={l2.x - 6} y={l2.y} text="landowner / builder" />
           </>
         );
       })()}
@@ -301,14 +299,14 @@ export function HomeownerDiagram() {
       <Curve d={`M ${hoaX + boxW - 10} ${hoaY + boxH + 6} Q ${hoaX + boxW + 70} ${visY + 20}, ${pgX + boxW / 2} ${vendorY}`} />
 
       {(() => {
-        const c = midPoint(hoaX + boxW / 2, hoaY + boxH + 6, visX + boxW / 2, visY);
-        const lc = quadPoint(hoaX + 10, hoaY + boxH + 6, hoaX - 70, visY + 20, shrX + boxW / 2, vendorY);
-        const rc = quadPoint(hoaX + boxW - 10, hoaY + boxH + 6, hoaX + boxW + 70, visY + 20, pgX + boxW / 2, vendorY);
+        const c = midPoint(hoaX + boxW / 2, hoaY + boxH + 4, visX + boxW / 2, visY);
+        const lc = quadPoint(hoaX + 10, hoaY + boxH + 4, hoaX - 70, visY + 20, shrX + boxW / 2, vendorY);
+        const rc = quadPoint(hoaX + boxW - 10, hoaY + boxH + 4, hoaX + boxW + 70, visY + 20, pgX + boxW / 2, vendorY);
         return (
           <>
-            <Label x={c.x} y={c.y - 6} text="contracts" />
-            <Label x={lc.x} y={lc.y - 6} text="contracts" />
-            <Label x={rc.x} y={rc.y - 6} text="contracts" />
+            <Label x={c.x} y={c.y} text="contracts" />
+            <Label x={lc.x} y={lc.y} text="contracts" />
+            <Label x={rc.x} y={rc.y} text="contracts" />
           </>
         );
       })()}
@@ -316,12 +314,12 @@ export function HomeownerDiagram() {
       <Line x1={visX + boxW / 2} y1={visY + boxH + 6} x2={shrX + boxW / 2} y2={vendorY} dashed />
       <Line x1={visX + boxW / 2} y1={visY + boxH + 6} x2={pgX + boxW / 2} y2={vendorY} dashed />
       {(() => {
-        const s1 = midPoint(visX + boxW / 2, visY + boxH + 6, shrX + boxW / 2, vendorY);
-        const s2 = midPoint(visX + boxW / 2, visY + boxH + 6, pgX + boxW / 2, vendorY);
+        const s1 = midPoint(visX + boxW / 2, visY + boxH + 4, shrX + boxW / 2, vendorY);
+        const s2 = midPoint(visX + boxW / 2, visY + boxH + 4, pgX + boxW / 2, vendorY);
         return (
           <>
-            <Label x={s1.x} y={s1.y - 6} text="selects" />
-            <Label x={s2.x} y={s2.y - 6} text="selects" />
+            <Label x={s1.x} y={s1.y} text="selects" />
+            <Label x={s2.x} y={s2.y} text="selects" />
           </>
         );
       })()}
