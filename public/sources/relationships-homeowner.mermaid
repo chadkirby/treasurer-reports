@@ -1,7 +1,7 @@
 ---
 title: "Homeowner Control Period (2026-Present)"
 ---
-graph LR
+graph TB
   classDef person fill:#4A90D9,color:#fff,stroke:#2C5F8A,stroke-width:2px
   classDef entity fill:#F5A623,color:#fff,stroke:#C47D0E,stroke-width:2px
   classDef hoa fill:#7B68EE,color:#fff,stroke:#5A4CB5,stroke-width:3px
@@ -9,25 +9,31 @@ graph LR
   classDef mgmt fill:#E74C3C,color:#fff,stroke:#C0392B,stroke-width:2px
   classDef homeowners fill:#4A90D9,color:#fff,stroke:#2C5F8A,stroke-width:2px,stroke-dasharray: 5 5
 
-  Owners["7 Homeowner\nBoard Members"]:::homeowners
+  Owners["7 Homeowner<br/>Board Members"]:::homeowners
   Board_H["Board"]:::entity
-  HOA_H["Deschutes Heights HOA\n(WA non-profit)"]:::hoa
+  HOA_H["Deschutes Heights HOA<br/>(WA non-profit)"]:::hoa
 
-  Min_H["Min\n(no longer on Board)"]:::person
-  SOUK_H["SO UK Investments\n(landowner)"]:::entity
-  Lotus_H["Lotus House\n(landowner)"]:::entity
+  subgraph LANDOWNERS ["Landowners (no governance)"]
+    direction LR
+  Min_H["Min<br/>(not on Board)"]:::person
+    SOUK_H["SO UK Investments"]:::entity
+    Lotus_H["Lotus House"]:::entity
+  end
 
-  VIS_H["VIS Group\n(Management Co.)"]:::mgmt
-  SHR_H["Simply Home Realty\n(Vendor)"]:::vendor
-  PG_H["Precision Groundworks\n(Vendor)"]:::vendor
+  subgraph VENDORS ["Contracted Services"]
+    direction LR
+  VIS_H["VIS Group<br/>(Management Co.)"]:::mgmt
+  SHR_H["Simply Home Realty<br/>(Vendor)"]:::vendor
+  PG_H["Precision Groundworks<br/>(Vendor)"]:::vendor
+  end
 
   Owners -- "control" --> Board_H
   Board_H -- "governs" --> HOA_H
 
   Min_H -- "controls" --> SOUK_H
   Min_H -- "controls" --> Lotus_H
-  SOUK_H -. "landowner\n(no governance role)" .-> HOA_H
-  Lotus_H -. "landowner / builder\n(no governance role)" .-> HOA_H
+  SOUK_H -. "landowner" .-> HOA_H
+  Lotus_H -. "landowner / builder" .-> HOA_H
 
   HOA_H -- "contracts" --> VIS_H
   HOA_H -- "contracts" --> SHR_H

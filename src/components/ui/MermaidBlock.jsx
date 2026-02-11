@@ -21,7 +21,7 @@ export default function MermaidBlock({ filename, className = '' }) {
         flowchart: { curve: 'basis' },
         themeVariables: {
           fontFamily: '"Times New Roman", serif',
-          fontSize: '16px',
+          fontSize: '20px',
           primaryColor: '#ffffff',
           primaryTextColor: '#0f172a',
           lineColor: '#64748b',
