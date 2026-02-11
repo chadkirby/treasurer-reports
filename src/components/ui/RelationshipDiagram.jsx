@@ -219,15 +219,15 @@ export function DeveloperDiagram() {
 
 export function HomeownerDiagram() {
   const w = 1200;
-  const h = 680;
+  const h = 700;
   const boxW = 220;
   const boxH = 64;
-  const topY = 60;
-  const boardY = 160;
+  const topY = 40;
+  const boardY = 140;
   const row2Y = 260;
-  const hoaY = 360;
-  const visY = 500;
-  const vendorY = 610;
+  const hoaY = 380;
+  const visY = 520;
+  const vendorY = 640;
 
   const ownersX = 600 - boxW / 2;
   const boardX = 600 - boxW / 2;
@@ -263,23 +263,18 @@ export function HomeownerDiagram() {
         return <Label x={c.x} y={c.y - 6} text="control" />;
       })()}
 
-      <Line x1={boardX + boxW / 2} y1={boardY + boxH} x2={hoaX + boxW / 2} y2={hoaY} />
+      <Curve d={`M ${boardX + boxW / 2} ${boardY + boxH} Q ${boardX + boxW / 2} ${hoaY - 20}, ${hoaX + boxW / 2} ${hoaY}`} />
       {(() => {
-        const g = midPoint(boardX + boxW / 2, boardY + boxH, hoaX + boxW / 2, hoaY);
-        return <Label x={g.x + 8} y={g.y - 6} text="governs" />;
+        const g = quadPoint(boardX + boxW / 2, boardY + boxH, boardX + boxW / 2, hoaY - 20, hoaX + boxW / 2, hoaY);
+        return <Label x={g.x + 10} y={g.y - 10} text="governs" />;
       })()}
 
-      <Line x1={minX + boxW / 2} y1={row2Y + boxH} x2={soX + boxW / 2} y2={row2Y + boxH} />
-      <Line x1={minX + boxW / 2} y1={row2Y} x2={soX + boxW / 2} y2={row2Y} />
-      <Line x1={minX + boxW / 2} y1={row2Y + boxH / 2} x2={soX + boxW / 2} y2={row2Y + boxH / 2} />
-
-      <Line x1={minX + boxW / 2} y1={row2Y + boxH} x2={loX + boxW / 2} y2={row2Y + boxH} />
-      <Line x1={minX + boxW / 2} y1={row2Y} x2={loX + boxW / 2} y2={row2Y} />
-      <Line x1={minX + boxW / 2} y1={row2Y + boxH / 2} x2={loX + boxW / 2} y2={row2Y + boxH / 2} />
+      <Line x1={minX + boxW} y1={row2Y + boxH / 2} x2={soX} y2={row2Y + boxH / 2} />
+      <Line x1={soX + boxW} y1={row2Y + boxH / 2} x2={loX} y2={row2Y + boxH / 2} />
 
       {(() => {
-        const c1 = midPoint(minX + boxW / 2, row2Y + boxH / 2, soX + boxW / 2, row2Y + boxH / 2);
-        const c2 = midPoint(minX + boxW / 2, row2Y + boxH / 2, loX + boxW / 2, row2Y + boxH / 2);
+        const c1 = midPoint(minX + boxW, row2Y + boxH / 2, soX, row2Y + boxH / 2);
+        const c2 = midPoint(soX + boxW, row2Y + boxH / 2, loX, row2Y + boxH / 2);
         return (
           <>
             <Label x={c1.x} y={row2Y - 8} text="controls" />
@@ -288,11 +283,11 @@ export function HomeownerDiagram() {
         );
       })()}
 
-      <Line x1={soX + boxW / 2} y1={row2Y + boxH} x2={hoaX + boxW / 2 - 40} y2={hoaY} dashed />
-      <Line x1={loX + boxW / 2} y1={row2Y + boxH} x2={hoaX + boxW / 2 + 40} y2={hoaY} dashed />
+      <Curve d={`M ${soX + boxW / 2} ${row2Y + boxH} Q ${soX + boxW / 2} ${hoaY - 40}, ${hoaX + boxW / 2 - 40} ${hoaY}`} dashed />
+      <Curve d={`M ${loX + boxW / 2} ${row2Y + boxH} Q ${loX + boxW / 2} ${hoaY - 40}, ${hoaX + boxW / 2 + 40} ${hoaY}`} dashed />
       {(() => {
-        const l1 = midPoint(soX + boxW / 2, row2Y + boxH, hoaX + boxW / 2 - 40, hoaY);
-        const l2 = midPoint(loX + boxW / 2, row2Y + boxH, hoaX + boxW / 2 + 40, hoaY);
+        const l1 = quadPoint(soX + boxW / 2, row2Y + boxH, soX + boxW / 2, hoaY - 40, hoaX + boxW / 2 - 40, hoaY);
+        const l2 = quadPoint(loX + boxW / 2, row2Y + boxH, loX + boxW / 2, hoaY - 40, hoaX + boxW / 2 + 40, hoaY);
         return (
           <>
             <Label x={l1.x} y={l1.y - 6} text="landowner" />
