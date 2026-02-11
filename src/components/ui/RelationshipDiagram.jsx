@@ -67,11 +67,21 @@ function Curve({ d, dashed = false }) {
   );
 }
 
-function Label({ x, y, text, align = 'middle', size = 14 }) {
+function Label({ x, y, text, align = 'middle', size = 16 }) {
+  const padX = 6;
+  const padY = 4;
+  const width = text.length * (size * 0.55) + padX * 2;
+  const height = size + padY * 2;
+  const rx = 4;
+  const boxX = x - width / 2;
+  const boxY = y - height + padY;
   return (
-    <text x={x} y={y} textAnchor={align} fill="#0f172a" fontFamily="Times New Roman, serif" fontSize={size}>
-      {text}
-    </text>
+    <g>
+      <rect x={boxX} y={boxY} width={width} height={height} rx={rx} fill="#ffffff" stroke="none" />
+      <text x={x} y={y} textAnchor={align} fill="#0f172a" fontFamily="Times New Roman, serif" fontSize={size}>
+        {text}
+      </text>
+    </g>
   );
 }
 
