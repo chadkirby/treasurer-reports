@@ -13,13 +13,21 @@ const COLORS = {
 
 function Box({ x, y, w, h, fill, stroke, textColor, lines }) {
   const lineHeight = 18;
-  const startY = y + h / 2 - ((lines.length - 1) * lineHeight) / 2;
+  const centerY = y + h / 2;
   return (
     <g>
       <rect x={x} y={y} width={w} height={h} rx={4} fill={fill} stroke={stroke} strokeWidth={2} />
-      <text x={x + w / 2} y={startY} textAnchor="middle" fill={textColor} fontFamily="Times New Roman, serif" fontSize={16}>
+      <text
+        x={x + w / 2}
+        y={centerY}
+        textAnchor="middle"
+        dominantBaseline="middle"
+        fill={textColor}
+        fontFamily="Times New Roman, serif"
+        fontSize={16}
+      >
         {lines.map((line, idx) => (
-          <tspan key={line} x={x + w / 2} dy={idx === 0 ? 0 : lineHeight}>
+          <tspan key={line} x={x + w / 2} dy={(idx - (lines.length - 1) / 2) * lineHeight}>
             {line}
           </tspan>
         ))}
@@ -74,11 +82,19 @@ function Label({ x, y, text, align = 'middle', size = 16 }) {
   const height = size + padY * 2;
   const rx = 4;
   const boxX = x - width / 2;
-  const boxY = y - height + padY;
+  const boxY = y - height / 2;
   return (
     <g>
       <rect x={boxX} y={boxY} width={width} height={height} rx={rx} fill="#ffffff" stroke="none" />
-      <text x={x} y={y} textAnchor={align} fill="#0f172a" fontFamily="Times New Roman, serif" fontSize={size}>
+      <text
+        x={x}
+        y={y}
+        textAnchor={align}
+        dominantBaseline="middle"
+        fill="#0f172a"
+        fontFamily="Times New Roman, serif"
+        fontSize={size}
+      >
         {text}
       </text>
     </g>
