@@ -1,6 +1,5 @@
 import React from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, Home } from 'lucide-react';
 
 const SLIDES = [
   { path: '/', title: 'Home' },
@@ -18,12 +17,23 @@ const SLIDES = [
 export default function Layout() {
   const location = useLocation();
   const navigate = useNavigate();
+  const paletteInputRef = React.useRef(null);
 
   const currentIndex = SLIDES.findIndex(s => s.path === location.pathname);
-  const currentSlide = SLIDES[currentIndex] || { title: 'Treasurer\'s Report' };
+  const [isPaletteOpen, setIsPaletteOpen] = React.useState(false);
+  const [query, setQuery] = React.useState('');
+  const [highlightedIndex, setHighlightedIndex] = React.useState(0);
 
   const hasPrevious = currentIndex > 0;
   const hasNext = currentIndex < SLIDES.length - 1;
+  const normalizedQuery = query.trim().toLowerCase();
+  const filteredSlides = React.useMemo(
+    () =>
+      SLIDES.map((slide, idx) => ({ slide, idx })).filter(({ slide }) =>
+        slide.title.toLowerCase().includes(normalizedQuery)
+      ),
+    [normalizedQuery]
+  );
 
   const goToPrevious = () => {
     if (hasPrevious) navigate(SLIDES[currentIndex - 1].path);
@@ -33,15 +43,112 @@ export default function Layout() {
     if (hasNext) navigate(SLIDES[currentIndex + 1].path);
   };
 
-  // Keyboard navigation
+  const closePalette = React.useCallback(() => {
+    setIsPaletteOpen(false);
+    setQuery('');
+    setHighlightedIndex(0);
+  }, []);
+
+  const openPalette = React.useCallback(() => {
+    setQuery('');
+    setIsPaletteOpen(true);
+    setHighlightedIndex(currentIndex >= 0 ? currentIndex : 0);
+  }, [currentIndex]);
+
+  const goToSlide = React.useCallback(
+    (path) => {
+      closePalette();
+      navigate(path);
+    },
+    [closePalette, navigate]
+  );
+
+  const isEditableTarget = React.useCallback((target) => {
+    if (!(target instanceof HTMLElement)) return false;
+    if (target.isContentEditable) return true;
+    const tag = target.tagName.toLowerCase();
+    return tag === 'input' || tag === 'textarea' || tag === 'select';
+  }, []);
+
+  React.useEffect(() => {
+    if (isPaletteOpen) paletteInputRef.current?.focus();
+  }, [isPaletteOpen]);
+
+  React.useEffect(() => {
+    if (!isPaletteOpen) return;
+    setHighlightedIndex((prev) => {
+      if (filteredSlides.length === 0) return -1;
+      if (prev < 0 || prev >= filteredSlides.length) return 0;
+      return prev;
+    });
+  }, [filteredSlides.length, isPaletteOpen]);
+
+  // Keyboard navigation and command palette
   React.useEffect(() => {
     const handleKeyDown = (e) => {
+      const isPaletteInput = paletteInputRef.current && e.target === paletteInputRef.current;
+      if (isEditableTarget(e.target) && !isPaletteInput) return;
+
+      const isCommandPaletteShortcut =
+        e.shiftKey && (e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'p';
+
+      if (isCommandPaletteShortcut) {
+        e.preventDefault();
+        openPalette();
+        return;
+      }
+
+      if (isPaletteOpen) {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          closePalette();
+          return;
+        }
+
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          if (filteredSlides.length > 0) {
+            setHighlightedIndex((prev) => (prev + 1) % filteredSlides.length);
+          }
+          return;
+        }
+
+        if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (filteredSlides.length > 0) {
+            setHighlightedIndex((prev) =>
+              prev <= 0 ? filteredSlides.length - 1 : prev - 1
+            );
+          }
+          return;
+        }
+
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const selected = filteredSlides[highlightedIndex];
+          if (selected) goToSlide(selected.slide.path);
+          return;
+        }
+
+        return;
+      }
+
       if (e.key === 'ArrowLeft') goToPrevious();
       if (e.key === 'ArrowRight') goToNext();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentIndex, hasNext, hasPrevious]);
+  }, [
+    closePalette,
+    filteredSlides,
+    goToSlide,
+    goToNext,
+    goToPrevious,
+    highlightedIndex,
+    isEditableTarget,
+    isPaletteOpen,
+    openPalette,
+  ]);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#fffff8] text-slate-900 font-serif">
@@ -96,6 +203,69 @@ export default function Layout() {
             </button>
         </div>
       </footer>
+
+      {isPaletteOpen && (
+        <div
+          className="fixed inset-0 z-[60] bg-black/30 backdrop-blur-[1px] flex items-start justify-center pt-24 px-4"
+          onClick={closePalette}
+        >
+          <div
+            className="w-full max-w-2xl rounded-xl border border-slate-300 bg-[#fffff8] shadow-2xl overflow-hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="slide-jump-title"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="px-5 py-4 border-b border-slate-200">
+              <h2 id="slide-jump-title" className="text-lg font-serif italic text-black">
+                Jump to Slide
+              </h2>
+              <input
+                ref={paletteInputRef}
+                type="text"
+                value={query}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  setHighlightedIndex(0);
+                }}
+                placeholder="Type a slide name..."
+                className="mt-3 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-xs font-sans text-slate-900 outline-none focus:border-black focus:ring-1 focus:ring-black"
+                role="combobox"
+                aria-expanded="true"
+                aria-controls="slide-jump-listbox"
+                aria-autocomplete="list"
+                aria-label="Search slides"
+              />
+            </div>
+
+            <div id="slide-jump-listbox" role="listbox" className="p-2">
+              {filteredSlides.length === 0 ? (
+                <p className="px-3 py-8 text-xs text-slate-500 font-sans text-center">
+                  No matching slides.
+                </p>
+              ) : (
+                filteredSlides.map(({ slide, idx }, listIndex) => (
+                  <button
+                    key={slide.path}
+                    onMouseEnter={() => setHighlightedIndex(listIndex)}
+                    onClick={() => goToSlide(slide.path)}
+                    role="option"
+                    aria-selected={listIndex === highlightedIndex}
+                    className={`w-full text-left px-3 py-1 rounded-md transition-colors font-sans text-xs ${
+                      listIndex === highlightedIndex
+                        ? 'bg-slate-900 text-white'
+                        : 'text-slate-800 hover:bg-slate-100'
+                    }`}
+                  >
+                    <span className="inline-block w-8 text-xs font-mono opacity-80">{idx + 1}.</span>
+                    {slide.title}
+                  </button>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
