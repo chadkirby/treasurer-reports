@@ -7,15 +7,6 @@ import { useData } from '../hooks/useData';
 import { parseCurrency, formatCurrency } from '../utils/format';
 import { TUFTE_PALETTE } from '../utils/theme';
 
-function SummaryCard({ title, value, color }) {
-  return (
-    <div className="flex flex-col border-l-4 p-4 bg-white shadow-sm" style={{ borderColor: color }}>
-      <span className="text-xs uppercase tracking-wider text-slate-500 font-sans font-bold">{title}</span>
-      <span className="text-2xl font-serif italic text-slate-900">{formatCurrency(value)}</span>
-    </div>
-  );
-}
-
 export default function IncomeAnalysis() {
   const { data, loading, error } = useData('2021-2025/Cash Inflows.csv');
 
@@ -34,7 +25,7 @@ export default function IncomeAnalysis() {
         if (!row) return 0;
         let val = row[year];
         if (val) return parseCurrency(val);
-        const key = Object.keys(row).find(k => k.trim() === year);
+        const key = Object.keys(row).find(k => k.trim().startsWith(year));
         return key ? parseCurrency(row[key]) : 0;
     };
 
@@ -51,7 +42,7 @@ export default function IncomeAnalysis() {
       grandTotal: gTotal,
       totals: [
           { label: 'HOA Dues', total: hoaTotal, color: TUFTE_PALETTE[4] },
-          { label: 'Conveyance', total: convTotal, color: TUFTE_PALETTE[0] },
+          { label: 'Conveyance Assessments', total: convTotal, color: TUFTE_PALETTE[0] },
           { label: 'Other', total: otherTotal, color: TUFTE_PALETTE[1] }
       ],
       chartData: {
@@ -111,12 +102,39 @@ export default function IncomeAnalysis() {
   return (
     <Slide title="Income Analysis" subtitle="Breakdown of revenue sources.">
       <div className="flex flex-col gap-12">
-          {/* Summary */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <SummaryCard title="5-Year Inflow" value={grandTotal} color="#334155" />
-              {totals.map((t) => (
-                  <SummaryCard key={t.label} title={t.label} value={t.total} color={t.color} />
-              ))}
+          {/* Equation summary */}
+          <div className="bg-white p-6 border border-slate-200">
+            <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-end gap-x-3 text-slate-900">
+              <div className="flex flex-col min-w-0">
+                <span className="text-sm uppercase tracking-wide text-slate-700 font-sans font-bold whitespace-nowrap">5-Year Inflow</span>
+                <span className="text-[clamp(2rem,2.5vw,2.8rem)] font-serif italic leading-none whitespace-nowrap">{formatCurrency(grandTotal)}</span>
+              </div>
+              <span className="text-[clamp(1.8rem,2vw,2.5rem)] text-slate-500 leading-none pb-0.5">=</span>
+              {totals.map((t, idx) => {
+                const labelClass =
+                  t.label === 'HOA Dues'
+                    ? 'text-blue-700'
+                    : t.label === 'Conveyance Assessments'
+                      ? 'text-teal-700'
+                      : 'text-slate-700';
+                return (
+                  <React.Fragment key={t.label}>
+                    <div className="flex flex-col min-w-0">
+                      {t.label === 'Conveyance Assessments' ? (
+                        <span className={`text-sm uppercase tracking-wide font-sans font-bold leading-tight ${labelClass}`}>
+                          <span className="block">Conveyance</span>
+                          <span className="block">Assessments</span>
+                        </span>
+                      ) : (
+                        <span className={`text-sm uppercase tracking-wide font-sans font-bold whitespace-nowrap ${labelClass}`}>{t.label}</span>
+                      )}
+                      <span className="text-[clamp(2rem,2.5vw,2.8rem)] font-serif italic leading-none whitespace-nowrap">{formatCurrency(t.total)}</span>
+                    </div>
+                    {idx < totals.length - 1 && <span className="text-[clamp(1.8rem,2vw,2.5rem)] text-slate-500 leading-none pb-0.5">+</span>}
+                  </React.Fragment>
+                );
+              })}
+            </div>
           </div>
 
           <div className="bg-white p-8 border border-slate-200">
