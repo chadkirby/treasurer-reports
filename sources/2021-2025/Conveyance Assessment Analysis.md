@@ -11,8 +11,15 @@ The Deschutes Heights Homeowners' Association is a nonprofit corporation incorpo
 
 ## What actually happened:
 
-- To date, at least $50k in Conveyance Assessments have been collected by the HOA
+- $52.5 in Conveyance Assessments have been collected by the HOA
 - Between 2021-25, $52.5k of Conveyance Assessment funds were paid to the Developer (Lotus House Development Corp)
+
+    - 2021: $15,500 ($3,500 Check #16 Invoice #20210310 + $12k Check #17 Invoice #20210310)
+    - 2022: $14,500 (Check #37 Invoice #20220125-1)
+    - 2023: $10,500 (Check #55 Invoice #20230303)
+    - 2024: $4,500 (Check #70 Invoice #20240308)
+    - 2025: $7,500 (Check #92 Invoice #20250919)
+
 
 ## The Developer's justification:
 
