@@ -13,8 +13,8 @@ export default function FinancialPosition() {
   const chartData = useMemo(() => {
     if (!data) return null;
 
-    // Filter out "Average" row if present
-    const rows = data.filter(row => row.Year && row.Year !== 'Average');
+    // Keep only true year rows (e.g., 2021-2025), excluding summary rows like "Average" or "Total (5 Yrs)".
+    const rows = data.filter((row) => /^\d{4}$/.test(String(row.Year || '').trim()));
 
     return {
       labels: rows.map(r => r.Year),
