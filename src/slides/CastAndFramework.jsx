@@ -5,7 +5,29 @@ import MarkdownBlock from '../components/ui/MarkdownBlock';
 export default function CastAndFramework() {
   return (
     <Slide title="Cast, Characters, and Legal Framework" subtitle="Who is who, and how the HOA is governed.">
-      <div className="flex flex-col gap-8">
+      <div className="bg-white p-6 border border-slate-200">
+        <h3 className="text-xl font-bold mb-4 font-serif italic border-b border-slate-300 pb-2">Timeline</h3>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm text-slate-700">
+          <div className="p-4 bg-white border border-slate-200">
+            <div className="text-xs uppercase tracking-wide text-slate-500 font-bold">2011</div>
+            <div className="mt-1">HOA incorporated.</div>
+          </div>
+          <div className="p-4 bg-white border border-slate-200">
+            <div className="text-xs uppercase tracking-wide text-slate-500 font-bold">2019</div>
+            <div className="mt-1">Declaration amended (CC&Rs).</div>
+          </div>
+          <div className="p-4 bg-white border border-slate-200">
+            <div className="text-xs uppercase tracking-wide text-slate-500 font-bold">2020</div>
+            <div className="mt-1">VIS Group engaged.</div>
+          </div>
+          <div className="p-4 bg-white border border-slate-200">
+            <div className="text-xs uppercase tracking-wide text-slate-500 font-bold">2026</div>
+            <div className="mt-1">Homeowners take board control.</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-8 mt-8">
         <div className="bg-white p-6 border border-slate-200">
           <h3 className="text-xl font-bold mb-4 font-serif italic border-b border-slate-300 pb-2">Cast</h3>
           <ul className="list-disc pl-5 text-base text-slate-700 space-y-2">
@@ -59,28 +81,6 @@ export default function CastAndFramework() {
           </div>
           <div className="mt-4">
             <MarkdownBlock filename="relationships-authority.md" className="prose-sm font-serif" />
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-8 bg-white p-6 border border-slate-200">
-        <h3 className="text-xl font-bold mb-4 font-serif italic border-b border-slate-300 pb-2">Timeline</h3>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm text-slate-700">
-          <div className="p-4 bg-white border border-slate-200">
-            <div className="text-xs uppercase tracking-wide text-slate-500 font-bold">2011</div>
-            <div className="mt-1">HOA incorporated.</div>
-          </div>
-          <div className="p-4 bg-white border border-slate-200">
-            <div className="text-xs uppercase tracking-wide text-slate-500 font-bold">2019</div>
-            <div className="mt-1">Declaration amended (CC&Rs).</div>
-          </div>
-          <div className="p-4 bg-white border border-slate-200">
-            <div className="text-xs uppercase tracking-wide text-slate-500 font-bold">2020</div>
-            <div className="mt-1">VIS Group engaged.</div>
-          </div>
-          <div className="p-4 bg-white border border-slate-200">
-            <div className="text-xs uppercase tracking-wide text-slate-500 font-bold">2026</div>
-            <div className="mt-1">Homeowners take board control.</div>
           </div>
         </div>
       </div>
