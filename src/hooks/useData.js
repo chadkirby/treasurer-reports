@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Papa from 'papaparse';
+import { publicUrl } from '../utils/publicUrl';
 
 /**
  * Hook to fetch and parse data from the /sources directory.
@@ -18,7 +19,7 @@ export function useData(filename) {
       setLoading(true);
       setError(null);
       try {
-        const url = new URL(`/sources/${filename}`, window.location.origin);
+        const url = new URL(publicUrl(`sources/${filename}`), window.location.origin);
         if (import.meta.env.DEV) {
           // Avoid stale cached data in dev when files change.
           url.searchParams.set('t', Date.now().toString());

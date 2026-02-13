@@ -1,6 +1,7 @@
 import React from 'react';
 import Slide from '../components/ui/Slide';
 import MarkdownBlock from '../components/ui/MarkdownBlock';
+import { publicUrl } from '../utils/publicUrl';
 
 export default function CastAndFramework() {
   return (
@@ -46,7 +47,7 @@ export default function CastAndFramework() {
           <h3 className="text-xl font-bold mb-4 font-serif italic border-b border-slate-300 pb-2">Relationship Map: Developer Control Period</h3>
           <div className="bg-white border border-slate-200 p-4">
             <img
-              src="/sources/drawings/relationships-developer-control.drawio.svg"
+              src={publicUrl('sources/drawings/relationships-developer-control.drawio.svg')}
               alt="Developer control period relationship map"
               className="w-full h-auto"
             />
@@ -60,7 +61,7 @@ export default function CastAndFramework() {
           <h3 className="text-xl font-bold mb-4 font-serif italic border-b border-slate-300 pb-2">Relationship Map: Homeowner Control Period (Current)</h3>
           <div className="bg-white border border-slate-200 p-4">
             <img
-              src="/sources/drawings/relationships-homeowner-control.drawio.svg"
+              src={publicUrl('sources/drawings/relationships-homeowner-control.drawio.svg')}
               alt="Homeowner control period relationship map"
               className="w-full h-auto"
             />
@@ -74,7 +75,7 @@ export default function CastAndFramework() {
           <h3 className="text-xl font-bold mb-4 font-serif italic border-b border-slate-300 pb-2">Authority & Delegation</h3>
           <div className="bg-white border border-slate-200 p-4">
             <img
-              src="/sources/drawings/authorities.drawio.svg"
+              src={publicUrl('sources/drawings/authorities.drawio.svg')}
               alt="Authority and delegation diagram"
               className="w-full h-auto"
             />
