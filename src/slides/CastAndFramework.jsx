@@ -44,7 +44,7 @@ export default function CastAndFramework() {
         </div>
 
         <div className="bg-white p-6 border border-slate-200">
-          <h3 className="text-xl font-bold mb-4 font-serif italic border-b border-slate-300 pb-2">Relationship Map: Developer Control Period</h3>
+          <h3 className="text-xl font-bold mb-4 font-serif italic border-b border-slate-300 pb-2">Relationship Map: Developer Control Period (2011-2025)</h3>
           <div className="bg-white border border-slate-200 p-4">
             <img
               src={publicUrl('sources/drawings/relationships-developer-control.drawio.svg')}
@@ -58,7 +58,7 @@ export default function CastAndFramework() {
         </div>
 
         <div className="bg-white p-6 border border-slate-200">
-          <h3 className="text-xl font-bold mb-4 font-serif italic border-b border-slate-300 pb-2">Relationship Map: Homeowner Control Period (Current)</h3>
+          <h3 className="text-xl font-bold mb-4 font-serif italic border-b border-slate-300 pb-2">Relationship Map: Homeowner Control Period (2026-)</h3>
           <div className="bg-white border border-slate-200 p-4">
             <img
               src={publicUrl('sources/drawings/relationships-homeowner-control.drawio.svg')}
@@ -71,19 +71,6 @@ export default function CastAndFramework() {
           </div>
         </div>
 
-        <div className="bg-white p-6 border border-slate-200">
-          <h3 className="text-xl font-bold mb-4 font-serif italic border-b border-slate-300 pb-2">Authority & Delegation</h3>
-          <div className="bg-white border border-slate-200 p-4">
-            <img
-              src={publicUrl('sources/drawings/authorities.drawio.svg')}
-              alt="Authority and delegation diagram"
-              className="w-full h-auto"
-            />
-          </div>
-          <div className="mt-4">
-            <MarkdownBlock filename="relationships-authority.md" className="prose-sm font-serif" />
-          </div>
-        </div>
       </div>
     </Slide>
   );

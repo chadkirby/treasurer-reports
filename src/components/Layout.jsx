@@ -5,6 +5,7 @@ const SLIDES = [
   { path: '/', title: 'Home' },
   { path: '/methodology', title: 'Methodology' },
   { path: '/cast-framework', title: 'Cast & Legal Framework' },
+  { path: '/authority-framework', title: 'Authority Framework' },
   { path: '/executive-summary', title: 'Executive Summary' },
   { path: '/financial-position', title: 'Overall Financial Position' },
   { path: '/income', title: 'Income Analysis' },

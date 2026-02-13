@@ -10,6 +10,7 @@ import ConveyanceAssessment from './slides/ConveyanceAssessment';
 import ReserveStudy from './slides/ReserveStudy';
 import Methodology from './slides/Methodology';
 import CastAndFramework from './slides/CastAndFramework';
+import AuthorityFramework from './slides/AuthorityFramework';
 import './index.css';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route index element={<TitleSlide />} />
           <Route path="methodology" element={<Methodology />} />
           <Route path="cast-framework" element={<CastAndFramework />} />
+          <Route path="authority-framework" element={<AuthorityFramework />} />
           <Route path="executive-summary" element={<ExecutiveSummary />} />
           <Route path="financial-position" element={<FinancialPosition />} />
           <Route path="income" element={<IncomeAnalysis />} />
