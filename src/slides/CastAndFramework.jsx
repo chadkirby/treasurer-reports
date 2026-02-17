@@ -34,12 +34,10 @@ export default function CastAndFramework() {
           <ul className="list-disc pl-5 text-base text-slate-700 space-y-2">
             <li><strong>Deschutes Heights HOA</strong> - Nonprofit corporation (founded 2011) created to maintain common areas; powers and limits come from statute and the Declaration (CC&Rs).</li>
             <li><strong>The Board</strong> - Directors who control the HOA on behalf of the members.</li>
-            <li><strong>Min</strong> - Individual residing in NY; family acquired the land; not a full-time developer.</li>
-            <li><strong>SO UK Investments</strong> - NY investment entity controlled by Min; owned the land.</li>
-            <li><strong>Lotus House</strong> - WA business entity controlled by Min; developer entity that contracted with builders.</li>
+            <li><strong>Min Lai</strong> - Individual residing in NY whose family acquired the land.</li>
+            <li><strong>SO UK Investments</strong> - NY investment entity (controlled by Min Lai) that originally owned the entire plat and now owns most of the vacant lots.</li>
+            <li><strong>Lotus House</strong> - WA business entity (controlled by Min Lai) that contracts with builders to construct homes.</li>
             <li><strong>VIS Group</strong> - WA management company engaged in 2020 to administer the HOA.</li>
-            <li><strong>Simply Home Realty</strong> - WA company affiliated with VIS Group (relationship disclosed).</li>
-            <li><strong>Precision Groundworks</strong> - WA vendor for stormwater maintenance.</li>
           </ul>
         </div>
 
