@@ -13,6 +13,7 @@ export default function ExecutiveSummary() {
           className="pt-8 border-t border-slate-300"
           contentKey="main"
           markdownClassName="prose-base font-serif max-w-5xl"
+          stripLeadingH1
         />
       </div>
     </Slide>

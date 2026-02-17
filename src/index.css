@@ -161,8 +161,6 @@
   }
 
   .print-slide {
-    break-after: page;
-    page-break-after: always;
     margin: 0;
     padding: 0;
     min-height: auto;
@@ -170,9 +168,9 @@
     animation: none !important;
   }
 
-  .print-slide:last-child {
-    break-after: auto;
-    page-break-after: auto;
+  .print-slide + .print-slide {
+    break-before: page;
+    page-break-before: always;
   }
 
   .print-slide h1 {

@@ -9,6 +9,7 @@ export default function MarkdownSection({
   titleClassName = '',
   titleTag = 'h3',
   markdownClassName = '',
+  stripLeadingH1 = false,
 }) {
   const { resolvedFilename, data, loading, error, isEmpty } = useMarkdownSource({ filename, contentKey });
 
@@ -21,7 +22,11 @@ export default function MarkdownSection({
   return (
     <div className={className}>
       {title && <HeadingTag className={titleClassName}>{title}</HeadingTag>}
-      <MarkdownContent data={typeof data === 'string' ? data : ''} className={markdownClassName} />
+      <MarkdownContent
+        data={typeof data === 'string' ? data : ''}
+        className={markdownClassName}
+        stripLeadingH1={stripLeadingH1}
+      />
     </div>
   );
 }

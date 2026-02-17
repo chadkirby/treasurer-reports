@@ -14,7 +14,12 @@ export function useMarkdownSource({ filename, contentKey = 'main' }) {
   return { resolvedFilename, data, loading, error, isEmpty };
 }
 
-export function MarkdownContent({ data, className = '' }) {
+function stripLeadingLevelOneHeading(markdown) {
+  if (typeof markdown !== 'string') return '';
+  return markdown.replace(/^\s*#\s+.+\n+/, '');
+}
+
+export function MarkdownContent({ data, className = '', stripLeadingH1 = false }) {
   const urlTransform = (url) => {
     if (!url) return url;
     if (/^[a-z]+:\/\//i.test(url) || url.startsWith('mailto:') || url.startsWith('tel:') || url.startsWith('#')) {
@@ -28,11 +33,13 @@ export function MarkdownContent({ data, className = '' }) {
     }
     return url;
   };
+  const rawMarkdown = typeof data === 'string' ? data : '';
+  const markdown = stripLeadingH1 ? stripLeadingLevelOneHeading(rawMarkdown) : rawMarkdown;
 
   return (
     <div className={`prose prose-slate max-w-none ${className}`}>
       <ReactMarkdown
-        children={typeof data === 'string' ? data : ''}
+        children={markdown}
         urlTransform={urlTransform}
       />
     </div>
