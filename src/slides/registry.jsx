@@ -4,7 +4,6 @@ import FinancialPosition from './FinancialPosition';
 import IncomeAnalysis from './IncomeAnalysis';
 import SpendingByCategory from './SpendingByCategory';
 import SpendingByPayee from './SpendingByPayee';
-import ConveyanceAssessment from './ConveyanceAssessment';
 import ReserveStudy from './ReserveStudy';
 import Methodology from './Methodology';
 import CastAndFramework from './CastAndFramework';
@@ -35,7 +34,7 @@ export const SLIDES = [
     slug: 'executive-summary',
     title: 'Executive Summary',
     component: ExecutiveSummary,
-    tags: ['board'],
+    tags: [],
     markdown: {
       main: '2021-2025/Observations.md',
     },
@@ -77,15 +76,6 @@ export const SLIDES = [
     },
   },
   {
-    slug: 'conveyance-assessment',
-    title: 'Conveyance Assessments',
-    component: ConveyanceAssessment,
-    tags: ['board'],
-    markdown: {
-      main: '2021-2025/Conveyance Assessment Summary.md',
-    },
-  },
-  {
     slug: 'reserves',
     title: 'Reserve Study',
     component: ReserveStudy,
@@ -98,7 +88,7 @@ export const SLIDES = [
     slug: 'cast-framework',
     title: 'Cast & Legal Framework',
     component: CastAndFramework,
-    tags: ['background', 'board'],
+    tags: ['background'],
     markdown: {
       developerRelationship: 'relationships-developer.md',
       homeownerRelationship: 'relationships-homeowner.md',
@@ -108,7 +98,7 @@ export const SLIDES = [
     slug: 'authority-framework',
     title: 'Authority Framework',
     component: AuthorityFramework,
-    tags: ['background', 'board'],
+    tags: ['background'],
     markdown: {
       main: 'relationships-authority.md',
     },
@@ -117,7 +107,7 @@ export const SLIDES = [
     slug: 'methodology',
     title: 'Methodology',
     component: Methodology,
-    tags: ['background', 'board'],
+    tags: [],
     markdown: {
       main: 'METHODOLOGY.md',
     },
