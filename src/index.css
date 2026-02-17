@@ -211,4 +211,25 @@
   .print-slide .border-slate-100 {
     border-color: #cbd5e1 !important;
   }
+
+  .print-slide .financial-position-chart-card {
+    overflow: hidden;
+  }
+
+  .print-slide .financial-position-chart-wrap,
+  .print-slide .financial-position-chart-wrap canvas {
+    max-width: 100% !important;
+  }
+
+  .print-keep-with-next {
+    break-after: avoid-page;
+    page-break-after: avoid;
+  }
+
+  .print-keep-target {
+    break-before: avoid-page;
+    page-break-before: avoid;
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
 }

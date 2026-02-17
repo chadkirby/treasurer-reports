@@ -115,8 +115,8 @@ export default function FinancialPosition() {
           </div>
         </div>
 
-        <div className="bg-white p-8 border border-slate-200">
-          <div className="h-[400px]">
+        <div className="bg-white p-8 border border-slate-200 financial-position-chart-card">
+          <div className="h-[400px] financial-position-chart-wrap">
             <ChartContainer title="Annual Cash Flow (2021-2025)">
                 {chartData && <Chart type='bar' data={chartData} options={options} />}
             </ChartContainer>

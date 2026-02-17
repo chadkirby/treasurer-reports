@@ -97,6 +97,7 @@ async function run() {
 
     const browser = await chromium.launch();
     const page = await browser.newPage();
+    await page.setViewportSize({ width: 816, height: 1056 });
     await page.emulateMedia({ media: 'print' });
 
     for (const deck of DECKS) {
@@ -106,6 +107,7 @@ async function run() {
       console.log(`Exporting ${deck.id} deck -> ${outputPath}`);
       await page.goto(targetUrl, { waitUntil: 'networkidle' });
       await page.waitForSelector(`[data-print-deck="${deck.id}"]`, { timeout: 20_000 });
+      await page.evaluate(() => window.dispatchEvent(new Event('resize')));
       await page.waitForTimeout(1_500);
 
       await page.pdf({
