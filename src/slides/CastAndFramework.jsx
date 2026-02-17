@@ -37,6 +37,7 @@ export default function CastAndFramework() {
             <li><strong>Min Lai</strong> - Individual residing in NY whose family acquired the land.</li>
             <li><strong>SO UK Investments</strong> - NY investment entity (controlled by Min Lai) that originally owned the entire plat and now owns most of the vacant lots.</li>
             <li><strong>Lotus House</strong> - WA business entity (controlled by Min Lai) that contracts with builders to construct homes.</li>
+            <li><strong>Declarant</strong> - SO UK Investments and Lotus House (together) as defined in the Declaration.</li>
             <li><strong>VIS Group</strong> - WA management company engaged in 2020 to administer the HOA.</li>
           </ul>
         </div>
