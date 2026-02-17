@@ -10,7 +10,7 @@ export default function ExecutiveSummary() {
     >
       <div className="flex flex-col gap-8 max-w-5xl mx-auto">
         <MarkdownSection
-          className="pt-8 border-t border-slate-300"
+          className="pt-8"
           contentKey="main"
           markdownClassName="prose-base font-serif max-w-5xl"
           stripLeadingH1
