@@ -121,7 +121,7 @@ export default function FinancialPosition() {
 
         <div className="prose prose-slate max-w-3xl font-serif">
             <h3 className="text-lg font-bold mb-4 italic">Observations</h3>
-            <MarkdownBlock filename="2021-2025/Observations.md" className="prose-sm" />
+            <MarkdownBlock contentKey="observations" className="prose-sm" />
         </div>
       </div>
     </Slide>

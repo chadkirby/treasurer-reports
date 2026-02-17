@@ -16,7 +16,7 @@ export default function AuthorityFramework() {
           />
         </div>
         <div className="mt-4">
-          <MarkdownBlock filename="relationships-authority.md" className="prose-sm font-serif" />
+          <MarkdownBlock contentKey="main" className="prose-sm font-serif" />
         </div>
       </div>
     </Slide>

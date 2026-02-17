@@ -53,7 +53,7 @@ export default function CastAndFramework() {
             />
           </div>
           <div className="mt-4">
-            <MarkdownBlock filename="relationships-developer.md" className="prose-sm font-serif" />
+            <MarkdownBlock contentKey="developerRelationship" className="prose-sm font-serif" />
           </div>
         </div>
 
@@ -67,7 +67,7 @@ export default function CastAndFramework() {
             />
           </div>
           <div className="mt-4">
-            <MarkdownBlock filename="relationships-homeowner.md" className="prose-sm font-serif" />
+            <MarkdownBlock contentKey="homeownerRelationship" className="prose-sm font-serif" />
           </div>
         </div>
 

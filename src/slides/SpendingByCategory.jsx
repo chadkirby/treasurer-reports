@@ -104,7 +104,7 @@ export default function SpendingByCategory() {
               </div>
             ))}
           </div>
-          <MarkdownBlock filename="2021-2025/Cash Outflows by Category.md" className="prose-sm max-w-3xl" />
+          <MarkdownBlock contentKey="commentary" className="prose-sm max-w-3xl" />
         </div>
       </div>
     </Slide>

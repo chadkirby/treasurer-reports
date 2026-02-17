@@ -14,3 +14,26 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## Deck Routing
+
+The presentation now supports audience-specific decks:
+
+- `/owners`
+- `/board`
+- `/background`
+
+Each slide has audience tags in `/Users/ckirby/repos/treasurer-reports/src/slides/registry.jsx`.  
+Deck navigation, progress dots, and command palette all follow the active deck.
+
+## Owners-Only Build
+
+To build an owners-only app variant:
+
+```bash
+npm run build:owners
+```
+
+This sets `VITE_DECK_VISIBILITY=owners-only`, which hides board/background decks and routes in the client.
+
+Important: this is a presentation-layer restriction. If sensitive board-only source files are still deployed under `public/sources`, they may still be directly fetchable by URL. For truly private board content, publish owners and board variants separately with different deployed source sets.

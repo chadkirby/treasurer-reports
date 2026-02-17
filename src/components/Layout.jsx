@@ -1,47 +1,44 @@
 import React from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-
-const SLIDES = [
-  { path: '/', title: 'Home' },
-  { path: '/methodology', title: 'Methodology' },
-  { path: '/cast-framework', title: 'Cast & Legal Framework' },
-  { path: '/authority-framework', title: 'Authority Framework' },
-  { path: '/executive-summary', title: 'Executive Summary' },
-  { path: '/financial-position', title: 'Overall Financial Position' },
-  { path: '/income', title: 'Income Analysis' },
-  { path: '/spending-category', title: 'Spending: By Category' },
-  { path: '/spending-payee', title: 'Spending: By Payee' },
-  { path: '/conveyance-assessment', title: 'Conveyance Assessments' },
-  { path: '/reserves', title: 'Reserve Study' },
-];
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
+import {
+  buildDeckPath,
+  DEFAULT_DECK,
+  getSlidesForDeck,
+  VISIBLE_DECKS,
+} from '../slides/registry';
+import { DeckProvider } from '../context/DeckContext';
 
 export default function Layout() {
-  const location = useLocation();
+  const { deck: routeDeck, slideSlug } = useParams();
   const navigate = useNavigate();
   const paletteInputRef = React.useRef(null);
+  const activeDeck = VISIBLE_DECKS.some((deck) => deck.id === routeDeck) ? routeDeck : DEFAULT_DECK;
+  const slides = React.useMemo(() => getSlidesForDeck(activeDeck), [activeDeck]);
 
-  const currentIndex = SLIDES.findIndex(s => s.path === location.pathname);
+  const currentSlug = slideSlug || '';
+  const currentIndex = slides.findIndex((slide) => slide.slug === currentSlug);
+  const currentSlide = currentIndex >= 0 ? slides[currentIndex] : null;
   const [isPaletteOpen, setIsPaletteOpen] = React.useState(false);
   const [query, setQuery] = React.useState('');
   const [highlightedIndex, setHighlightedIndex] = React.useState(0);
 
   const hasPrevious = currentIndex > 0;
-  const hasNext = currentIndex < SLIDES.length - 1;
+  const hasNext = currentIndex >= 0 && currentIndex < slides.length - 1;
   const normalizedQuery = query.trim().toLowerCase();
   const filteredSlides = React.useMemo(
     () =>
-      SLIDES.map((slide, idx) => ({ slide, idx })).filter(({ slide }) =>
+      slides.map((slide, idx) => ({ slide, idx })).filter(({ slide }) =>
         slide.title.toLowerCase().includes(normalizedQuery)
       ),
-    [normalizedQuery]
+    [normalizedQuery, slides]
   );
 
   const goToPrevious = () => {
-    if (hasPrevious) navigate(SLIDES[currentIndex - 1].path);
+    if (hasPrevious) navigate(buildDeckPath(activeDeck, slides[currentIndex - 1].slug));
   };
 
   const goToNext = () => {
-    if (hasNext) navigate(SLIDES[currentIndex + 1].path);
+    if (hasNext) navigate(buildDeckPath(activeDeck, slides[currentIndex + 1].slug));
   };
 
   const closePalette = React.useCallback(() => {
@@ -57,11 +54,11 @@ export default function Layout() {
   }, [currentIndex]);
 
   const goToSlide = React.useCallback(
-    (path) => {
+    (slug) => {
       closePalette();
-      navigate(path);
+      navigate(buildDeckPath(activeDeck, slug));
     },
-    [closePalette, navigate]
+    [activeDeck, closePalette, navigate]
   );
 
   const isEditableTarget = React.useCallback((target) => {
@@ -127,7 +124,7 @@ export default function Layout() {
         if (e.key === 'Enter') {
           e.preventDefault();
           const selected = filteredSlides[highlightedIndex];
-          if (selected) goToSlide(selected.slide.path);
+          if (selected) goToSlide(selected.slide.slug);
           return;
         }
 
@@ -160,8 +157,31 @@ export default function Layout() {
               <h1 className="text-2xl font-normal text-black m-0 tracking-wide font-serif italic">HOA Treasurer's Report</h1>
               <span className="text-sm italic text-slate-600 font-sans">2021—2025 Financial Overview</span>
             </div>
-            <div className="text-sm font-mono text-slate-500 bg-[#f3efe3] px-2 py-1 rounded">
-              {currentIndex + 1} / {SLIDES.length}
+            <div className="flex items-center gap-3">
+              {VISIBLE_DECKS.length > 1 && (
+                <label className="text-xs font-mono text-slate-600 flex items-center gap-2">
+                  Deck
+                  <select
+                    value={activeDeck}
+                    onChange={(e) => {
+                      const nextDeck = e.target.value;
+                      const nextSlides = getSlidesForDeck(nextDeck);
+                      const nextSlide = nextSlides.find((slide) => slide.slug === currentSlug) || nextSlides[0];
+                      navigate(buildDeckPath(nextDeck, nextSlide?.slug || ''));
+                    }}
+                    className="text-xs font-mono bg-[#f3efe3] border border-slate-300 rounded px-2 py-1"
+                  >
+                    {VISIBLE_DECKS.map((deck) => (
+                      <option key={deck.id} value={deck.id}>
+                        {deck.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              )}
+              <div className="text-sm font-mono text-slate-500 bg-[#f3efe3] px-2 py-1 rounded">
+                {Math.max(currentIndex + 1, 1)} / {slides.length}
+              </div>
             </div>
         </div>
       </header>
@@ -169,7 +189,9 @@ export default function Layout() {
       {/* Main Content */}
       <main className="flex-1 pt-32 pb-24 px-4 container mx-auto slide-content max-w-5xl text-lg">
         <div className="bg-transparent rounded-none p-0 min-h-full">
-            <Outlet />
+            <DeckProvider value={{ activeDeck, currentSlide }}>
+              <Outlet />
+            </DeckProvider>
         </div>
       </main>
 
@@ -185,10 +207,10 @@ export default function Layout() {
             </button>
 
             <div className="flex gap-2">
-               {SLIDES.map((slide, idx) => (
+               {slides.map((slide, idx) => (
                  <button
-                   key={slide.path}
-                   onClick={() => navigate(slide.path)}
+                   key={slide.slug || 'home'}
+                   onClick={() => navigate(buildDeckPath(activeDeck, slide.slug))}
                    className={`w-2 h-2 rounded-full transition-all ${idx === currentIndex ? 'bg-black scale-125' : 'bg-slate-300 hover:bg-slate-400'}`}
                    title={slide.title}
                  />
@@ -247,9 +269,9 @@ export default function Layout() {
               ) : (
                 filteredSlides.map(({ slide, idx }, listIndex) => (
                   <button
-                    key={slide.path}
+                    key={slide.slug || 'home'}
                     onMouseEnter={() => setHighlightedIndex(listIndex)}
-                    onClick={() => goToSlide(slide.path)}
+                    onClick={() => goToSlide(slide.slug)}
                     role="option"
                     aria-selected={listIndex === highlightedIndex}
                     className={`w-full text-left px-3 py-1 rounded-md transition-colors font-sans text-xs ${
@@ -270,5 +292,3 @@ export default function Layout() {
     </div>
   );
 }
-
-export { SLIDES };

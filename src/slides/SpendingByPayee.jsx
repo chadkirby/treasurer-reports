@@ -123,7 +123,7 @@ export default function SpendingByPayee() {
               </div>
             ))}
           </div>
-          <MarkdownBlock filename="2021-2025/Cash Outflows by Payee.md" className="prose-sm max-w-3xl" />
+          <MarkdownBlock contentKey="commentary" className="prose-sm max-w-3xl" />
         </div>
       </div>
     </Slide>

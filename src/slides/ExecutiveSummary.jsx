@@ -10,7 +10,7 @@ export default function ExecutiveSummary() {
           <h3 className="text-xl font-bold text-black mb-6 font-serif italic border-b border-slate-300 pb-2">
             Status Overview
           </h3>
-          <MarkdownBlock filename="2021-2025/Observations.md" className="prose-base font-serif" />
+          <MarkdownBlock contentKey="main" className="prose-base font-serif" />
         </div>
 
         <div className="bg-white p-8 border border-slate-200">

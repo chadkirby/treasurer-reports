@@ -147,7 +147,7 @@ export default function IncomeAnalysis() {
 
           <div className="pt-8 border-t border-slate-300">
              <h3 className="text-lg font-bold mb-4 font-serif italic">Commentary</h3>
-             <MarkdownBlock filename="2021-2025/Cash Inflows.md" className="prose-sm font-serif max-w-3xl" />
+             <MarkdownBlock contentKey="commentary" className="prose-sm font-serif max-w-3xl" />
           </div>
       </div>
     </Slide>

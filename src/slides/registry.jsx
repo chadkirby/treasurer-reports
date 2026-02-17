@@ -1,0 +1,148 @@
+import TitleSlide from './TitleSlide';
+import ExecutiveSummary from './ExecutiveSummary';
+import FinancialPosition from './FinancialPosition';
+import IncomeAnalysis from './IncomeAnalysis';
+import SpendingByCategory from './SpendingByCategory';
+import SpendingByPayee from './SpendingByPayee';
+import ConveyanceAssessment from './ConveyanceAssessment';
+import ReserveStudy from './ReserveStudy';
+import Methodology from './Methodology';
+import CastAndFramework from './CastAndFramework';
+import AuthorityFramework from './AuthorityFramework';
+
+export const DECKS = [
+  { id: 'owners', label: 'Owners' },
+  { id: 'board', label: 'Board' },
+  { id: 'background', label: 'Background' },
+];
+
+const OWNER_ONLY_MODE = import.meta.env.VITE_DECK_VISIBILITY === 'owners-only';
+
+export const VISIBLE_DECKS = OWNER_ONLY_MODE
+  ? DECKS.filter((deck) => deck.id === 'owners')
+  : DECKS;
+
+export const DEFAULT_DECK = VISIBLE_DECKS[0]?.id || 'owners';
+
+export const SLIDES = [
+  {
+    slug: '',
+    title: 'Home',
+    component: TitleSlide,
+    tags: ['owners', 'board'],
+  },
+  {
+    slug: 'executive-summary',
+    title: 'Executive Summary',
+    component: ExecutiveSummary,
+    tags: ['board'],
+    markdown: {
+      main: '2021-2025/Observations.md',
+    },
+  },
+  {
+    slug: 'financial-position',
+    title: 'Overall Financial Position',
+    component: FinancialPosition,
+    tags: ['owners', 'board'],
+    markdown: {
+      observations: '2021-2025/Observations.md',
+    },
+  },
+  {
+    slug: 'income',
+    title: 'Income Analysis',
+    component: IncomeAnalysis,
+    tags: ['owners', 'board'],
+    markdown: {
+      commentary: '2021-2025/Cash Inflows.md',
+    },
+  },
+  {
+    slug: 'spending-category',
+    title: 'Spending: By Category',
+    component: SpendingByCategory,
+    tags: ['owners', 'board'],
+    markdown: {
+      commentary: '2021-2025/Cash Outflows by Category.md',
+    },
+  },
+  {
+    slug: 'spending-payee',
+    title: 'Spending: By Payee',
+    component: SpendingByPayee,
+    tags: ['board'],
+    markdown: {
+      commentary: '2021-2025/Cash Outflows by Payee.md',
+    },
+  },
+  {
+    slug: 'conveyance-assessment',
+    title: 'Conveyance Assessments',
+    component: ConveyanceAssessment,
+    tags: ['board'],
+    markdown: {
+      main: '2021-2025/Conveyance Assessment Summary.md',
+    },
+  },
+  {
+    slug: 'reserves',
+    title: 'Reserve Study',
+    component: ReserveStudy,
+    tags: ['owners', 'board'],
+    markdown: {
+      main: '2021-2025/Reserve Study Analysis.md',
+    },
+  },
+  {
+    slug: 'cast-framework',
+    title: 'Cast & Legal Framework',
+    component: CastAndFramework,
+    tags: ['background', 'board'],
+    markdown: {
+      developerRelationship: 'relationships-developer.md',
+      homeownerRelationship: 'relationships-homeowner.md',
+    },
+  },
+  {
+    slug: 'authority-framework',
+    title: 'Authority Framework',
+    component: AuthorityFramework,
+    tags: ['background', 'board'],
+    markdown: {
+      main: 'relationships-authority.md',
+    },
+  },
+  {
+    slug: 'methodology',
+    title: 'Methodology',
+    component: Methodology,
+    tags: ['background', 'board'],
+    markdown: {
+      main: 'METHODOLOGY.md',
+    },
+  },
+];
+
+export function isDeckVisible(deckId) {
+  return VISIBLE_DECKS.some((deck) => deck.id === deckId);
+}
+
+export function getSlidesForDeck(deckId) {
+  return SLIDES.filter((slide) => slide.tags.includes(deckId));
+}
+
+export function getFirstSlideForDeck(deckId) {
+  return getSlidesForDeck(deckId)[0] || null;
+}
+
+export function buildDeckPath(deckId, slug = '') {
+  return slug ? `/${deckId}/${slug}` : `/${deckId}`;
+}
+
+export function getMarkdownFilenameForSlide(slide, deckId, contentKey = 'main') {
+  if (!slide) return null;
+  const deckOverrides = slide.deckMarkdown?.[deckId];
+  if (deckOverrides && deckOverrides[contentKey]) return deckOverrides[contentKey];
+  return slide.markdown?.[contentKey] || null;
+}

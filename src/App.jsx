@@ -1,36 +1,48 @@
-import { BrowserRouter, Routes, Route, HashRouter } from 'react-router-dom';
+import { HashRouter, Navigate, Route, Routes, useParams } from 'react-router-dom';
 import Layout from './components/Layout';
-import TitleSlide from './slides/TitleSlide';
-import ExecutiveSummary from './slides/ExecutiveSummary';
-import FinancialPosition from './slides/FinancialPosition';
-import IncomeAnalysis from './slides/IncomeAnalysis';
-import SpendingByCategory from './slides/SpendingByCategory';
-import SpendingByPayee from './slides/SpendingByPayee';
-import ConveyanceAssessment from './slides/ConveyanceAssessment';
-import ReserveStudy from './slides/ReserveStudy';
-import Methodology from './slides/Methodology';
-import CastAndFramework from './slides/CastAndFramework';
-import AuthorityFramework from './slides/AuthorityFramework';
+import {
+  buildDeckPath,
+  DEFAULT_DECK,
+  getFirstSlideForDeck,
+  getSlidesForDeck,
+  isDeckVisible,
+} from './slides/registry';
 import './index.css';
 
+function DeckSlideRoute() {
+  const { deck, slideSlug } = useParams();
+
+  if (!deck || !isDeckVisible(deck)) {
+    const defaultSlide = getFirstSlideForDeck(DEFAULT_DECK);
+    return <Navigate to={buildDeckPath(DEFAULT_DECK, defaultSlide?.slug || '')} replace />;
+  }
+
+  const slides = getSlidesForDeck(deck);
+  const targetSlug = slideSlug || '';
+  const slide = slides.find((item) => item.slug === targetSlug);
+
+  if (!slide) {
+    return <Navigate to={buildDeckPath(deck, slides[0]?.slug || '')} replace />;
+  }
+
+  const SlideComponent = slide.component;
+  return <SlideComponent />;
+}
+
 function App() {
+  const defaultSlide = getFirstSlideForDeck(DEFAULT_DECK);
+  const defaultPath = buildDeckPath(DEFAULT_DECK, defaultSlide?.slug || '');
+
   // Use HashRouter for GitHub Pages compatibility
   return (
     <HashRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<TitleSlide />} />
-          <Route path="methodology" element={<Methodology />} />
-          <Route path="cast-framework" element={<CastAndFramework />} />
-          <Route path="authority-framework" element={<AuthorityFramework />} />
-          <Route path="executive-summary" element={<ExecutiveSummary />} />
-          <Route path="financial-position" element={<FinancialPosition />} />
-          <Route path="income" element={<IncomeAnalysis />} />
-          <Route path="spending-category" element={<SpendingByCategory />} />
-          <Route path="spending-payee" element={<SpendingByPayee />} />
-          <Route path="conveyance-assessment" element={<ConveyanceAssessment />} />
-          <Route path="reserves" element={<ReserveStudy />} />
+        <Route path="/" element={<Navigate to={defaultPath} replace />} />
+        <Route path="/:deck" element={<Layout />}>
+          <Route index element={<DeckSlideRoute />} />
+          <Route path=":slideSlug" element={<DeckSlideRoute />} />
         </Route>
+        <Route path="*" element={<Navigate to={defaultPath} replace />} />
       </Routes>
     </HashRouter>
   );
