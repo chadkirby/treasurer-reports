@@ -4,6 +4,7 @@ import FinancialPosition from './FinancialPosition';
 import IncomeAnalysis from './IncomeAnalysis';
 import SpendingByCategory from './SpendingByCategory';
 import SpendingByPayee from './SpendingByPayee';
+import StormwaterMaintenance from './StormwaterMaintenance';
 import ReserveStudy from './ReserveStudy';
 import Methodology from './Methodology';
 import CastAndFramework from './CastAndFramework';
@@ -73,6 +74,15 @@ export const SLIDES = [
     tags: ['board'],
     markdown: {
       commentary: '2021-2025/Cash Outflows by Payee.md',
+    },
+  },
+  {
+    slug: 'stormwater-maintenance',
+    title: 'Stormwater Maintenance',
+    component: StormwaterMaintenance,
+    tags: ['board'],
+    markdown: {
+      main: '2021-2025/Stormwater Maintenance.md',
     },
   },
   {

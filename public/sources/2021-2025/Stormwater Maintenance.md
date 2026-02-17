@@ -26,7 +26,7 @@ The Maintenance Agreement contains a specific "Cost Estimate for Maintenance" br
 
 ## Actual Maintenance Costs
 
-Based on the general ledger reports, the HOA has made numerous payments to Sustainable Groundworks LLC between August 2022 and December 2025. These payments are primarily categorized under Stormwater/Detention Pond maintenance, with earlier payments classified as Landscaping (Non-contract).
+Based on the general ledger reports, the HOA has made numerous payments to Sustainable Groundworks LLC between August 2022 and December 2025. These payments total $56,616.70 and are primarily categorized under Stormwater/Detention Pond maintenance, with earlier payments classified as Landscaping (Non-contract).
 
 The payments, listed chronologically, are as follows:
 
@@ -49,6 +49,7 @@ The payments, listed chronologically, are as follows:
 - September 17, 2025: $4,519.64 (Invoice #1464) for Stormwater/Detention Pond maintenance,.
 - December 8, 2025: $4,519.64 (Invoice #1494) for Stormwater/Detention Pond maintenance,.
 
-Note: One source document labeled "2025-07-31" contained data duplicate to the July 2023 ledger (Invoice #1259), suggesting a labeling error in the source file; that duplicate entry has been excluded from the 2025 list above to avoid double-counting. This was probably a simple clerical error.
-
-Even if we adjust the labor rate from the 2011 estimate (15/hr) to a reasonable market rate (65/hr), the annual cost should be roughly $7,572. The HOA is paying double to triple that amount.
+## Questions
+- Do we need to dredge? Could be $15-30k every 20-30 years?
+- Have the expenses over the past 5 years been normal or were we doing deferred maintenance?
+- Can vendor provide a 30 year outlook on this pond so we know how to budget for large expenses?
