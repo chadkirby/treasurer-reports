@@ -1,5 +1,6 @@
 import { HashRouter, Navigate, Route, Routes, useParams } from 'react-router-dom';
 import Layout from './components/Layout';
+import PrintDeck from './components/PrintDeck';
 import {
   buildDeckPath,
   DEFAULT_DECK,
@@ -38,6 +39,7 @@ function App() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<Navigate to={defaultPath} replace />} />
+        <Route path="/:deck/print" element={<PrintDeck />} />
         <Route path="/:deck" element={<Layout />}>
           <Route index element={<DeckSlideRoute />} />
           <Route path=":slideSlug" element={<DeckSlideRoute />} />

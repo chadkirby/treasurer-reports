@@ -121,3 +121,94 @@
 .prose li {
     @apply mb-2;
 }
+
+.print-deck-screen {
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.print-slide {
+  margin: 0 auto 1rem auto;
+  padding: 0.25in;
+  background: #fff;
+}
+
+@media print {
+  @page {
+    size: Letter portrait;
+    margin: 0.5in;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 11pt;
+    line-height: 1.35;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-shadow: none !important;
+  }
+
+  .print-deck-screen {
+    max-width: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .print-slide {
+    break-after: page;
+    page-break-after: always;
+    margin: 0;
+    padding: 0;
+    min-height: auto;
+    background: transparent !important;
+    animation: none !important;
+  }
+
+  .print-slide:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+
+  .print-slide h1 {
+    font-size: 22pt !important;
+    line-height: 1.2 !important;
+  }
+
+  .print-slide h2 {
+    font-size: 16pt !important;
+    line-height: 1.25 !important;
+  }
+
+  .print-slide h3 {
+    font-size: 13pt !important;
+    line-height: 1.25 !important;
+  }
+
+  .print-slide p,
+  .print-slide li,
+  .print-slide td,
+  .print-slide th,
+  .print-slide span,
+  .print-slide label {
+    font-size: 10pt !important;
+    line-height: 1.4 !important;
+  }
+
+  .print-slide .bg-white,
+  .print-slide .bg-\[\#fffff8\],
+  .print-slide .bg-\[\#f3efe3\] {
+    background: transparent !important;
+  }
+
+  .print-slide .border-slate-200,
+  .print-slide .border-slate-300,
+  .print-slide .border-slate-100 {
+    border-color: #cbd5e1 !important;
+  }
+}
