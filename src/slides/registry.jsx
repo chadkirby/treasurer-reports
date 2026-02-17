@@ -6,7 +6,6 @@ import SpendingByCategory from './SpendingByCategory';
 import SpendingByPayee from './SpendingByPayee';
 import StormwaterMaintenance from './StormwaterMaintenance';
 import ReserveStudy from './ReserveStudy';
-import Methodology from './Methodology';
 import CastAndFramework from './CastAndFramework';
 import AuthorityFramework from './AuthorityFramework';
 
@@ -35,9 +34,9 @@ export const SLIDES = [
     slug: 'executive-summary',
     title: 'Executive Summary',
     component: ExecutiveSummary,
-    tags: [],
+    tags: ['owners', 'board'],
     markdown: {
-      main: '2021-2025/Observations.md',
+      main: '2021-2025/Executive Summary.md',
     },
   },
   {
@@ -111,15 +110,6 @@ export const SLIDES = [
     tags: ['background'],
     markdown: {
       main: 'relationships-authority.md',
-    },
-  },
-  {
-    slug: 'methodology',
-    title: 'Methodology',
-    component: Methodology,
-    tags: [],
-    markdown: {
-      main: 'METHODOLOGY.md',
     },
   },
 ];
