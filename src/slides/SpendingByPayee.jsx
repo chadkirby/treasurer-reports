@@ -95,36 +95,46 @@ export default function SpendingByPayee() {
 
   return (
     <Slide title="Cash Outflows by Payee" subtitle="Top payees and yearly trends.">
-      <div className="bg-white p-8 border border-slate-200">
-        <div className="h-[450px]">
-          <ChartContainer title="Cash Outflows by Payee (Yearly Trends)">
-            {payeeChartData && <Chart type='bar' data={payeeChartData} options={stackedOptions} />}
-          </ChartContainer>
-        </div>
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="p-4 bg-white border border-slate-200">
-            <div className="text-[10px] uppercase text-slate-500 font-bold tracking-tight">Top 3 Share of Total Outflows</div>
-            <div className="text-2xl font-serif italic text-slate-900">{formatPercent(top3Share)}</div>
-            <div className="text-xs text-slate-500">Based on 2020–2025 payee totals</div>
+      <div className="flex flex-col gap-12">
+        <div className="bg-white p-8 border border-slate-200">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-4 bg-white border border-slate-200">
+              <div className="text-[10px] uppercase text-slate-500 font-bold tracking-tight">Top 3 Share of Total Outflows</div>
+              <div className="text-2xl font-serif italic text-slate-900">{formatPercent(top3Share)}</div>
+              <div className="text-xs text-slate-500">Based on 2020–2025 payee totals</div>
+            </div>
+            <div className="p-4 bg-white border border-slate-200">
+              <div className="text-[10px] uppercase text-slate-500 font-bold tracking-tight">Largest Payee</div>
+              <div className="text-lg font-serif italic text-slate-900">{topPayee ? topPayee.label : '—'}</div>
+              <div className="text-sm text-slate-600">{topPayee ? formatCurrency(topPayee.total) : '—'}</div>
+            </div>
           </div>
-          <div className="p-4 bg-white border border-slate-200">
-            <div className="text-[10px] uppercase text-slate-500 font-bold tracking-tight">Largest Payee</div>
-            <div className="text-lg font-serif italic text-slate-900">{topPayee ? topPayee.label : '—'}</div>
-            <div className="text-sm text-slate-600">{topPayee ? formatCurrency(topPayee.total) : '—'}</div>
+          <div className="mt-8 pt-8 border-t border-slate-300">
+            <h4 className="font-bold mb-4 italic font-serif text-lg">Top Payee Aggregates (2020-2025)</h4>
+            <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+              {payeeTotals.map((pt) => (
+                <div key={pt.label} className="flex flex-col border-b border-slate-200 pb-2">
+                  <span className="text-[10px] uppercase text-slate-500 font-bold truncate tracking-tight" title={pt.label}>{pt.label}</span>
+                  <span className="text-base font-serif italic">{formatCurrency(pt.total)}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-        <div className="mt-8 pt-8 border-t border-slate-300">
-          <h4 className="font-bold mb-4 italic font-serif text-lg">Top Payee Aggregates (2020-2025)</h4>
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
-            {payeeTotals.map((pt) => (
-              <div key={pt.label} className="flex flex-col border-b border-slate-200 pb-2">
-                <span className="text-[10px] uppercase text-slate-500 font-bold truncate tracking-tight" title={pt.label}>{pt.label}</span>
-                <span className="text-base font-serif italic">{formatCurrency(pt.total)}</span>
-              </div>
-            ))}
+
+        <div className="bg-white p-8 border border-slate-200">
+          <div className="h-[450px]">
+            <ChartContainer title="Cash Outflows by Payee (Yearly Trends)">
+              {payeeChartData && <Chart type='bar' data={payeeChartData} options={stackedOptions} />}
+            </ChartContainer>
           </div>
-          <MarkdownSection contentKey="commentary" markdownClassName="prose-sm max-w-3xl" />
         </div>
+
+        <MarkdownSection
+          className="pt-8 border-t border-slate-300"
+          contentKey="commentary"
+          markdownClassName="prose-sm max-w-3xl"
+        />
       </div>
     </Slide>
   );

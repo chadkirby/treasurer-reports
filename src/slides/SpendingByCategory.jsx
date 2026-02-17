@@ -88,15 +88,10 @@ export default function SpendingByCategory() {
 
   return (
     <Slide title="Cash Outflows by Category" subtitle="Yearly trends and category totals.">
-      <div className="bg-white p-8 border border-slate-200">
-        <div className="h-[450px]">
-          <ChartContainer title="Cash Outflows by Category (Yearly Trends)">
-            {catChartData && <Chart type='bar' data={catChartData} options={stackedOptions} />}
-          </ChartContainer>
-        </div>
-        <div className="mt-8 pt-8 border-t border-slate-300">
+      <div className="flex flex-col gap-12">
+        <div className="bg-white p-8 border border-slate-200">
           <h4 className="font-bold mb-4 italic font-serif text-lg">Top Category Aggregates (2020-2025)</h4>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {catTotals.map((ct) => (
               <div key={ct.label} className="flex flex-col border-b border-slate-200 pb-2">
                 <span className="text-[10px] uppercase text-slate-500 font-bold tracking-tight">{ct.label}</span>
@@ -104,8 +99,21 @@ export default function SpendingByCategory() {
               </div>
             ))}
           </div>
-          <MarkdownSection contentKey="commentary" markdownClassName="prose-sm max-w-3xl" />
         </div>
+
+        <div className="bg-white p-8 border border-slate-200">
+          <div className="h-[450px]">
+            <ChartContainer title="Cash Outflows by Category (Yearly Trends)">
+              {catChartData && <Chart type='bar' data={catChartData} options={stackedOptions} />}
+            </ChartContainer>
+          </div>
+        </div>
+
+        <MarkdownSection
+          className="pt-8 border-t border-slate-300"
+          contentKey="commentary"
+          markdownClassName="prose-sm max-w-3xl"
+        />
       </div>
     </Slide>
   );

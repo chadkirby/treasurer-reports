@@ -89,7 +89,7 @@ export const SLIDES = [
     slug: 'reserves',
     title: 'Reserve Study',
     component: ReserveStudy,
-    tags: ['owners', 'board'],
+    tags: ['board'],
     markdown: {
       main: '2021-2025/Reserve Study Analysis.md',
     },

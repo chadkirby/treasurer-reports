@@ -98,13 +98,8 @@ export default function FinancialPosition() {
   return (
     <Slide title="Overall Financial Position" subtitle="Year-over-year comparison of Inflows vs Outflows.">
       <div className="flex flex-col gap-12">
-        <div className="h-[400px]">
-          <ChartContainer title="Annual Cash Flow (2021-2025)">
-              {chartData && <Chart type='bar' data={chartData} options={options} />}
-          </ChartContainer>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-sm pt-8 border-t border-slate-300">
+        <div className="bg-white p-6 border border-slate-200">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-sm">
             <div className="p-4 bg-white border border-slate-200 text-center">
                <div className="uppercase tracking-widest text-xs font-semibold mb-2 text-slate-500">Avg. Annual Inflow</div>
                <div className="text-2xl">$75,387</div>
@@ -117,15 +112,24 @@ export default function FinancialPosition() {
                <div className="uppercase tracking-widest text-xs font-semibold mb-2 text-slate-500">Avg. Net Flow</div>
                <div className="text-2xl">+$5,286</div>
             </div>
+          </div>
+        </div>
+
+        <div className="bg-white p-8 border border-slate-200">
+          <div className="h-[400px]">
+            <ChartContainer title="Annual Cash Flow (2021-2025)">
+                {chartData && <Chart type='bar' data={chartData} options={options} />}
+            </ChartContainer>
+          </div>
         </div>
 
         <MarkdownSection
-          className="prose prose-slate max-w-3xl font-serif"
+          className="pt-8 border-t border-slate-300"
           title="Observations"
           titleTag="h3"
-          titleClassName="text-lg font-bold mb-4 italic"
+          titleClassName="text-lg font-bold mb-4 font-serif italic"
           contentKey="observations"
-          markdownClassName="prose-sm"
+          markdownClassName="prose-sm font-serif max-w-3xl"
         />
       </div>
     </Slide>
