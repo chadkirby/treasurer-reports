@@ -1,6 +1,6 @@
 import React from 'react';
 import Slide from '../components/ui/Slide';
-import MarkdownBlock from '../components/ui/MarkdownBlock';
+import MarkdownSection from '../components/ui/MarkdownSection';
 import { publicUrl } from '../utils/publicUrl';
 
 export default function CastAndFramework() {
@@ -52,9 +52,11 @@ export default function CastAndFramework() {
               className="w-full h-auto"
             />
           </div>
-          <div className="mt-4">
-            <MarkdownBlock contentKey="developerRelationship" className="prose-sm font-serif" />
-          </div>
+          <MarkdownSection
+            className="mt-4"
+            contentKey="developerRelationship"
+            markdownClassName="prose-sm font-serif"
+          />
         </div>
 
         <div className="bg-white p-6 border border-slate-200">
@@ -66,9 +68,11 @@ export default function CastAndFramework() {
               className="w-full h-auto"
             />
           </div>
-          <div className="mt-4">
-            <MarkdownBlock contentKey="homeownerRelationship" className="prose-sm font-serif" />
-          </div>
+          <MarkdownSection
+            className="mt-4"
+            contentKey="homeownerRelationship"
+            markdownClassName="prose-sm font-serif"
+          />
         </div>
 
       </div>

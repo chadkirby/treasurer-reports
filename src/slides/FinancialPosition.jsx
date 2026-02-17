@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Chart } from 'react-chartjs-2';
 import Slide from '../components/ui/Slide';
 import ChartContainer from '../components/charts/ChartContainer';
-import MarkdownBlock from '../components/ui/MarkdownBlock';
+import MarkdownSection from '../components/ui/MarkdownSection';
 import { useData } from '../hooks/useData';
 import { parseCurrency, formatCurrency } from '../utils/format';
 import { TUFTE_PALETTE } from '../utils/theme';
@@ -119,10 +119,14 @@ export default function FinancialPosition() {
             </div>
         </div>
 
-        <div className="prose prose-slate max-w-3xl font-serif">
-            <h3 className="text-lg font-bold mb-4 italic">Observations</h3>
-            <MarkdownBlock contentKey="observations" className="prose-sm" />
-        </div>
+        <MarkdownSection
+          className="prose prose-slate max-w-3xl font-serif"
+          title="Observations"
+          titleTag="h3"
+          titleClassName="text-lg font-bold mb-4 italic"
+          contentKey="observations"
+          markdownClassName="prose-sm"
+        />
       </div>
     </Slide>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import Slide from '../components/ui/Slide';
-import MarkdownBlock from '../components/ui/MarkdownBlock';
+import MarkdownSection from '../components/ui/MarkdownSection';
 import { publicUrl } from '../utils/publicUrl';
 
 export default function AuthorityFramework() {
@@ -15,9 +15,11 @@ export default function AuthorityFramework() {
             className="w-full h-auto"
           />
         </div>
-        <div className="mt-4">
-          <MarkdownBlock contentKey="main" className="prose-sm font-serif" />
-        </div>
+        <MarkdownSection
+          className="mt-4"
+          contentKey="main"
+          markdownClassName="prose-sm font-serif"
+        />
       </div>
     </Slide>
   );

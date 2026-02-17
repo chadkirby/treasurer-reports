@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Chart } from 'react-chartjs-2';
 import Slide from '../components/ui/Slide';
 import ChartContainer from '../components/charts/ChartContainer';
-import MarkdownBlock from '../components/ui/MarkdownBlock';
+import MarkdownSection from '../components/ui/MarkdownSection';
 import { useData } from '../hooks/useData';
 import { parseCurrency, formatCurrency } from '../utils/format';
 import { TUFTE_PALETTE } from '../utils/theme';
@@ -145,10 +145,14 @@ export default function IncomeAnalysis() {
              </div>
           </div>
 
-          <div className="pt-8 border-t border-slate-300">
-             <h3 className="text-lg font-bold mb-4 font-serif italic">Commentary</h3>
-             <MarkdownBlock contentKey="commentary" className="prose-sm font-serif max-w-3xl" />
-          </div>
+          <MarkdownSection
+            className="pt-8 border-t border-slate-300"
+            title="Commentary"
+            titleTag="h3"
+            titleClassName="text-lg font-bold mb-4 font-serif italic"
+            contentKey="commentary"
+            markdownClassName="prose-sm font-serif max-w-3xl"
+          />
       </div>
     </Slide>
   );

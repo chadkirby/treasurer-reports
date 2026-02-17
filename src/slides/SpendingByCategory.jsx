@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Chart } from 'react-chartjs-2';
 import Slide from '../components/ui/Slide';
 import ChartContainer from '../components/charts/ChartContainer';
-import MarkdownBlock from '../components/ui/MarkdownBlock';
+import MarkdownSection from '../components/ui/MarkdownSection';
 import { useData } from '../hooks/useData';
 import { parseCurrency, formatCurrency } from '../utils/format';
 import { TUFTE_PALETTE } from '../utils/theme';
@@ -104,7 +104,7 @@ export default function SpendingByCategory() {
               </div>
             ))}
           </div>
-          <MarkdownBlock contentKey="commentary" className="prose-sm max-w-3xl" />
+          <MarkdownSection contentKey="commentary" markdownClassName="prose-sm max-w-3xl" />
         </div>
       </div>
     </Slide>

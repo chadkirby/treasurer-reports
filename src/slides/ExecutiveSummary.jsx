@@ -1,17 +1,19 @@
 import React from 'react';
 import Slide from '../components/ui/Slide';
-import MarkdownBlock from '../components/ui/MarkdownBlock';
+import MarkdownSection from '../components/ui/MarkdownSection';
 
 export default function ExecutiveSummary() {
   return (
     <Slide title="Executive Summary" subtitle="Key observations from the 2021-2025 financial period.">
       <div className="flex flex-col gap-8 max-w-4xl mx-auto">
-        <div className="bg-white p-8 border border-slate-200">
-          <h3 className="text-xl font-bold text-black mb-6 font-serif italic border-b border-slate-300 pb-2">
-            Status Overview
-          </h3>
-          <MarkdownBlock contentKey="main" className="prose-base font-serif" />
-        </div>
+        <MarkdownSection
+          className="bg-white p-8 border border-slate-200"
+          title="Status Overview"
+          titleTag="h3"
+          titleClassName="text-xl font-bold text-black mb-6 font-serif italic border-b border-slate-300 pb-2"
+          contentKey="main"
+          markdownClassName="prose-base font-serif"
+        />
 
         <div className="bg-white p-8 border border-slate-200">
           <h3 className="text-xl font-bold text-black mb-4 font-serif italic border-b border-slate-300 pb-2">

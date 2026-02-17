@@ -1,13 +1,15 @@
 import React from 'react';
 import Slide from '../components/ui/Slide';
-import MarkdownBlock from '../components/ui/MarkdownBlock';
+import MarkdownSection from '../components/ui/MarkdownSection';
 
 export default function ConveyanceAssessment() {
   return (
     <Slide title="Conveyance Assessments & Developer Loans" subtitle="Restricted funds and repayment flow.">
-      <div className="bg-white p-8 border border-slate-200 max-w-4xl mx-auto">
-        <MarkdownBlock contentKey="main" className="prose-base font-serif" />
-      </div>
+      <MarkdownSection
+        className="bg-white p-8 border border-slate-200 max-w-4xl mx-auto"
+        contentKey="main"
+        markdownClassName="prose-base font-serif"
+      />
     </Slide>
   );
 }
