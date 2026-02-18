@@ -1,32 +1,40 @@
 import React from 'react';
 import Slide from '../components/ui/Slide';
 import MarkdownSection from '../components/ui/MarkdownSection';
+import { SummaryGrid, SummaryMetric, SummaryPanel } from '../components/ui/SummaryPanel';
 import { publicUrl } from '../utils/publicUrl';
 
 export default function CastAndFramework() {
   return (
-    <Slide title="Cast, Characters, and Legal Framework" subtitle="Who is who, and how the HOA is governed.">
-      <div className="bg-white p-6 border border-slate-200">
-        <h3 className="text-xl font-bold mb-4 font-serif italic border-b border-slate-300 pb-2">Timeline</h3>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm text-slate-700">
-          <div className="p-4 bg-white border border-slate-200">
-            <div className="text-xs uppercase tracking-wide text-slate-500 font-bold">2011</div>
-            <div className="mt-1">HOA incorporated.</div>
-          </div>
-          <div className="p-4 bg-white border border-slate-200">
-            <div className="text-xs uppercase tracking-wide text-slate-500 font-bold">2019</div>
-            <div className="mt-1">Declaration amended (CC&Rs).</div>
-          </div>
-          <div className="p-4 bg-white border border-slate-200">
-            <div className="text-xs uppercase tracking-wide text-slate-500 font-bold">2020</div>
-            <div className="mt-1">VIS Group engaged.</div>
-          </div>
-          <div className="p-4 bg-white border border-slate-200">
-            <div className="text-xs uppercase tracking-wide text-slate-500 font-bold">2026</div>
-            <div className="mt-1">Homeowners take board control.</div>
-          </div>
-        </div>
-      </div>
+    <Slide title="Cast and Characters" subtitle="Who is who, and how the HOA is governed.">
+      <SummaryPanel title="Timeline">
+        <SummaryGrid className="md:grid-cols-4 xl:grid-cols-4">
+          <SummaryMetric
+            label="2011"
+            value="HOA incorporated."
+            compact
+            valueClassName="not-italic font-normal leading-snug text-lg text-slate-700 whitespace-normal"
+          />
+          <SummaryMetric
+            label="2019"
+            value="Declaration amended (CC&Rs)."
+            compact
+            valueClassName="not-italic font-normal leading-snug text-lg text-slate-700 whitespace-normal"
+          />
+          <SummaryMetric
+            label="2020"
+            value="VIS Group engaged."
+            compact
+            valueClassName="not-italic font-normal leading-snug text-lg text-slate-700 whitespace-normal"
+          />
+          <SummaryMetric
+            label="2026"
+            value="Homeowners take board control."
+            compact
+            valueClassName="not-italic font-normal leading-snug text-lg text-slate-700 whitespace-normal"
+          />
+        </SummaryGrid>
+      </SummaryPanel>
 
       <div className="flex flex-col gap-8 mt-8">
         <div className="bg-white p-6 border border-slate-200">
