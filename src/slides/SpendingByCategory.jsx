@@ -35,9 +35,14 @@ export default function SpendingByCategory() {
         total: getRowVal(row, 'Total')
       }))
       .sort((a, b) => b.total - a.total);
+    const grandTotal = totals.reduce((sum, item) => sum + item.total, 0);
+    const totalsWithPercent = totals.map((item) => ({
+      ...item,
+      sharePercent: grandTotal > 0 ? Math.round((item.total / grandTotal) * 100) : 0,
+    }));
 
     return {
-      catTotals: totals,
+      catTotals: totalsWithPercent,
       catChartData: {
         labels: years,
         datasets: rows.map((row, idx) => ({
@@ -95,7 +100,9 @@ export default function SpendingByCategory() {
             {catTotals.map((ct) => (
               <div key={ct.label} className="flex flex-col border-b border-slate-200 pb-2">
                 <span className="text-[12px] uppercase text-slate-500 font-bold tracking-tight">{ct.label}</span>
-                <span className="text-2xl font-serif italic">{formatCurrency(ct.total)}</span>
+                <span className="text-2xl font-serif italic">
+                  {formatCurrency(ct.total)} ({ct.sharePercent}%)
+                </span>
               </div>
             ))}
           </div>
