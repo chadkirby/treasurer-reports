@@ -1,5 +1,5 @@
 import { spawn } from 'node:child_process';
-import { mkdir } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 import { setTimeout as delay } from 'node:timers/promises';
@@ -7,9 +7,9 @@ import { setTimeout as delay } from 'node:timers/promises';
 const HOST = '127.0.0.1';
 const PORT = process.env.PDF_PORT || '4173';
 const ROOT = process.cwd();
-const OUTPUT_DIR = path.join(ROOT, 'pdf');
+const OUTPUT_DIR = path.join(ROOT, 'public', 'pdf');
 const DECKS = [
-  { id: 'owners', output: 'owner-deck.pdf' },
+  { id: 'owners', output: 'owners-deck.pdf' },
   { id: 'board', output: 'board-deck.pdf' },
   { id: 'background', output: 'background-deck.pdf' },
 ];
@@ -110,12 +110,12 @@ async function run() {
       await page.evaluate(() => window.dispatchEvent(new Event('resize')));
       await page.waitForTimeout(1_500);
 
-      await page.pdf({
-        path: outputPath,
+      const pdfBuffer = await page.pdf({
         format: 'Letter',
         printBackground: false,
         preferCSSPageSize: true,
       });
+      await writeFile(outputPath, pdfBuffer);
     }
 
     await browser.close();

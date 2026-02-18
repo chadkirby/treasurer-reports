@@ -105,7 +105,7 @@ export default function SpendingByPayee() {
                 <span className="text-base font-serif italic">{formatCurrency(pt.total)}</span>
               </div>
             ))}
-        </div>
+          </div>
         </div>
 
         <div className="bg-white p-8 border border-slate-200">

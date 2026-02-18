@@ -94,8 +94,8 @@ export default function SpendingByCategory() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {catTotals.map((ct) => (
               <div key={ct.label} className="flex flex-col border-b border-slate-200 pb-2">
-                <span className="text-[10px] uppercase text-slate-500 font-bold tracking-tight">{ct.label}</span>
-                <span className="text-lg font-serif italic">{formatCurrency(ct.total)}</span>
+                <span className="text-[12px] uppercase text-slate-500 font-bold tracking-tight">{ct.label}</span>
+                <span className="text-2xl font-serif italic">{formatCurrency(ct.total)}</span>
               </div>
             ))}
           </div>

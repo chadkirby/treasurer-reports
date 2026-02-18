@@ -7,6 +7,7 @@ import {
   VISIBLE_DECKS,
 } from '../slides/registry';
 import { DeckProvider } from '../context/DeckContext';
+import { publicUrl } from '../utils/publicUrl';
 
 export default function Layout() {
   const { deck: routeDeck, slideSlug } = useParams();
@@ -18,6 +19,8 @@ export default function Layout() {
   const currentSlug = slideSlug || '';
   const currentIndex = slides.findIndex((slide) => slide.slug === currentSlug);
   const currentSlide = currentIndex >= 0 ? slides[currentIndex] : null;
+  const deckPdfFilename = `${activeDeck}-deck.pdf`;
+  const deckPdfHref = publicUrl(`pdf/${deckPdfFilename}`);
   const [isPaletteOpen, setIsPaletteOpen] = React.useState(false);
   const [query, setQuery] = React.useState('');
   const [highlightedIndex, setHighlightedIndex] = React.useState(0);
@@ -179,6 +182,14 @@ export default function Layout() {
                   </select>
                 </label>
               )}
+              <a
+                href={deckPdfHref}
+                download={deckPdfFilename}
+                className="text-xs font-mono text-slate-700 bg-[#f3efe3] border border-slate-300 rounded px-2 py-1 hover:text-black hover:border-slate-500"
+                title={`Download ${activeDeck} deck PDF`}
+              >
+                Download PDF
+              </a>
               <div className="text-sm font-mono text-slate-500 bg-[#f3efe3] px-2 py-1 rounded">
                 {Math.max(currentIndex + 1, 1)} / {slides.length}
               </div>
