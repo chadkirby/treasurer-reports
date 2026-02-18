@@ -27,7 +27,12 @@ export default function SpendingByPayee() {
     // Filter out total row and empty payees
     const rows = payeeData.filter(r => {
       const p = r['Payee'] || Object.values(r)[0];
-      return p && p.trim() !== '' && !p.includes('TOTAL');
+      return (
+        p &&
+        p.trim() !== '' &&
+        !p.includes('TOTAL') &&
+        !/all others/i.test(p)
+      );
     });
 
     // Sort by Total to get Top 10
@@ -90,7 +95,7 @@ export default function SpendingByPayee() {
     <Slide title="Cash Outflows by Payee" subtitle="Top payees and yearly trends.">
       <div className="flex flex-col gap-12">
         <SummaryPanel title="Top Payee Aggregates (2020-2025)">
-          <SummaryGrid className="xl:grid-cols-5">
+          <SummaryGrid className="md:grid-cols-3 xl:grid-cols-3">
             {payeeTotals.map((pt) => (
               <SummaryMetric
                 key={pt.label}
@@ -98,7 +103,7 @@ export default function SpendingByPayee() {
                 labelTitle={pt.label}
                 value={formatCurrency(pt.total)}
                 compact
-                labelClassName="truncate"
+                labelClassName="whitespace-normal break-words"
               />
             ))}
           </SummaryGrid>

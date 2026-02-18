@@ -17,7 +17,7 @@ export function SummaryPanel({ title, children, className = '' }) {
 }
 
 export function SummaryGrid({ children, className = '' }) {
-  return <div className={`grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 ${className}`}>{children}</div>;
+  return <div className={`grid grid-cols-1 gap-4 ${className}`}>{children}</div>;
 }
 
 export function SummaryMetric({
