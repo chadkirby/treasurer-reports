@@ -10,9 +10,9 @@ export default function ExecutiveSummary() {
     >
       <div className="flex flex-col gap-8 max-w-5xl mx-auto">
         <MarkdownSection
-          className="pt-8"
+          className="pt-2"
           contentKey="main"
-          markdownClassName="prose-base font-serif max-w-5xl"
+          markdownClassName="prose-base font-serif max-w-5xl [&>h2:first-child]:mt-0"
           stripLeadingH1
         />
       </div>

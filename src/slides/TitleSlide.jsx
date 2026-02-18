@@ -14,7 +14,7 @@ export default function TitleSlide() {
         {currentDate}
       </p>
       <div className="flex gap-16 text-slate-600 text-sm font-mono uppercase tracking-widest">
-           Treasurer &bull; 2021—2025
+           Chad Kirby, Treasurer
       </div>
     </div>
 

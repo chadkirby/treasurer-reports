@@ -1,4 +1,4 @@
-# Why Does the HOA Exist? (And What Do We Have to Pay For?)
+# Why Does the HOA Exist? (And What Does It Have to Pay For?)
 
 ## Our Mission
 - **Purpose:** Create and maintain a desirable, attractive subdivision for the mutual benefit and protection of all owners. (See 2011 CC&Rs, Preamble.)
