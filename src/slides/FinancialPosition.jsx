@@ -3,6 +3,7 @@ import { Chart } from 'react-chartjs-2';
 import Slide from '../components/ui/Slide';
 import ChartContainer from '../components/charts/ChartContainer';
 import MarkdownSection from '../components/ui/MarkdownSection';
+import { SummaryMetric, SummaryPanel } from '../components/ui/SummaryPanel';
 import { useData } from '../hooks/useData';
 import { parseCurrency, formatCurrency } from '../utils/format';
 import { TUFTE_PALETTE } from '../utils/theme';
@@ -98,22 +99,13 @@ export default function FinancialPosition() {
   return (
     <Slide title="Overall Financial Position" subtitle="Year-over-year comparison of Inflows vs Outflows.">
       <div className="flex flex-col gap-12">
-        <div className="bg-white p-6 border border-slate-200">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-sm">
-            <div className="p-4 bg-white border border-slate-200 text-center">
-               <div className="uppercase tracking-widest text-xs font-semibold mb-2 text-slate-500">Avg. Annual Inflow</div>
-               <div className="text-2xl">$75,387</div>
-            </div>
-            <div className="p-4 bg-white border border-slate-200 text-center">
-               <div className="uppercase tracking-widest text-xs font-semibold mb-2 text-slate-500">Avg. Annual Outflow</div>
-               <div className="text-2xl">$70,101</div>
-            </div>
-            <div className="p-4 bg-white border border-slate-200 text-center text-teal-700">
-               <div className="uppercase tracking-widest text-xs font-semibold mb-2 text-slate-500">Avg. Net Flow</div>
-               <div className="text-2xl">+$5,286</div>
-            </div>
+        <SummaryPanel className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <SummaryMetric label="Avg. Annual Inflow" value="$75,387" />
+            <SummaryMetric label="Avg. Annual Outflow" value="$70,101" />
+            <SummaryMetric label="Avg. Net Flow" value="+$5,286" tone="teal" />
           </div>
-        </div>
+        </SummaryPanel>
 
         <div className="bg-white p-8 border border-slate-200 financial-position-chart-card">
           <div className="h-[400px] financial-position-chart-wrap">

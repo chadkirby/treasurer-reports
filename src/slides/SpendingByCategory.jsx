@@ -3,6 +3,7 @@ import { Chart } from 'react-chartjs-2';
 import Slide from '../components/ui/Slide';
 import ChartContainer from '../components/charts/ChartContainer';
 import MarkdownSection from '../components/ui/MarkdownSection';
+import { SummaryGrid, SummaryMetric, SummaryPanel } from '../components/ui/SummaryPanel';
 import { useData } from '../hooks/useData';
 import { parseCurrency, formatCurrency } from '../utils/format';
 import { TUFTE_PALETTE } from '../utils/theme';
@@ -136,19 +137,19 @@ export default function SpendingByCategory() {
   return (
     <Slide title="Cash Outflows by Category" subtitle="Yearly trends and category totals.">
       <div className="flex flex-col gap-12">
-        <div className="bg-white p-8 border border-slate-200">
-          <h4 className="font-bold mb-4 italic font-serif text-lg">Top Category Aggregates (2020-2025)</h4>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <SummaryPanel title="Top Category Aggregates (2020-2025)">
+          <SummaryGrid className="md:grid-cols-4 xl:grid-cols-4">
             {catTotals.map((ct) => (
-              <div key={ct.label} className="flex flex-col border-b border-slate-200 pb-2">
-                <span className="text-[12px] uppercase text-slate-500 font-bold tracking-tight">{ct.label}</span>
-                <span className="text-2xl font-serif italic">
-                  {formatCurrency(ct.total)} ({ct.sharePercent}%)
-                </span>
-              </div>
+              <SummaryMetric
+                key={ct.label}
+                label={ct.label.replace(/\s*\(.*\)\s*$/, '')}
+                value={`${formatCurrency(ct.total)} (${ct.sharePercent}%)`}
+                compact
+                valueClassName="whitespace-nowrap"
+              />
             ))}
-          </div>
-        </div>
+          </SummaryGrid>
+        </SummaryPanel>
 
         <div className="bg-white p-8 border border-slate-200">
           <div className="h-[450px]">

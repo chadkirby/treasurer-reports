@@ -102,12 +102,11 @@ export default function IncomeAnalysis() {
   return (
     <Slide title="Income Analysis" subtitle="Breakdown of revenue sources.">
       <div className="flex flex-col gap-12">
-          {/* Equation summary */}
           <div className="bg-white p-6 border border-slate-200">
             <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-end gap-x-3 text-slate-900">
               <div className="flex flex-col min-w-0">
                 <span className="text-sm uppercase tracking-wide text-slate-700 font-sans font-bold whitespace-nowrap">5-Year Inflow</span>
-                <span className="text-[clamp(2rem,2.5vw,2.8rem)] font-serif italic leading-none whitespace-nowrap">{formatCurrency(grandTotal)}</span>
+                <span className="text-[clamp(2rem,2.5vw,2.8rem)] font-serif italic leading-none whitespace-nowrap mt-[6px]">{formatCurrency(grandTotal)}</span>
               </div>
               <span className="text-[clamp(1.8rem,2vw,2.5rem)] text-slate-500 leading-none pb-0.5">=</span>
               {totals.map((t, idx) => {
@@ -128,7 +127,7 @@ export default function IncomeAnalysis() {
                       ) : (
                         <span className={`text-sm uppercase tracking-wide font-sans font-bold whitespace-nowrap ${labelClass}`}>{t.label}</span>
                       )}
-                      <span className="text-[clamp(2rem,2.5vw,2.8rem)] font-serif italic leading-none whitespace-nowrap">{formatCurrency(t.total)}</span>
+                      <span className="text-[clamp(2rem,2.5vw,2.8rem)] font-serif italic leading-none whitespace-nowrap mt-[6px]">{formatCurrency(t.total)}</span>
                     </div>
                     {idx < totals.length - 1 && <span className="text-[clamp(1.8rem,2vw,2.5rem)] text-slate-500 leading-none pb-0.5">+</span>}
                   </React.Fragment>
