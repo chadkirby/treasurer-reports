@@ -114,8 +114,22 @@
     @apply mb-6 leading-relaxed;
 }
 
-.prose ul, .prose ol {
-    @apply mb-8;
+.prose ul {
+    @apply mb-8 list-disc pl-6;
+}
+
+.prose ol {
+    @apply mb-8 list-decimal pl-6;
+}
+
+.prose ul ul {
+    list-style-type: circle;
+    margin-bottom: 1rem;
+}
+
+.prose ol ol {
+    list-style-type: lower-alpha;
+    margin-bottom: 1rem;
 }
 
 .prose li {

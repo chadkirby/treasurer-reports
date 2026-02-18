@@ -1,28 +1,25 @@
 # Stormwater Maintenance Obligations
 
-The Association is bound by the Residential Subdivision Agreement to Maintain Stormwater Facilities recorded with Thurston County. Failure to adhere to these requirements can result in the County performing the work and placing a lien on the property for the costs.
+The Association is bound by the Residential Subdivision Agreement to Maintain Stormwater Facilities recorded with Thurston County. Failure to adhere to these requirements can result in the City performing the work and placing a lien on the property for the costs.
 
 ## Primary Obligations
 
-- Maintenance Implementation: The Association must implement the specific maintenance program detailed in "Attachment A" of the agreement. This includes maintaining catch basins, pipes, the wet pond, and the infiltration pond.
-    - Critical Standard: The infiltration pond must be kept clean of silts and sediments. If infiltration tests show a rate lower than 2 inches per hour, additional construction/remediation is required.
+- Maintenance Implementation: The Association must implement the specific maintenance program detailed in "Attachment A" of the agreement. This includes maintaining catch basins, pipes, the wet pond, and the infiltration pond, which must be kept clean of silts and sediments.
 
 - Inspection Schedule:
     - Monthly: From November through April.
     - Annually: Once in late summer (preferably September).
     - Post-Storm: After any major storm (defined as 1 inch of rain in 24 hours).
 
-- Documentation (The Log Book): The Association must maintain a "Log Book" cataloging inspections, actions taken, who performed them, and any problems encountered. This log book must be available for inspection by Thurston County.
+- Documentation (The Log Book): The Association must maintain a "Log Book" cataloging inspections, actions taken, who performed them, and any problems encountered. This log book must be available for inspection by the City.
 
-- Annual Reporting: An annual report must be submitted to Thurston County on or before August 31st of each year. This report must include a summary of activities, photocopies of the log book, and an outline of planned activities for the next year.
+- Annual Reporting: An annual report must be submitted to the City on or before August 31st of each year. This report must include a summary of activities, photocopies of the log book, and an outline of planned activities for the next year.
 
-- Financial Responsibility: The Association assumes all responsibility for the cost of maintenance and repairs. If the County is forced to intervene, the HOA must reimburse the County within 30 days of invoice.
+- Financial Responsibility: The Association assumes all responsibility for the cost of maintenance and repairs. If the City is forced to intervene, the HOA must reimburse the City within 30 days of invoice.
 
 ## Cost Estimate for Maintenance
 
-The Maintenance Agreement contains a specific "Cost Estimate for Maintenance" breakdown (in 2011 dollars).
-
-- Agreement Estimate: 116.5 labor hours per year. Total estimated cost: $1,747.50 per year.
+The Maintenance Agreement contains a specific "Cost Estimate for Maintenance" breakdown (in 2011 dollars): 116.5 labor hours per year. Total estimated cost: $1,747.50 per year.
 
 ## Actual Maintenance Costs
 
