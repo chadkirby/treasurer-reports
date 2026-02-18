@@ -91,6 +91,48 @@ export default function SpendingByCategory() {
     }
   };
 
+  const stackedPercentLabelsPlugin = {
+    id: 'stackedPercentLabels',
+    afterDatasetsDraw(chart) {
+      const { ctx } = chart;
+      const datasets = chart.data.datasets || [];
+      if (!datasets.length) return;
+
+      ctx.save();
+      ctx.fillStyle = '#111827';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = '10px Consolas, Monaco, monospace';
+
+      datasets.forEach((dataset, datasetIndex) => {
+        const meta = chart.getDatasetMeta(datasetIndex);
+        if (!meta || meta.hidden) return;
+
+        meta.data.forEach((element, dataIndex) => {
+          const rawValue = Number(dataset.data?.[dataIndex] ?? 0);
+          if (!Number.isFinite(rawValue) || rawValue <= 0) return;
+
+          const totalForYear = datasets.reduce((sum, ds) => {
+            const value = Number(ds.data?.[dataIndex] ?? 0);
+            return sum + (Number.isFinite(value) ? value : 0);
+          }, 0);
+          if (totalForYear <= 0) return;
+
+          const percent = (rawValue / totalForYear) * 100;
+          if (percent < 8) return;
+
+          const { x, y, base } = element.getProps(['x', 'y', 'base'], true);
+          const segmentHeight = Math.abs(base - y);
+          if (segmentHeight < 14) return;
+
+          ctx.fillText(`${Math.round(percent)}%`, x, y + segmentHeight / 2);
+        });
+      });
+
+      ctx.restore();
+    }
+  };
+
   return (
     <Slide title="Cash Outflows by Category" subtitle="Yearly trends and category totals.">
       <div className="flex flex-col gap-12">
@@ -111,7 +153,14 @@ export default function SpendingByCategory() {
         <div className="bg-white p-8 border border-slate-200">
           <div className="h-[450px]">
             <ChartContainer title="Cash Outflows by Category (Yearly Trends)">
-              {catChartData && <Chart type='bar' data={catChartData} options={stackedOptions} />}
+              {catChartData && (
+                <Chart
+                  type='bar'
+                  data={catChartData}
+                  options={stackedOptions}
+                  plugins={[stackedPercentLabelsPlugin]}
+                />
+              )}
             </ChartContainer>
           </div>
         </div>
