@@ -3,6 +3,7 @@ import { Chart } from 'react-chartjs-2';
 import Slide from '../components/ui/Slide';
 import ChartContainer from '../components/charts/ChartContainer';
 import MarkdownSection from '../components/ui/MarkdownSection';
+import { SummaryGrid, SummaryMetric, SummaryPanel } from '../components/ui/SummaryPanel';
 import { useData } from '../hooks/useData';
 import { formatCurrency } from '../utils/format';
 import { TUFTE_PALETTE } from '../utils/theme';
@@ -11,8 +12,6 @@ export default function StormwaterMaintenance() {
   const { data, loading, error } = useData('2021-2025/Stormwater Maintenance.csv');
 
   const {
-    labels,
-    stormwaterByYear,
     totalStormwater,
     averageStormwater,
     peakYear,
@@ -20,8 +19,6 @@ export default function StormwaterMaintenance() {
   } = useMemo(() => {
     if (!Array.isArray(data) || data.length === 0) {
       return {
-        labels: [],
-        stormwaterByYear: [],
         totalStormwater: 0,
         averageStormwater: 0,
         peakYear: null,
@@ -47,8 +44,6 @@ export default function StormwaterMaintenance() {
     );
 
     return {
-      labels,
-      stormwaterByYear: values,
       totalStormwater: total,
       averageStormwater: average,
       peakYear: peak,
@@ -102,30 +97,16 @@ export default function StormwaterMaintenance() {
   return (
     <Slide title="Stormwater Maintenance" subtitle="Year-by-year stormwater maintenance payments.">
       <div className="flex flex-col gap-12">
-        <div className="bg-white p-8 border border-slate-200">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-sm">
-            <div className="p-4 bg-white border border-slate-200 text-center">
-              <div className="uppercase tracking-widest text-xs font-semibold mb-2 text-slate-500">
-                Total Stormwater Paid
-              </div>
-              <div className="text-2xl">{formatCurrency(totalStormwater)}</div>
-            </div>
-            <div className="p-4 bg-white border border-slate-200 text-center">
-              <div className="uppercase tracking-widest text-xs font-semibold mb-2 text-slate-500">
-                Avg. Annual Stormwater
-              </div>
-              <div className="text-2xl">{formatCurrency(averageStormwater)}</div>
-            </div>
-            <div className="p-4 bg-white border border-slate-200 text-center">
-              <div className="uppercase tracking-widest text-xs font-semibold mb-2 text-slate-500">
-                Peak Year
-              </div>
-              <div className="text-2xl">
-                {peakYear ? `${peakYear.year} (${formatCurrency(peakYear.stormwater)})` : '—'}
-              </div>
-            </div>
-          </div>
-        </div>
+        <SummaryPanel>
+          <SummaryGrid className="md:grid-cols-3 xl:grid-cols-3">
+            <SummaryMetric label="Total Stormwater Paid" value={formatCurrency(totalStormwater)} />
+            <SummaryMetric label="Avg. Annual Stormwater" value={formatCurrency(averageStormwater)} />
+            <SummaryMetric
+              label={peakYear ? `Peak Year (${peakYear.year})` : 'Peak Year'}
+              value={peakYear ? formatCurrency(peakYear.stormwater) : '—'}
+            />
+          </SummaryGrid>
+        </SummaryPanel>
 
         <div className="bg-white p-8 border border-slate-200">
           <div className="h-[450px]">
