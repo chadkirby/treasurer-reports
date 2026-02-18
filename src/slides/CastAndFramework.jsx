@@ -17,19 +17,19 @@ export default function CastAndFramework() {
           />
           <SummaryMetric
             label="2019"
-            value="Declaration amended (CC&Rs)."
+            value="Declaration amended."
             compact
             valueClassName="not-italic font-normal leading-snug text-lg text-slate-700 whitespace-normal"
           />
           <SummaryMetric
             label="2020"
-            value="VIS Group engaged."
+            value="VIS Group hired."
             compact
             valueClassName="not-italic font-normal leading-snug text-lg text-slate-700 whitespace-normal"
           />
           <SummaryMetric
             label="2026"
-            value="Homeowners take board control."
+            value="Homeowners control board."
             compact
             valueClassName="not-italic font-normal leading-snug text-lg text-slate-700 whitespace-normal"
           />
@@ -42,11 +42,11 @@ export default function CastAndFramework() {
           <ul className="list-disc pl-5 text-base text-slate-700 space-y-2">
             <li><strong>Deschutes Heights HOA</strong> - Nonprofit corporation (founded 2011) created to maintain common areas; powers and limits come from statute and the Declaration (CC&Rs).</li>
             <li><strong>The Board</strong> - Directors who control the HOA on behalf of the members.</li>
-            <li><strong>Min Lai</strong> - Individual residing in NY whose family acquired the land.</li>
-            <li><strong>SO UK Investments</strong> - NY investment entity (controlled by Min Lai) that originally owned the entire plat and now owns most of the vacant lots.</li>
+            <li><strong>Min Lai</strong> - Individual residing in NY whose family acquired the original plat.</li>
+            <li><strong>SO UK Investments</strong> - NY investment entity (controlled by Min Lai) that now owns most of the vacant lots.</li>
             <li><strong>Lotus House</strong> - WA business entity (controlled by Min Lai) that contracts with builders to construct homes.</li>
-            <li><strong>Declarant</strong> - SO UK Investments and Lotus House (together) as defined in the Declaration.</li>
-            <li><strong>VIS Group</strong> - WA management company engaged in 2020 to administer the HOA.</li>
+            <li><strong>Declarant</strong> - SO UK Investments and Lotus House (together, as defined in the Declaration).</li>
+            <li><strong>VIS Group</strong> - WA management company contracted in 2020 to administer the HOA.</li>
           </ul>
         </div>
 
