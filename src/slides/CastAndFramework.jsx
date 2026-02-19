@@ -6,7 +6,7 @@ import { publicUrl } from '../utils/publicUrl';
 
 export default function CastAndFramework() {
   return (
-    <Slide title="Cast and Characters" subtitle="Who is who, and how the HOA is governed.">
+    <Slide title="Cast and Characters" subtitle="Who is who.">
       <SummaryPanel title="Timeline">
         <SummaryGrid className="md:grid-cols-4 xl:grid-cols-4">
           <SummaryMetric
